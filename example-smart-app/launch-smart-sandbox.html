@@ -29,7 +29,8 @@
         If/when this changes, or when working with other authorization servers, please update the client_id field here. -->
     <script>
       FHIR.oauth2.authorize({
-        'client_id': 'c113f5fb-3be9-448c-9a80-b31c731a8b0f',
+        'client_id': 'my-app',
+        'client_secret': 'my-app-secret-123',
         'scope':  'patient/Patient.read patient/Observation.read launch online_access openid fhirUser profile'
       });
       /*FHIR.oauth2.authorize({
