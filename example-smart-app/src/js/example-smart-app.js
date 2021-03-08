@@ -25,10 +25,10 @@
         var allergies = smart.patient.api.fetchAll({
                     type: 'AllergyIntolerance',                    
                   });
+        
+        $.when(pt, obv,allergies).fail(onError);
 
-        $.when(pt, obv).fail(onError);
-
-        $.when(pt, obv).done(function(patient, obv) {
+        $.when(pt, obv,allergies).done(function(patient, obv,allergies) {
           var byCodes = smart.byCodes(obv, 'code');
           var gender = patient.gender;
 
@@ -39,7 +39,23 @@
             fname = patient.name[0].given.join(' ');
             lname = patient.name[0].family.join(' ');
           }
-
+          var allergyList="<table><tr><td>item</td><td>categorgy</td><td>reaction</td></tr>";
+          var allergies.forEach(function(allergy){
+            
+            var allergyList+="<tr><td>allergy.substance.text</td><td>allergy.category</td><td>";
+            var manifestationList="";
+            if ( allergy.reaction.manifestation ){
+                allergy.reaction.manifestation.forEach(function(m){
+                   if  (i==0){
+                      manifestationList=m.text;
+                   } else {
+                     manifestationList=","+ m.text;
+                   }
+                }
+                allergyList+="<td>"+manifestationList+"</td>";
+                allergyList+="</tr></table>";
+          });
+          p.allergies=allergyList;
           var height = byCodes('8302-2');
           var systolicbp = getBloodPressureValue(byCodes('55284-4'),'8480-6');
           var diastolicbp = getBloodPressureValue(byCodes('55284-4'),'8462-4');
@@ -53,6 +69,7 @@
           p.fname = fname;
           p.lname = lname;
           p.height = getQuantityValueAndUnit(height[0]);
+          
 
           if (typeof systolicbp != 'undefined')  {
             p.systolicbp = systolicbp;
@@ -89,6 +106,7 @@
       diastolicbp: {value: ''},
       ldl: {value: ''},
       hdl: {value: ''},
+      allergies: {value: ''},
     };
   }
 
