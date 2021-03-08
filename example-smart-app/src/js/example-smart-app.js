@@ -47,7 +47,7 @@
           var ldl = byCodes('2089-1');
 
           var p = defaultPatient();
-          p.id=patient.id;
+          p.id=patient.refID;
           p.birthdate = patient.birthDate;
           p.gender = gender;
           p.fname = fname;
