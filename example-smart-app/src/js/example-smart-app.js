@@ -22,7 +22,7 @@
                     }
                   });
         
-        var obv = smart.patient.api.fetchAll({
+        var allergies = smart.patient.api.fetchAll({
                     type: 'AllergyIntolerance',                    
                   });
 
