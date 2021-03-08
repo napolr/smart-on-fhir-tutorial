@@ -44,8 +44,9 @@
             
             var allergyList+="<tr><td>allergy.substance.text</td><td>allergy.category</td><td>";
             var manifestationList="";
-            if ( allergy.reaction.manifestation ){
-                allergy.reaction.manifestation.forEach(function(m){
+            var i=0;
+            if ( allergy.reaction[0].manifestation ){
+                allergy.reaction[0].manifestation.forEach(function(m){
                    if  (i==0){
                       manifestationList=m.text;
                    } else {
