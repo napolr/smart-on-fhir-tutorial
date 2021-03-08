@@ -47,7 +47,7 @@
           var ldl = byCodes('2089-1');
 
           var p = defaultPatient();
-          p.id=patient.patientId;
+          p.patientId=patient.patientId;
           p.birthdate = patient.birthDate;
           p.gender = gender;
           p.fname = fname;
@@ -79,6 +79,7 @@
 
   function defaultPatient(){
     return {
+      patientId: {value: ''},
       fname: {value: ''},
       lname: {value: ''},
       gender: {value: ''},
@@ -122,6 +123,7 @@
   window.drawVisualization = function(p) {
     $('#holder').show();
     $('#loading').hide();
+    $('#patientId').html(p.patientId);
     $('#fname').html(p.fname);
     $('#lname').html(p.lname);
     $('#gender').html(p.gender);
