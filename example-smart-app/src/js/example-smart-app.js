@@ -22,7 +22,7 @@
                     }
                   });
         
-        var allergies=getAllergyIntolerances(patient);
+      //  var allergies=getAllergyIntolerances(patient);
         $.when(pt, obv).fail(onError);
 
         $.when(pt, obv).done(function(patient, obv) {
