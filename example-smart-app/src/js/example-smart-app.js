@@ -22,10 +22,7 @@
                       }
                     });
 
-          var allergies = smart.patient.api.fetchAll({
-                      type: 'AllergyIntolerance',                    
-                    });
-          allergies=null;
+
           $.when(pt, obv).fail(onError);
 
           $.when(pt, obv).done(function(patient, obv) {
@@ -39,47 +36,8 @@
               fname = patient.name[0].given.join(' ');
               lname = patient.name[0].family.join(' ');
             }
-            if ( allergies !=null ){
-              	var allergies="";
-	log.debug("allergy count="+allergyIntolerance.length);
-	if ( allergyIntolerance != null ){
-			var allergyTableHeader="<table><tr><td>item</td><td>category</td><td>reaction</td></tr>";
-			var j=0;
-			allergyRows="";
-			var rows="";
-			allergyIntolerance.forEach(function(allergy,j){
-				 
-				
-			//	log.debug(JSON.stringify(allergy));
-					//log.debug("allergy.resource.code"+JSON.stringify(allergy.resource));
-					
-					if (allergy.resource.code && allergy.resource.code!="invalid"){
-						rows+="<tr><td>"+allergy.resource.code.text+"</td><td>"+allergy.resource.category+"</td><td>";
-					}
-					 
-					var i=0;
-					if ( allergy.resource.reaction){
-						allergyReactions=""; 
-						allergy.resource.reaction.forEach(function(reaction){
-							
-						   if  (i==0){ 
-							  allergyReactions=reaction.description+ "("+reaction.severity+")";
-						   } else {
-							 allergyReactions=", " + reaction.description + + "("+reaction.severity+")";
-						   } 
-						});
-						rows+="<td>"+allergyReactions+"</td>"; 
-						rows+="</tr>";
-					} 
-				  // log.debug("rows="+rows);
-				  
-					
-		  });
-		  //log.debug("allergies="+rows);
-		  allergies=allergyTableHeader+ rows+ "</table>";
-          p.allergies=allergies;
-    }
-	var height = byCodes('8302-2');
+         
+    var height = byCodes('8302-2');
     var systolicbp = getBloodPressureValue(byCodes('55284-4'),'8480-6');
     var diastolicbp = getBloodPressureValue(byCodes('55284-4'),'8462-4');
     var hdl = byCodes('2085-9');
@@ -159,6 +117,52 @@ function getQuantityValueAndUnit(ob) {
   } else {
 	return undefined;
   }
+}
+	  
+function getAllergyIntolerances(){
+    
+    
+        var allergyIntolerance = smart.patient.api.fetchAll({
+                      type: 'AllergyIntolerance',                    
+                    });
+        allergies=null;
+    	if ( allergyIntolerance !== null ){
+			var allergyTableHeader="<table><tr><td>item</td><td>category</td><td>reaction</td></tr>";
+			var j=0;
+			allergyRows="";
+			var rows="";
+			allergyIntolerance.forEach(function(allergy,j){
+				 
+				
+			//	log.debug(JSON.stringify(allergy));
+					//log.debug("allergy.resource.code"+JSON.stringify(allergy.resource));
+					
+					if (allergy.resource.code && allergy.resource.code!="invalid"){
+						rows+="<tr><td>"+allergy.resource.code.text+"</td><td>"+allergy.resource.category+"</td><td>";
+					}
+					 
+					var i=0;
+					if ( allergy.resource.reaction){
+						allergyReactions=""; 
+						allergy.resource.reaction.forEach(function(reaction){
+							
+						   if  (i===0){ 
+							  allergyReactions=reaction.description+ "("+reaction.severity+")";
+						   } else {
+							 allergyReactions=", " + reaction.description + "("+reaction.severity+")";
+						   } 
+						});
+						rows+="<td>"+allergyReactions+"</td>"; 
+						rows+="</tr>";
+					} 
+				  // log.debug("rows="+rows);
+				  
+					
+		  });
+		  //log.debug("allergies="+rows);
+		  allergies=allergyTableHeader+ rows+ "</table>";
+          p.allergies=allergies;
+    }
 }
 
 window.drawVisualization = function(p) {
