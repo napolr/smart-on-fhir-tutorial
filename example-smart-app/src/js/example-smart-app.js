@@ -50,7 +50,7 @@
           p.fname = fname;
           p.lname = lname;
           p.height = getQuantityValueAndUnit(height[0]);
-	  p.allergies=allergies;
+	  //p.allergies=allergies;
           if (typeof systolicbp != 'undefined')  {
             p.systolicbp = systolicbp;
           }
@@ -132,7 +132,7 @@
 			var rows="";
 			allergyIntolerance.forEach(function(allergy,j){
 	 
-			logDebug("allergyTolerance="+JSON.stringify(allergyIntolerance)); 
+		//	logDebug("allergyTolerance="+JSON.stringify(allergyIntolerance)); 
 					
 					if (allergy.resource.code && allergy.resource.code!="invalid"){
 						rows+="<tr><td>"+allergy.resource.code.text+"</td><td>"+allergy.resource.category+"</td><td>";
@@ -162,13 +162,14 @@
          return(allergies);
     }
 }
+	/*
 function logDebug(errMsg){
 				<div>foo</div>
 				<script>
 					document.write('<div>errMsg</div>');
 				</script>
 			<div>bar</div>
-}
+}*/
 
   window.drawVisualization = function(p) {
     $('#holder').show();
