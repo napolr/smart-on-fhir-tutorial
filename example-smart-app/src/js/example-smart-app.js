@@ -21,7 +21,7 @@
                       }
                     }
                   });
-        
+
         $.when(pt, obv).fail(onError);
 
         $.when(pt, obv).done(function(patient, obv) {
@@ -43,7 +43,6 @@
           var ldl = byCodes('2089-1');
 
           var p = defaultPatient();
-          p.patientId=patient.patientId;
           p.birthdate = patient.birthDate;
           p.gender = gender;
           p.fname = fname;
@@ -66,7 +65,7 @@
       } else {
         onError();
       }
-     
+    }
 
     FHIR.oauth2.ready(onReady, onError);
     return ret.promise();
@@ -75,7 +74,6 @@
 
   function defaultPatient(){
     return {
-      patientId: {value: ''},
       fname: {value: ''},
       lname: {value: ''},
       gender: {value: ''},
@@ -115,54 +113,10 @@
       return undefined;
     }
   }
-  
-  function getAllergyIntolerances(patient){
-    
-    
-        var allergyIntolerance = patient.api.fetchAll({
-                      type: 'AllergyIntolerance',                    
-                    });
-        allergies=null;
-    	if ( allergyIntolerance !== null ){
-			var allergyTableHeader="<table><tr><td>item</td><td>category</td><td>reaction</td></tr>";
-			var j=0;
-			allergyRows="";
-			var rows="";
-			allergyIntolerance.forEach(function(allergy,j){
-				 
-				 
-					//log.debug("allergy.resource.code"+JSON.stringify(allergy.resource));
-					
-					if (allergy.resource.code && allergy.resource.code!="invalid"){
-						rows+="<tr><td>"+allergy.resource.code.text+"</td><td>"+allergy.resource.category+"</td><td>";
-					}
-					 
-					var i=0;
-					if ( allergy.resource.reaction){
-						allergyReactions=""; 
-						allergy.resource.reaction.forEach(function(reaction){
-							
-						   if  (i===0){ 
-							  allergyReactions=reaction.description+ "("+reaction.severity+")";
-						   } else {
-							 allergyReactions=", " + reaction.description + "("+reaction.severity+")";
-						   } 
-						});
-						rows+="<td>"+allergyReactions+"</td>"; 
-						rows+="</tr>";
-					}  
-				  
-					
-		  }); 
-		  allergies=allergyTableHeader+ rows+ "</table>";
-         return(allergies);
-    }
-}
 
   window.drawVisualization = function(p) {
     $('#holder').show();
     $('#loading').hide();
-    $('#patientId').html(p.patientId);
     $('#fname').html(p.fname);
     $('#lname').html(p.lname);
     $('#gender').html(p.gender);
