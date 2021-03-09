@@ -87,7 +87,6 @@
       diastolicbp: {value: ''},
       ldl: {value: ''},
       hdl: {value: ''},
-     // allergies: {value: ''},
     };
   }
 
@@ -125,7 +124,7 @@
         var allergyIntolerance =  patient.api.fetchAll({
                       type: 'AllergyIntolerance',                    
                     });
-        allergies=null;
+        //allergies=null;
     	if ( allergyIntolerance !== null ){
 			var allergyTableHeader="<table><tr><td>item</td><td>category</td><td>reaction</td></tr>";
 			var j=0;
@@ -178,7 +177,6 @@
     $('#diastolicbp').html(p.diastolicbp);
     $('#ldl').html(p.ldl);
     $('#hdl').html(p.hdl);
-   // $('#allergies').html(p.allergies);
   };
 
 })(window);
