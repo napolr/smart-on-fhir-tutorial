@@ -52,8 +52,7 @@
 	  p.allergies=getAllergyIntolerances(patient);
 
 document.write('<div>Allergies='+p.allergies+'</div>');
-
-<div>bar</div>
+ 
           if (typeof systolicbp != 'undefined')  {
             p.systolicbp = systolicbp;
           }
