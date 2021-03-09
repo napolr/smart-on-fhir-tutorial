@@ -49,7 +49,6 @@
           p.fname = fname;
           p.lname = lname;
           p.height = getQuantityValueAndUnit(height[0]);
-	  //p.allergies=getAllergyIntolerances(patient);
 
           if (typeof systolicbp != 'undefined')  {
             p.systolicbp = systolicbp;
@@ -86,7 +85,6 @@
       diastolicbp: {value: ''},
       ldl: {value: ''},
       hdl: {value: ''},
-      allergies: {value: ''},
     };
   }
 
@@ -118,13 +116,12 @@
     }
   }
   
-  function getAllergyIntolerances(patient){
+  function getAllergyIntolerances(){
     
     
-        var allergyIntolerance = patient.api.fetchAll({
+        var allergyIntolerance = smart.patient.api.fetchAll({
                       type: 'AllergyIntolerance',                    
-                    });
-        
+                    }); 
     	if ( allergyIntolerance !== null ){
 			var allergyTableHeader="<table><tr><td>item</td><td>category</td><td>reaction</td></tr>";
 			var j=0;
