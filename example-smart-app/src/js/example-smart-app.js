@@ -22,7 +22,10 @@
                     }
                   });
         
-        //var allergies=getAllergyIntolerances(smart);
+     /*   var allergies = smart.patient.api.fetchAll({
+                    type: 'AllergyIntolerance',                    
+                  });
+*/
         $.when(pt, obv).fail(onError);
 
         $.when(pt, obv).done(function(patient, obv) {
@@ -50,7 +53,7 @@
           p.fname = fname;
           p.lname = lname;
           p.height = getQuantityValueAndUnit(height[0]);
-	  //p.allergies=allergies;
+
           if (typeof systolicbp != 'undefined')  {
             p.systolicbp = systolicbp;
           }
@@ -85,8 +88,7 @@
       systolicbp: {value: ''},
       diastolicbp: {value: ''},
       ldl: {value: ''},
-      hdl: {value: ''}
-    //  allergies: {value: ''},
+      hdl: {value: ''},
     };
   }
 
@@ -117,59 +119,6 @@
       return undefined;
     }
   }
-   
-  function getAllergyIntolerances(smart){
-    
-    
-        var allergyIntolerance = smart.patient.api.fetchAll({
-                      type: 'AllergyIntolerance',                    
-                    }); 
-	  
-    	if ( allergyIntolerance !== null ){
-			var allergyTableHeader="<table><tr><td>item</td><td>category</td><td>reaction</td></tr>";
-			var j=0;
-			allergyRows="";
-			var rows="";
-			allergyIntolerance.forEach(function(allergy,j){
-	 
-		//	logDebug("allergyTolerance="+JSON.stringify(allergyIntolerance)); 
-					
-					if (allergy.resource.code && allergy.resource.code!="invalid"){
-						rows+="<tr><td>"+allergy.resource.code.text+"</td><td>"+allergy.resource.category+"</td><td>";
-					}
-					 
-					var i=0;
-					if ( allergy.resource.reaction){
-						allergyReactions=""; 
-						allergy.resource.reaction.forEach(function(reaction){
-							
-						   if  (i===0){ 
-							  allergyReactions=reaction.description+ "("+reaction.severity+")";
-						   } else {
-							 allergyReactions=", " + reaction.description + "("+reaction.severity+")";
-							 i++;
-						   } 
-						});
-						rows+="<td>"+allergyReactions+"</td>"; 
-						rows+="</tr>";
-					} 
-				  // log.debug("rows="+rows);
-				  
-					
-		  });
-		  //log.debug("allergies="+rows);
-		  allergies=allergyTableHeader+ rows+ "</table>";
-         return(allergies);
-    }
-}
-	/*
-function logDebug(errMsg){
-				<div>foo</div>
-				<script>
-					document.write('<div>errMsg</div>');
-				</script>
-			<div>bar</div>
-}*/
 
   window.drawVisualization = function(p) {
     $('#holder').show();
