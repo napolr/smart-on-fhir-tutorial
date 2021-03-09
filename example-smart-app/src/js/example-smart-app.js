@@ -22,7 +22,7 @@
                     }
                   });
         
-        var allergies=getAllergyIntolerances(smart);
+        //var allergies=getAllergyIntolerances(smart);
         $.when(pt, obv).fail(onError);
 
         $.when(pt, obv).done(function(patient, obv) {
