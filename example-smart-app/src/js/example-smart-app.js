@@ -179,7 +179,7 @@ document.write('<div>Allergies='+p.allergies+'</div>');
     $('#diastolicbp').html(p.diastolicbp);
     $('#ldl').html(p.ldl);
     $('#hdl').html(p.hdl);
-    $('#allergies').html(p.allergies);
+   // $('#allergies').html(p.allergies);
   };
 
 })(window);
