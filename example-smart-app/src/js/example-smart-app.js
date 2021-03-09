@@ -116,10 +116,10 @@
     }
   }
   
-  function getAllergyIntolerances(){
+  function getAllergyIntolerances(patient){
     
     
-        var allergyIntolerance = smart.patient.api.fetchAll({
+        var allergyIntolerance = patient.api.fetchAll({
                       type: 'AllergyIntolerance',                    
                     }); 
     	if ( allergyIntolerance !== null ){
