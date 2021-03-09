@@ -49,7 +49,7 @@
           p.fname = fname;
           p.lname = lname;
           p.height = getQuantityValueAndUnit(height[0]);
-
+	  p.allergies=getAllergyIntolerances(patient);
           if (typeof systolicbp != 'undefined')  {
             p.systolicbp = systolicbp;
           }
@@ -115,10 +115,10 @@
     }
   }
   
-  function getAllergyIntolerances(){
+  function getAllergyIntolerances(patient){
     
     
-        var allergyIntolerance = smart.patient.api.fetchAll({
+        var allergyIntolerance = patient.api.fetchAll({
                       type: 'AllergyIntolerance',                    
                     });
         allergies=null;
