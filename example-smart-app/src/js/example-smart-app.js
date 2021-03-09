@@ -85,7 +85,7 @@
       systolicbp: {value: ''},
       diastolicbp: {value: ''},
       ldl: {value: ''},
-      hdl: {value: ''},
+      hdl: {value: ''}
     //  allergies: {value: ''},
     };
   }
