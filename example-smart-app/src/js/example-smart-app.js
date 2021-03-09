@@ -116,53 +116,8 @@
       return undefined;
     }
   }
-  
    
-  function getAllergyIntolerances(patient){
-    
-    
-        var allergyIntolerance = patient.api.fetchAll({
-                      type: 'AllergyIntolerance',                    
-                    });
-        allergies=null;
-    	if ( allergyIntolerance !== null ){
-			var allergyTableHeader="<table><tr><td>item</td><td>category</td><td>reaction</td></tr>";
-			var j=0;
-			allergyRows="";
-			var rows="";
-			allergyIntolerance.forEach(function(allergy,j){
-				 
-				
-			//	log.debug(JSON.stringify(allergy));
-					//log.debug("allergy.resource.code"+JSON.stringify(allergy.resource));
-					
-					if (allergy.resource.code && allergy.resource.code!="invalid"){
-						rows+="<tr><td>"+allergy.resource.code.text+"</td><td>"+allergy.resource.category+"</td><td>";
-					}
-					 
-					var i=0;
-					if ( allergy.resource.reaction){
-						allergyReactions=""; 
-						allergy.resource.reaction.forEach(function(reaction){
-							
-						   if  (i===0){ 
-							  allergyReactions=reaction.description+ "("+reaction.severity+")";
-						   } else {
-							 allergyReactions=", " + reaction.description + "("+reaction.severity+")";
-						   } 
-						});
-						rows+="<td>"+allergyReactions+"</td>"; 
-						rows+="</tr>";
-					} 
-				  // log.debug("rows="+rows);
-				  
-					
-		  });
-		  //log.debug("allergies="+rows);
-		  allergies=allergyTableHeader+ rows+ "</table>";
-         return(allergies);
-    }
-}
+ 
 
   window.drawVisualization = function(p) {
     $('#holder').show();
