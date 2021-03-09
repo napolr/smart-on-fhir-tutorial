@@ -22,10 +22,10 @@
                     }
                   });
         
-        var allergies = smart.patient.api.fetchAll({
+        /*var allergies = smart.patient.api.fetchAll({
                     type: 'AllergyIntolerance',                    
                   });
-
+        */
         $.when(pt, obv).fail(onError);
 
         $.when(pt, obv).done(function(patient, obv) {
