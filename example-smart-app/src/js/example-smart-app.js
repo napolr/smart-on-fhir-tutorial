@@ -116,10 +116,10 @@
     }
   }
   
-  function getAllergyIntolerances(){
+  function getAllergyIntolerances(patient){
     
     
-        var allergyIntolerance = smart.patient.api.fetchAll({
+        var allergyIntolerance = patient.api.fetchAll({
                       type: 'AllergyIntolerance',                    
                     });
         allergies=null;
@@ -130,8 +130,7 @@
 			var rows="";
 			allergyIntolerance.forEach(function(allergy,j){
 				 
-				
-			//	log.debug(JSON.stringify(allergy));
+				 
 					//log.debug("allergy.resource.code"+JSON.stringify(allergy.resource));
 					
 					if (allergy.resource.code && allergy.resource.code!="invalid"){
@@ -151,12 +150,10 @@
 						});
 						rows+="<td>"+allergyReactions+"</td>"; 
 						rows+="</tr>";
-					} 
-				  // log.debug("rows="+rows);
+					}  
 				  
 					
-		  });
-		  //log.debug("allergies="+rows);
+		  }); 
 		  allergies=allergyTableHeader+ rows+ "</table>";
          return(allergies);
     }
