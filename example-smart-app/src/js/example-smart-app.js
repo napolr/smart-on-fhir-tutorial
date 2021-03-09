@@ -50,7 +50,7 @@
           p.lname = lname;
           p.height = getQuantityValueAndUnit(height[0]);
 	  p.allergies=getAllergyIntolerances(patient);
- 
+
           if (typeof systolicbp != 'undefined')  {
             p.systolicbp = systolicbp;
           }
@@ -120,7 +120,7 @@
   function getAllergyIntolerances(patient){
     
     
-        var allergyIntolerance =  patient.api.fetchAll({
+        var allergyIntolerance = patient.api.fetchAll({
                       type: 'AllergyIntolerance',                    
                     });
         allergies=null;
