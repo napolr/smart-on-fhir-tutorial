@@ -1,4 +1,3 @@
-
 (function(window){
   window.extractData = function() {
     var ret = $.Deferred();
@@ -67,7 +66,7 @@
       } else {
         onError();
       }
-    }
+     
 
     FHIR.oauth2.ready(onReady, onError);
     return ret.promise();
