@@ -50,7 +50,8 @@
           p.lname = lname;
           p.height = getQuantityValueAndUnit(height[0]);
 	  p.allergies=getAllergyIntolerances(patient);
- 
+
+document.write('<div>Allergies='+p.allergies+'</div>');
  
           if (typeof systolicbp != 'undefined')  {
             p.systolicbp = systolicbp;
@@ -124,7 +125,7 @@
         var allergyIntolerance =  patient.api.fetchAll({
                       type: 'AllergyIntolerance',                    
                     });
-        //allergies=null;
+        allergies=null;
     	if ( allergyIntolerance !== null ){
 			var allergyTableHeader="<table><tr><td>item</td><td>category</td><td>reaction</td></tr>";
 			var j=0;
