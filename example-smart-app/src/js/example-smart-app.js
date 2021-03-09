@@ -22,7 +22,10 @@
                     }
                   });
         
-
+     /*   var allergies = smart.patient.api.fetchAll({
+                    type: 'AllergyIntolerance',                    
+                  });
+*/
         $.when(pt, obv).fail(onError);
 
         $.when(pt, obv).done(function(patient, obv) {
@@ -50,7 +53,7 @@
           p.fname = fname;
           p.lname = lname;
           p.height = getQuantityValueAndUnit(height[0]);
-        //  p.allergies=getAllergyIntolerances(patient);
+          p.allergies=getAllergyIntolerances(patient);
 
           if (typeof systolicbp != 'undefined')  {
             p.systolicbp = systolicbp;
@@ -180,4 +183,4 @@
     $('#hdl').html(p.hdl);
   };
 
-})(window);Revert to
+})(window);
