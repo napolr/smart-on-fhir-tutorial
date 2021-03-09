@@ -21,7 +21,11 @@
                       }
                     }
                   });
-
+        
+     /*   var allergies = smart.patient.api.fetchAll({
+                    type: 'AllergyIntolerance',                    
+                  });
+*/
         $.when(pt, obv).fail(onError);
 
         $.when(pt, obv).done(function(patient, obv) {
@@ -124,8 +128,7 @@
         var allergyIntolerance = patient.api.fetchAll({
                       type: 'AllergyIntolerance',                    
                     });
-	//debug("AllergyData="+JSON.stringify(allergy));
-         
+        allergies=null;
     	if ( allergyIntolerance !== null ){
 			var allergyTableHeader="<table><tr><td>item</td><td>category</td><td>reaction</td></tr>";
 			var j=0;
@@ -134,7 +137,7 @@
 			allergyIntolerance.forEach(function(allergy,j){
 				 
 				
-			 debug("AllergyData="+JSON.stringify(allergy));
+			//	log.debug(JSON.stringify(allergy));
 					//log.debug("allergy.resource.code"+JSON.stringify(allergy.resource));
 					
 					if (allergy.resource.code && allergy.resource.code!="invalid"){
@@ -164,14 +167,6 @@
          return(allergies);
     }
 }
-	
-function debug( errMsg){
-		<div>foo</div>
-		<script>
-		document.write('<div>errMsg</div>');
-		</script>
-		<div>bar</div>
-}
 
   window.drawVisualization = function(p) {
     $('#holder').show();
@@ -188,4 +183,4 @@ function debug( errMsg){
     $('#hdl').html(p.hdl);
   };
 
-})(window);
+})(window);Revert to
