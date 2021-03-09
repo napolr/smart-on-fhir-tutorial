@@ -119,9 +119,12 @@
     
     
         var allergyIntolerance = patient.api.fetchAll({
-                      type: 'AllergyIntolerance',                    
-                    });
-        allergies=null;
+	  type: 'AllergyIntolerance',
+                    query: {
+                     
+                    }
+                  });
+	   
     	if ( allergyIntolerance !== null ){
 			var allergyTableHeader="<table><tr><td>item</td><td>category</td><td>reaction</td></tr>";
 			var j=0;
