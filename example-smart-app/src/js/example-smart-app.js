@@ -116,12 +116,13 @@
     }
   }
   
-  function getAllergyIntolerances(patient){
+  function getAllergyIntolerances(){
     
     
-        var allergyIntolerance = patient.api.fetchAll({
+        var allergyIntolerance = smart.patient.api.fetchAll({
                       type: 'AllergyIntolerance',                    
-                    }); 
+                    });
+        allergies=null;
     	if ( allergyIntolerance !== null ){
 			var allergyTableHeader="<table><tr><td>item</td><td>category</td><td>reaction</td></tr>";
 			var j=0;
@@ -156,7 +157,7 @@
 					
 		  });
 		  //log.debug("allergies="+rows);
-		  var allergies=allergyTableHeader+ rows+ "</table>";
+		  allergies=allergyTableHeader+ rows+ "</table>";
          return(allergies);
     }
 }
