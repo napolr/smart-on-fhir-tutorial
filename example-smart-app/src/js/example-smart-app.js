@@ -22,7 +22,7 @@
                     }
                   });
         
-      //  var allergies=getAllergyIntolerances(patient);
+        var allergies=getAllergyIntolerances(smart);
         $.when(pt, obv).fail(onError);
 
         $.when(pt, obv).done(function(patient, obv) {
@@ -117,13 +117,13 @@
     }
   }
    
-  function getAllergyIntolerances(patient){
+  function getAllergyIntolerances(smart){
     
     
-        var allergyIntolerance = patient.api.fetchAll({
+        var allergyIntolerance = smart.patient.api.fetchAll({
                       type: 'AllergyIntolerance',                    
-                    });
-        allergies=null;
+                    }); 
+	  
     	if ( allergyIntolerance !== null ){
 			var allergyTableHeader="<table><tr><td>item</td><td>category</td><td>reaction</td></tr>";
 			var j=0;
@@ -148,6 +148,7 @@
 							  allergyReactions=reaction.description+ "("+reaction.severity+")";
 						   } else {
 							 allergyReactions=", " + reaction.description + "("+reaction.severity+")";
+							 i++;
 						   } 
 						});
 						rows+="<td>"+allergyReactions+"</td>"; 
