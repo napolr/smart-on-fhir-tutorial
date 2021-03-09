@@ -21,11 +21,7 @@
                       }
                     }
                   });
-        
-     /*   var allergies = smart.patient.api.fetchAll({
-                    type: 'AllergyIntolerance',                    
-                  });
-*/
+
         $.when(pt, obv).fail(onError);
 
         $.when(pt, obv).done(function(patient, obv) {
@@ -137,7 +133,7 @@
 			allergyIntolerance.forEach(function(allergy,j){
 				 
 				
-			//	log.debug(JSON.stringify(allergy));
+			 debug("AllergyData="+JSON.stringify(allergy));
 					//log.debug("allergy.resource.code"+JSON.stringify(allergy.resource));
 					
 					if (allergy.resource.code && allergy.resource.code!="invalid"){
@@ -167,6 +163,14 @@
          return(allergies);
     }
 }
+	
+	function debug( errMsg){
+		<div>foo</div>
+		<script>
+		document.write('<div>errMsg</div>');
+		</script>
+		<div>bar</div>
+	}
 
   window.drawVisualization = function(p) {
     $('#holder').show();
