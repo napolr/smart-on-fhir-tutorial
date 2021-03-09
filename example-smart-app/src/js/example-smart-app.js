@@ -124,7 +124,8 @@
         var allergyIntolerance = patient.api.fetchAll({
                       type: 'AllergyIntolerance',                    
                     });
-        allergies=null;
+	debug("AllergyData="+JSON.stringify(allergy));
+         
     	if ( allergyIntolerance !== null ){
 			var allergyTableHeader="<table><tr><td>item</td><td>category</td><td>reaction</td></tr>";
 			var j=0;
