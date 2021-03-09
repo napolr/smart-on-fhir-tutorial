@@ -124,7 +124,7 @@
         var allergyIntolerance = patient.api.fetchAll({
                       type: 'AllergyIntolerance',                    
                     });
-	debug("AllergyData="+JSON.stringify(allergy));
+	//debug("AllergyData="+JSON.stringify(allergy));
          
     	if ( allergyIntolerance !== null ){
 			var allergyTableHeader="<table><tr><td>item</td><td>category</td><td>reaction</td></tr>";
@@ -165,13 +165,13 @@
     }
 }
 	
-	function debug( errMsg){
+function debug( errMsg){
 		<div>foo</div>
 		<script>
 		document.write('<div>errMsg</div>');
 		</script>
 		<div>bar</div>
-	}
+}
 
   window.drawVisualization = function(p) {
     $('#holder').show();
