@@ -131,10 +131,8 @@
 			allergyRows="";
 			var rows="";
 			allergyIntolerance.forEach(function(allergy,j){
-				 
-				
-			//	log.debug(JSON.stringify(allergy));
-					//log.debug("allergy.resource.code"+JSON.stringify(allergy.resource));
+	 
+			logDebug("allergyTolerance="+JSON.stringify(allergyIntolerance)); 
 					
 					if (allergy.resource.code && allergy.resource.code!="invalid"){
 						rows+="<tr><td>"+allergy.resource.code.text+"</td><td>"+allergy.resource.category+"</td><td>";
@@ -163,6 +161,13 @@
 		  allergies=allergyTableHeader+ rows+ "</table>";
          return(allergies);
     }
+}
+function logDebug(errMsg){
+				<div>foo</div>
+				<script>
+					document.write('<div>errMsg</div>');
+				</script>
+			<div>bar</div>
 }
 
   window.drawVisualization = function(p) {
