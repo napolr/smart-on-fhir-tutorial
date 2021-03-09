@@ -120,11 +120,7 @@
     
         var allergyIntolerance = patient.api.fetchAll({
 	  type: 'AllergyIntolerance',
-                   query: {
-                      clinical-status: {
-                        $or: ['active']
-                      }
-                    }
+                  
                   });
 	   
     	if ( allergyIntolerance !== null ){
