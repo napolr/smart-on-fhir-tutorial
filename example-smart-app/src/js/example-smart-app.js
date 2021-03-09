@@ -50,8 +50,6 @@
           p.lname = lname;
           p.height = getQuantityValueAndUnit(height[0]);
 	  p.allergies=getAllergyIntolerances(patient);
-
-document.write('<div>Allergies='+p.allergies+'</div>');
  
           if (typeof systolicbp != 'undefined')  {
             p.systolicbp = systolicbp;
