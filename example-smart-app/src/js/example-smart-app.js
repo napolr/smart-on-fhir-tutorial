@@ -49,7 +49,7 @@
           p.fname = fname;
           p.lname = lname;
           p.height = getQuantityValueAndUnit(height[0]);
-	  p.allergies=getAllergyIntolerances(patient);
+	  //p.allergies=getAllergyIntolerances(patient);
 
           if (typeof systolicbp != 'undefined')  {
             p.systolicbp = systolicbp;
@@ -124,7 +124,7 @@
         var allergyIntolerance = patient.api.fetchAll({
                       type: 'AllergyIntolerance',                    
                     });
-        allergies=null;
+        
     	if ( allergyIntolerance !== null ){
 			var allergyTableHeader="<table><tr><td>item</td><td>category</td><td>reaction</td></tr>";
 			var j=0;
@@ -159,7 +159,7 @@
 					
 		  });
 		  //log.debug("allergies="+rows);
-		  allergies=allergyTableHeader+ rows+ "</table>";
+		  var allergies=allergyTableHeader+ rows+ "</table>";
          return(allergies);
     }
 }
