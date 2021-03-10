@@ -11,6 +11,12 @@
       if (smart.hasOwnProperty('patient')) {
         var patient = smart.patient;
         var pt = patient.read();
+	var allergyIntolerance = smart.patient.api.fetchAll({
+                    type: 'AllergyIntolerance',
+                    query: {
+                      
+                    }
+                  });
         var obv = smart.patient.api.fetchAll({
                     type: 'Observation',
                     query: {
@@ -21,12 +27,7 @@
                       }
                     }
                   });
-        var allergyIntolerance = patient.api.fetchAll({
-                    type: 'AllergyIntolerance',
-                    query: {
-                      
-                    }
-                  });
+
         $.when(pt, obv).fail(onError);
 
         $.when(pt, obv).done(function(patient, obv) {
