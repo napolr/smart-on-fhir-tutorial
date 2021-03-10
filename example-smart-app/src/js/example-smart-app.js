@@ -140,7 +140,7 @@
         var requestOptions = {
             method: 'GET',
             headers: myHeaders,
-            body: raw,
+            //body: raw,
             redirect: 'follow'
         };
 
