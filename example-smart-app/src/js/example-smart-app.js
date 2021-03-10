@@ -15,8 +15,9 @@
                     type: 'AllergyIntolerance',
 
                 });
-                 
-                console.log("exports =" + exports );
+               
+                console.log("this =" + FHIR);
+                console.log("this =" + smart);
                 var relativeURL = "https://open-ic.epic.com/Argonaut/api/FHIR/Argonaut/AllergyIntolerance?patient=" + patient.id;
                 response=callRestfulAPI(relativeURL,atoken, "application/json", "application/json");
                 console.log(response);
