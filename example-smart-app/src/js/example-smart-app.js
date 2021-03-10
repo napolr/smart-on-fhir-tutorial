@@ -17,7 +17,7 @@
                 });*/
                 
                 console.log("this =" + JSON.stringify(smart)); 
-                var relativeURL = mart.server.serviceURL+"/AllergyIntolerance?patient=" + patient.id;
+                var relativeURL = smart.server.serviceURL+"/AllergyIntolerance?patient=" + patient.id;
                 var token = smart.server.auth.type + " " + smart.server.auth.token;
                 response=callRestfulAPI(relativeURL,token, "application/json", "application/json");
                 console.log(response);
