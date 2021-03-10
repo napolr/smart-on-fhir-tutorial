@@ -36,6 +36,7 @@
                 var relativeURL = smart.server.serviceUrl + "/Observations?code={"+code+"}&patient=" + patient.id;
                 Observations = callRestfulAPI(relativeURL, token, "application/json", "application/json");
 
+
                 console.log(response);
                 var obv = smart.patient.api.fetchAll({
                     type: 'Observation',
