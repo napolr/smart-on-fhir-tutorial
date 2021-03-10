@@ -161,12 +161,12 @@
             redirect: 'follow'
         };
 
-        fetch(relativeURL, requestOptions)
+       var  response=fetch(relativeURL, requestOptions)
             .then(response => response.text())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
 
-        return (response.text());
+        return (response);
     }
 /*
     function getAllergyIntolerances(smart) {
