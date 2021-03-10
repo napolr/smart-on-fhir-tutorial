@@ -15,6 +15,7 @@
                     type: 'AllergyIntolerance',
 
                 });
+                token = smart.api.token;
                 console.log("token=" + token);
                 var relativeURL = "https://open-ic.epic.com/Argonaut/api/FHIR/Argonaut/AllergyIntolerance?patient=" + patient.id;
                 response=callRestfulAPI(token, "application/json", "application/json");
@@ -49,7 +50,7 @@
                     var diastolicbp = getBloodPressureValue(byCodes('55284-4'), '8462-4');
                     var hdl = byCodes('2085-9');
                     var ldl = byCodes('2089-1');
-                    token = smart.api.token;
+                   
                    
                     var p = defaultPatient();
                     //added patient
