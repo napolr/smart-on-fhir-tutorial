@@ -33,7 +33,7 @@
                 var relativeURL = smart.server.serviceUrl + "/Condition?patient=" + patient.id;
                 var Conditions = callRestfulAPI(relativeURL, token, "application/json", "application/json");
                 var code = "";
-                var relativeURL = smart.server.serviceUrl + "/Observations?&patient=" + patient.id;
+                var relativeURL = smart.server.serviceUrl + "/Observations?patient=" + patient.id;
                 var Observations = callRestfulAPI(relativeURL, token, "application/json", "application/json");
 
 
