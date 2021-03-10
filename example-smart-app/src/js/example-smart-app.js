@@ -129,7 +129,7 @@
                       
                     }*/
                   });
-	  console.log("allergyIntolerance="+JSON.parse(allergyIntolerance);
+	  console.log("allergyIntolerance="+JSON.parse(allergyIntolerance));
 	entries=allergyIntolerance.entry;
 	  
     	if ( entries !== null ){
