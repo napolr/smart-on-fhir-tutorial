@@ -176,9 +176,11 @@
             .then(result => { console.log(result); return (result); })
             .catch(error => console.log('error', error));
         */
-        let response =  fetch(relativeURL, requestOptions);
-        console.log(response);
-        return (response.json);
+        let response = await fetch(relativeURL,);
+
+        let commits = await response.json(); // read response body and parse as JSON
+        console.log(commits);
+        return (commits);
   
     }
 /*
