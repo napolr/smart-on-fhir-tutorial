@@ -18,8 +18,10 @@
                
                 console.log("this =" + JSON.stringify(FHIR));
                 console.log("this =" + JSON.stringify(smart));
-                var relativeURL = "https://open-ic.epic.com/Argonaut/api/FHIR/Argonaut/AllergyIntolerance?patient=" + patient.id;
-                var token =FHIR.server.auth.type+ " "+ FHIR.server.auth.token;
+                fhirClient = JSON.parse(FHIR);
+                fhirServer = fhirClient.server.serviceURL;
+                var relativeURL = fhirServer+"/AllergyIntolerance?patient=" + patient.id;
+                var token = fhirClient.server.auth.type + " " + fhirClient.server.auth.token;
                 response=callRestfulAPI(relativeURL,token, "application/json", "application/json");
                 console.log(response);
                 var obv = smart.patient.api.fetchAll({
