@@ -21,6 +21,8 @@
                 var relativeURL = smart.server.serviceUrl + "/AllergyIntolerance?patient=" + patient.id;
                 console.log("relativeURL=" + relativeURL);
                 var token = smart.server.auth.type + " " + smart.server.auth.token;
+                var token = smart.tokenResponse.token_type + " " + smart.tokenResponse.access_token;
+                console.log("token=" + token);
                 response=callRestfulAPI(relativeURL,token, "application/json", "application/json");
                 console.log(response);
                 var obv = smart.patient.api.fetchAll({
