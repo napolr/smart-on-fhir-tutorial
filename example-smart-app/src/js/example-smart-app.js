@@ -11,12 +11,11 @@
             if (smart.hasOwnProperty('patient')) {
                 var patient = smart.patient;
                 var pt = patient.read();
-                /*var allergyIntolerance = smart.patient.api.fetchAll({
-                                type: 'AllergyIntolerance',
-                                query: {
-                                  
-                                }
-                              });*/
+                var allergyIntolerance = smart.patient.api.fetchAll({
+                    type: 'AllergyIntolerance',
+
+                });
+                console.log(allergy.)
                 var obv = smart.patient.api.fetchAll({
                     type: 'Observation',
                     query: {
@@ -41,7 +40,7 @@
                         fname = patient.name[0].given.join(' ');
                         lname = patient.name[0].family.join(' ');
                     }
-
+                    console.log(patient);
                     var height = byCodes('8302-2');
                     var systolicbp = getBloodPressureValue(byCodes('55284-4'), '8480-6');
                     var diastolicbp = getBloodPressureValue(byCodes('55284-4'), '8462-4');
@@ -59,6 +58,7 @@
                     }); */
                     var p = defaultPatient();
                     //added patient
+
                     p.patientId = patient.id;
                     p.birthdate = patient.birthDate;
                     p.gender = gender;
@@ -130,22 +130,21 @@
             return undefined;
         }
     }
-
+/*
     function getAllergyIntolerances(smart) {
         var allergyIntolerance = null;
         var allergyIntolerance = smart.patient.api.fetchAll({
             type: 'AllergyIntolerance',
-            /*query: {
-              
-            }*/
+            
         });
 
         
-        //console.log(allergyIntolerance);
+        console.log(allergyIntolerance);
         entries = null;
         entries = allergyIntolerance.entries;
        
         console.log(allergyIntolerance.allergies);
+        allergyIntolerance.
         if (entries !== null) {
             var allergyTableHeader = "<table><tr><td>item</td><td>category</td><td>reaction</td></tr>";
             var j = 0;
@@ -183,7 +182,7 @@
             allergies = allergyTableHeader + rows + "</table>";
             return (allergies);
         }
-    }
+    }*/
 
     window.drawVisualization = function (p) {
         $('#holder').show();
