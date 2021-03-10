@@ -176,7 +176,7 @@
             .then(result => { console.log(result); return (result); })
             .catch(error => console.log('error', error));
         */
-        let response = await fetch('/non-existence.txt', requestOptions);
+        let response = await fetch(relativeURL, requestOptions);
         console.log(response);
         return (response.json);
   
