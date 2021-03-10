@@ -15,7 +15,10 @@
                     type: 'AllergyIntolerance',
 
                 });
-                console.log(allergyIntolerance);
+                console.log("token=" + token);
+                var relativeURL = "https://open-ic.epic.com/Argonaut/api/FHIR/Argonaut/AllergyIntolerance?patient=" + patient.id;
+                response=callRestfulAPI(token, "application/json", "application/json");
+                console.log(response);
                 var obv = smart.patient.api.fetchAll({
                     type: 'Observation',
                     query: {
@@ -46,16 +49,8 @@
                     var diastolicbp = getBloodPressureValue(byCodes('55284-4'), '8462-4');
                     var hdl = byCodes('2085-9');
                     var ldl = byCodes('2089-1');
-                    /*
-                    var api = new RestClient('https://api.github.com');
-                    api.res({ repos: 'releases' });
-
-                    api.repos('Amareis/another-rest-client').releases('latest').get().then(function (release) {
-                        console.log(release);
-                        document.write('Latest release of another-rest-client:<br>');
-                        document.write('Published at: ' + release.published_at + '<br>');
-                        document.write('Tag: ' + release.tag_name + '<br>');
-                    }); */
+                    token = smart.api.token;
+                   
                     var p = defaultPatient();
                     //added patient
 
@@ -130,6 +125,29 @@
         } else {
             return undefined;
         }
+    }
+
+    function callRestfulAPI(relativeURL,token,contentType,acceptType) {
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", "Basic "+token);
+        myHeaders.append("Content-Type", contentType);
+        myHeaders.append("Accept", acceptType);
+     
+        var raw = "";
+
+        var requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+
+        fetch(relativeURL, requestOptions)
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
+
+        return (response.text());
     }
 /*
     function getAllergyIntolerances(smart) {
