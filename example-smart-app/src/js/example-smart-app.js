@@ -49,14 +49,14 @@
                     var ldl = byCodes('2089-1');
 
                     var p = defaultPatient();
-                    //added patient id data
+                    //added patient
                     p.patientId = patient.patientId;
                     p.birthdate = patient.birthDate;
                     p.gender = gender;
                     p.fname = fname;
                     p.lname = lname;
                     p.height = getQuantityValueAndUnit(height[0]);
-                    p.allergies = getAllergyIntolerances(smart);
+                   // p.allergies = getAllergyIntolerances(smart);
                     if (typeof systolicbp != 'undefined') {
                         p.systolicbp = systolicbp;
                     }
