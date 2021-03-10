@@ -16,7 +16,7 @@
 
                 });*/
                 console.log("smart=" + JSON.stringify(smart)); 
-                console.log("patient=" + JSON.stringify(pt)); 
+                console.log( pt); 
                 console.log("srverURL =" + smart.server.serviceUrl); 
                 var relativeURL = smart.server.serviceUrl + "/AllergyIntolerance?patient=" + patient.id;
                 console.log("relativeURL=" + relativeURL);
@@ -49,7 +49,7 @@
                     }
                 });*/
 
-                $.when(pt, obv).fail(onError);
+                //$.when(pt, obv).fail(onError);
 
                // $.when(pt, obv).done(function (patient, obv) {
                //     var byCodes = smart.byCodes(obv, 'code');
