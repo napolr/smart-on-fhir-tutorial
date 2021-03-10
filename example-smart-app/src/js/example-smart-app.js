@@ -144,7 +144,8 @@
         //console.log(allergyIntolerance);
         entries = null;
         entries = allergyIntolerance.entries;
-        console.log(entries);
+       
+        console.log(allergyIntolerance.allergies);
         if (entries !== null) {
             var allergyTableHeader = "<table><tr><td>item</td><td>category</td><td>reaction</td></tr>";
             var j = 0;
