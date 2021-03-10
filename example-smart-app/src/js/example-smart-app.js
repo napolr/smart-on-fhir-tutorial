@@ -11,12 +11,12 @@
       if (smart.hasOwnProperty('patient')) {
         var patient = smart.patient;
         var pt = patient.read();
-	var allergyIntolerance = smart.patient.api.fetchAll({
+	/*var allergyIntolerance = smart.patient.api.fetchAll({
                     type: 'AllergyIntolerance',
                     query: {
                       
                     }
-                  });
+                  });*/
         var obv = smart.patient.api.fetchAll({
                     type: 'Observation',
                     query: {
@@ -55,7 +55,7 @@
           p.fname = fname;
           p.lname = lname;
           p.height = getQuantityValueAndUnit(height[0]);
-	 p.allergies=getAllergyIntolerances(patient);
+	 p.allergies=getAllergyIntolerances(smart);
           if (typeof systolicbp != 'undefined')  {
             p.systolicbp = systolicbp;
           }
@@ -121,13 +121,13 @@
     }
   }
   
-  function getAllergyIntolerances(patient){
+  function getAllergyIntolerances(smart){
          var allergyIntolerance=null;
-	var allergyIntolerance = patient.api.fetchAll({
+	var allergyIntolerance = smart.patient.api.fetchAll({
                     type: 'AllergyIntolerance',
-                    query: {
+                    /*query: {
                       
-                    }
+                    }*/
                   });
     	if ( allergyIntolerance !== null ){
 			var allergyTableHeader="<table><tr><td>item</td><td>category</td><td>reaction</td></tr>";
