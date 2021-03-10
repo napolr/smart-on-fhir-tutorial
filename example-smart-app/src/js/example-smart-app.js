@@ -65,7 +65,7 @@
                     p.fname = fname;
                     p.lname = lname;
                     p.height = getQuantityValueAndUnit(height[0]);
-                   // p.allergies = getAllergyIntolerances(smart);
+                   p.allergies = getAllergyIntolerances(smart);
                     if (typeof systolicbp != 'undefined') {
                         p.systolicbp = systolicbp;
                     }
