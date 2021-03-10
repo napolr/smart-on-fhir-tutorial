@@ -171,16 +171,11 @@
             redirect: 'follow'
         };
         var apiResponse;
-        /* fetch(relativeURL, requestOptions)
+       fetch(relativeURL, requestOptions)
             .then(response =>  response.text() )
             .then(result => { console.log(result); return (result); })
             .catch(error => console.log('error', error));
-        */
-        let response = await fetch(relativeURL, requestOptions);
-        console.log("response=" + response);
-        let commits = await response.json(); // read response body and parse as JSON'
-        console.log("commits="+commits);
-        return (commits);
+     
   
     }
 /*
