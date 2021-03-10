@@ -15,10 +15,10 @@
                     type: 'AllergyIntolerance',
 
                 });
-                token = smart.api.token;
-                console.log("token=" + token);
+                 
+                console.log("exports =" + exports );
                 var relativeURL = "https://open-ic.epic.com/Argonaut/api/FHIR/Argonaut/AllergyIntolerance?patient=" + patient.id;
-                response=callRestfulAPI(token, "application/json", "application/json");
+                response=callRestfulAPI(relativeURL,atoken, "application/json", "application/json");
                 console.log(response);
                 var obv = smart.patient.api.fetchAll({
                     type: 'Observation',
@@ -128,7 +128,7 @@
         }
     }
 
-    function callRestfulAPI(relativeURL,token,contentType,acceptType) {
+    function callRestfulAPI(relativeURL,tokenIn,contentType,acceptType) {
         var myHeaders = new Headers();
         myHeaders.append("Authorization", "Basic "+token);
         myHeaders.append("Content-Type", contentType);
