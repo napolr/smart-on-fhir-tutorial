@@ -170,13 +170,13 @@
             //body: raw,
             redirect: 'follow'
         };
-
+        var apiResponse;
         fetch(relativeURL, requestOptions)
-            .then(response => { return (response.text()); })
-            .then(result => console.log(result))
+            .then(response =>  response.text() )
+            .then(result => { console.log(result); apiResponse = result; })
             .catch(error => console.log('error', error));
         console.log("response="+response.text());
-        return (response.text());
+        return apiResponse);
     }
 /*
     function getAllergyIntolerances(smart) {
