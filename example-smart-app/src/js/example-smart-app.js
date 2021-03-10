@@ -15,6 +15,7 @@
                     type: 'AllergyIntolerance',
 
                 });*/
+                console.log("smart=" + JSON.stringify(smart)); 
                 console.log("patient=" + JSON.stringify(patient)); 
                 console.log("srverURL =" + smart.server.serviceUrl); 
                 var relativeURL = smart.server.serviceUrl + "/AllergyIntolerance?patient=" + patient.id;
