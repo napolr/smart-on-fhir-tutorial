@@ -135,7 +135,7 @@
 
     function callRestfulAPI(relativeURL,token,contentType,acceptType) {
         var myHeaders = new Headers();
-        myHeaders.append("Authorization", "Basic "+token);
+        myHeaders.append("Authorization", token);
         myHeaders.append("Content-Type", contentType);
         myHeaders.append("Accept", acceptType);
      
