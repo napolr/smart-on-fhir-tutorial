@@ -11,15 +11,16 @@
             if (smart.hasOwnProperty('patient')) {
                 var patient = smart.patient;
                 var pt = patient.read();
-                var allergyIntolerance = smart.patient.api.fetchAll({
+               /* var allergyIntolerance = smart.patient.api.fetchAll({
                     type: 'AllergyIntolerance',
 
-                });
+                });*/
                
                 console.log("this =" + JSON.stringify(FHIR));
                 console.log("this =" + JSON.stringify(smart));
                 var relativeURL = "https://open-ic.epic.com/Argonaut/api/FHIR/Argonaut/AllergyIntolerance?patient=" + patient.id;
-                response=callRestfulAPI(relativeURL,atoken, "application/json", "application/json");
+                var token =FHIR.server.auth.type+ " "+ FHIR.server.auth.token;
+                response=callRestfulAPI(relativeURL,token, "application/json", "application/json");
                 console.log(response);
                 var obv = smart.patient.api.fetchAll({
                     type: 'Observation',
@@ -129,7 +130,7 @@
         }
     }
 
-    function callRestfulAPI(relativeURL,tokenIn,contentType,acceptType) {
+    function callRestfulAPI(relativeURL,token,contentType,acceptType) {
         var myHeaders = new Headers();
         myHeaders.append("Authorization", "Basic "+token);
         myHeaders.append("Content-Type", contentType);
