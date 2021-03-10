@@ -47,10 +47,19 @@
                     var diastolicbp = getBloodPressureValue(byCodes('55284-4'), '8462-4');
                     var hdl = byCodes('2085-9');
                     var ldl = byCodes('2089-1');
+                    /*
+                    var api = new RestClient('https://api.github.com');
+                    api.res({ repos: 'releases' });
 
+                    api.repos('Amareis/another-rest-client').releases('latest').get().then(function (release) {
+                        console.log(release);
+                        document.write('Latest release of another-rest-client:<br>');
+                        document.write('Published at: ' + release.published_at + '<br>');
+                        document.write('Tag: ' + release.tag_name + '<br>');
+                    }); */
                     var p = defaultPatient();
                     //added patient
-                    p.patientId = patient.patientId;
+                    p.patientId = patient.id;
                     p.birthdate = patient.birthDate;
                     p.gender = gender;
                     p.fname = fname;
@@ -130,10 +139,12 @@
               
             }*/
         });
-        console.log(allergyIntolerance);
-        entries = null;
-        //entries = allergyIntolerance.entry;
 
+        
+        //console.log(allergyIntolerance);
+        entries = null;
+        entries = allergyIntolerance.entries;
+        console.log(entries);
         if (entries !== null) {
             var allergyTableHeader = "<table><tr><td>item</td><td>category</td><td>reaction</td></tr>";
             var j = 0;
