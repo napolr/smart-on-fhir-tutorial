@@ -17,16 +17,16 @@
 
                 });*/
                 console.log("smart=" + JSON.stringify(smart)); 
-                console.log( pt); 
+                
                 console.log("srverURL =" + smart.server.serviceUrl); 
 
-                console.log("relativeURL=" + relativeURL);
+              
                 var token = smart.server.auth.type + " " + smart.server.auth.token;
                 var token = smart.tokenResponse.token_type + " " + smart.tokenResponse.access_token;
                 console.log("token=" + token);
 
 
-                var relativeURL = smart.server.serviceUrl + "/Patient/" + patient.id;
+                var relativeURL = smart.server.serviceUrl + "/Patient/_id=" + patient.id;
                 var pt = callRestfulAPI(relativeURL, token, "application/json", "application/json");
                 console.log("patient=" + JSON.stringify(pt));
 
