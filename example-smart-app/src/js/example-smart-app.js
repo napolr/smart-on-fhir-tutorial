@@ -171,9 +171,9 @@
             redirect: 'follow'
         };
         var apiResponse;
-        fetch(relativeURL, requestOptions)
+        apiResponse= fetch(relativeURL, requestOptions)
             .then(response =>  response.text() )
-            .then(result => { console.log(result); apiResponse = result; })
+            .then(result => { console.log(result); return (result); })
             .catch(error => console.log('error', error));
         console.log("response=" + apiResponse);
         return (apiResponse);
