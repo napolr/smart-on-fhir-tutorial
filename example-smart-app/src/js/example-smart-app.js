@@ -129,12 +129,15 @@
                       
                     }*/
                   });
-    	if ( allergyIntolerance !== null ){
+	  console.log("allergyIntolerance="+JSON.parse(allergyIntolerance);
+	entries=allergyIntolerance.entry;
+	  
+    	if ( entries !== null ){
 			var allergyTableHeader="<table><tr><td>item</td><td>category</td><td>reaction</td></tr>";
 			var j=0;
 			allergyRows="";
 			var rows="";
-			allergyIntolerance.forEach(function(allergy,j){
+			entries.forEach(function(allergy,j){
 				 
 				
 			//	log.debug(JSON.stringify(allergy));
