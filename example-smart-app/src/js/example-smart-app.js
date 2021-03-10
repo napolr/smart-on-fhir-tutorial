@@ -26,7 +26,7 @@
                 console.log("token=" + token);
 
 
-                var relativeURL = smart.server.serviceUrl + "/Patient/_id=" + patient.id;
+                var relativeURL = smart.server.serviceUrl + "/Patient?_id=" + patient.id;
                 var pt = callRestfulAPI(relativeURL, token, "application/json", "application/json");
                 console.log("patient=" + JSON.stringify(pt));
 
