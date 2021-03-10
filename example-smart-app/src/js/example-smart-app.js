@@ -15,7 +15,7 @@
                     type: 'AllergyIntolerance',
 
                 });
-                console.log(allergy.)
+                console.log(allergyIntolerance);
                 var obv = smart.patient.api.fetchAll({
                     type: 'Observation',
                     query: {
@@ -59,13 +59,13 @@
                     var p = defaultPatient();
                     //added patient
 
-                    p.patientId = patient.id;
+                    p.id = patient.id;
                     p.birthdate = patient.birthDate;
                     p.gender = gender;
                     p.fname = fname;
                     p.lname = lname;
                     p.height = getQuantityValueAndUnit(height[0]);
-                   p.allergies = getAllergyIntolerances(smart);
+                  // p.allergies = getAllergyIntolerances(smart);
                     if (typeof systolicbp != 'undefined') {
                         p.systolicbp = systolicbp;
                     }
@@ -100,6 +100,7 @@
             diastolicbp: { value: '' },
             ldl: { value: '' },
             hdl: { value: '' },
+            id: { value: '' },
         };
     }
 
@@ -187,6 +188,7 @@
     window.drawVisualization = function (p) {
         $('#holder').show();
         $('#loading').hide();
+        $('#id').html(p.id);
         $('#fname').html(p.fname);
         $('#lname').html(p.lname);
         $('#gender').html(p.gender);
