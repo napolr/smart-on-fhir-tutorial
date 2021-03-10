@@ -23,18 +23,18 @@
                 var token = smart.server.auth.type + " " + smart.server.auth.token;
                 var token = smart.tokenResponse.token_type + " " + smart.tokenResponse.access_token;
                 console.log("token=" + token);
-                AllergyIntolerance = callRestfulAPI(relativeURL, token, "application/json", "application/json");
+                var AllergyIntolerance = callRestfulAPI(relativeURL, token, "application/json", "application/json");
 
 
                 var relativeURL = smart.server.serviceUrl + "/Medications?patient=" + patient.id;
-                Medications = callRestfulAPI(relativeURL, token, "application/json", "application/json");
+                var Medications = callRestfulAPI(relativeURL, token, "application/json", "application/json");
 
 
                 var relativeURL = smart.server.serviceUrl + "/Condition?patient=" + patient.id;
-                Conditions = callRestfulAPI(relativeURL, token, "application/json", "application/json");
-                code = "";
-                var relativeURL = smart.server.serviceUrl + "/Observations?code={"+code+"}&patient=" + patient.id;
-                Observations = callRestfulAPI(relativeURL, token, "application/json", "application/json");
+                var Conditions = callRestfulAPI(relativeURL, token, "application/json", "application/json");
+                var code = "";
+                var relativeURL = smart.server.serviceUrl + "/Observations?&patient=" + patient.id;
+                var Observations = callRestfulAPI(relativeURL, token, "application/json", "application/json");
 
 
                 console.log(Observations);
