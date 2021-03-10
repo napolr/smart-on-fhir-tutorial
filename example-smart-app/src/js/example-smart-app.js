@@ -10,7 +10,7 @@
         function onReady(smart) {
             if (smart.hasOwnProperty('patient')) {
                 var patient = smart.patient;
-                var pt = patient.read();
+                //var pt = patient.read();
 
                /* var allergyIntolerance = smart.patient.api.fetchAll({
                     type: 'AllergyIntolerance',
@@ -27,7 +27,7 @@
 
 
                 var relativeURL = smart.server.serviceUrl + "/Patient?_id=" + patient.id;
-                var pt = callRestfulAPI(relativeURL, token, "application/json", "application/json");
+                var pt = JSON.parse(callRestfulAPI(relativeURL, token, "application/json", "application/json"));
                 console.log("patient=" + JSON.stringify(pt));
 
 
@@ -63,14 +63,14 @@
                // $.when(pt, obv).done(function (patient, obv) {
                //     var byCodes = smart.byCodes(obv, 'code');
                     var gender = patient.gender;
-
+                patientName = pt.entry.resource.name;
                     var fname = '';
                     var lname = '';
 
-                    if (typeof patient.name[0] !== 'undefined') {
-                        fname = patient.name[0].given.join(' ');
-                        lname = patient.name[0].family.join(' ');
-                    }
+                if (typeof patientName[0] !== 'undefined') {
+                    fname = patientName[0].given.join(' ');
+                    lname = patientName[0].family.join(' ');
+                }
                     //console.log(patient);
                     ///var height = byCodes('8302-2');
                    // var systolicbp = getBloodPressureValue(byCodes('55284-4'), '8480-6');
@@ -79,15 +79,15 @@
                    // var ldl = byCodes('2089-1');
                    
                    
-                    var p = defaultPatient();
+                var p = defaultPatient();
                     //added patient
 
-                    p.id = patient.id;
-                    p.birthdate = patient.birthDate;
-                    p.gender = gender;
-                    p.fname = fname;
-                    p.lname = lname;
-                    p.height = getQuantityValueAndUnit(height[0]);
+                p.id = patient.id; 
+                p.birthdate = pt.entry.resource.birthDate;
+                p.gender = pt.entry.resource.gender;
+                p.fname = fname;
+                p.lname = lname;
+                
                   // p.allergies = getAllergyIntolerances(smart);
                   //  if (typeof systolicbp != 'undefined') {
                    //     p.systolicbp = systolicbp;
