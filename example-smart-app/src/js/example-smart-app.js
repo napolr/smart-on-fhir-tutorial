@@ -16,7 +16,7 @@
 
                 });*/
                 console.log("smart=" + JSON.stringify(smart)); 
-                console.log("patient=" + JSON.stringify(patient)); 
+                console.log("patient=" + JSON.stringify(pt)); 
                 console.log("srverURL =" + smart.server.serviceUrl); 
                 var relativeURL = smart.server.serviceUrl + "/AllergyIntolerance?patient=" + patient.id;
                 console.log("relativeURL=" + relativeURL);
@@ -38,7 +38,7 @@
 
 
                 console.log(Observations);
-                var obv = smart.patient.api.fetchAll({
+                /*var obv = smart.patient.api.fetchAll({
                     type: 'Observation',
                     query: {
                         code: {
@@ -47,12 +47,12 @@
                                 'http://loinc.org|2089-1', 'http://loinc.org|55284-4']
                         }
                     }
-                });
+                });*/
 
                 $.when(pt, obv).fail(onError);
 
-                $.when(pt, obv).done(function (patient, obv) {
-                    var byCodes = smart.byCodes(obv, 'code');
+               // $.when(pt, obv).done(function (patient, obv) {
+               //     var byCodes = smart.byCodes(obv, 'code');
                     var gender = patient.gender;
 
                     var fname = '';
@@ -62,12 +62,12 @@
                         fname = patient.name[0].given.join(' ');
                         lname = patient.name[0].family.join(' ');
                     }
-                    console.log(patient);
-                    var height = byCodes('8302-2');
-                    var systolicbp = getBloodPressureValue(byCodes('55284-4'), '8480-6');
-                    var diastolicbp = getBloodPressureValue(byCodes('55284-4'), '8462-4');
-                    var hdl = byCodes('2085-9');
-                    var ldl = byCodes('2089-1');
+                    //console.log(patient);
+                    ///var height = byCodes('8302-2');
+                   // var systolicbp = getBloodPressureValue(byCodes('55284-4'), '8480-6');
+                   // var diastolicbp = getBloodPressureValue(byCodes('55284-4'), '8462-4');
+                   // var hdl = byCodes('2085-9');
+                   // var ldl = byCodes('2089-1');
                    
                    
                     var p = defaultPatient();
@@ -80,19 +80,19 @@
                     p.lname = lname;
                     p.height = getQuantityValueAndUnit(height[0]);
                   // p.allergies = getAllergyIntolerances(smart);
-                    if (typeof systolicbp != 'undefined') {
-                        p.systolicbp = systolicbp;
-                    }
+                  //  if (typeof systolicbp != 'undefined') {
+                   //     p.systolicbp = systolicbp;
+                  //  }
 
-                    if (typeof diastolicbp != 'undefined') {
-                        p.diastolicbp = diastolicbp;
-                    }
+                   // if (typeof diastolicbp != 'undefined') {
+                   //     p.diastolicbp = diastolicbp;
+                   // }
 
-                    p.hdl = getQuantityValueAndUnit(hdl[0]);
-                    p.ldl = getQuantityValueAndUnit(ldl[0]);
+                  //  p.hdl = getQuantityValueAndUnit(hdl[0]);
+                  //  p.ldl = getQuantityValueAndUnit(ldl[0]);
 
                     ret.resolve(p);
-                });
+               // });
             } else {
                 onError();
             }
@@ -118,7 +118,7 @@
         };
     }
 
-    function getBloodPressureValue(BPObservations, typeOfPressure) {
+   /* function getBloodPressureValue(BPObservations, typeOfPressure) {
         var formattedBPObservations = [];
         BPObservations.forEach(function (observation) {
             var BP = observation.component.find(function (component) {
@@ -145,6 +145,7 @@
             return undefined;
         }
     }
+    */
 
     function callRestfulAPI(relativeURL,token,contentType,acceptType) {
         var myHeaders = new Headers();
