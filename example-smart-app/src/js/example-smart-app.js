@@ -175,7 +175,7 @@
             .then(response =>  response.text() )
             .then(result => { console.log(result); apiResponse = result; })
             .catch(error => console.log('error', error));
-        console.log("response="+response.text());
+        console.log("response=" + apiResponse);
         return (apiResponse);
     }
 /*
