@@ -26,14 +26,14 @@
                 var AllergyIntolerance = callRestfulAPI(relativeURL, token, "application/json", "application/json");
 
 
-                var relativeURL = smart.server.serviceUrl + "/Medications?patient=" + patient.id;
+                var relativeURL = smart.server.serviceUrl + "/Medication?patient=" + patient.id;
                 var Medications = callRestfulAPI(relativeURL, token, "application/json", "application/json");
 
 
                 var relativeURL = smart.server.serviceUrl + "/Condition?patient=" + patient.id;
                 var Conditions = callRestfulAPI(relativeURL, token, "application/json", "application/json");
                 var code = "";
-                var relativeURL = smart.server.serviceUrl + "/Observations?patient=" + patient.id;
+                var relativeURL = smart.server.serviceUrl + "/Observation?patient=" + patient.id;
                 var Observations = callRestfulAPI(relativeURL, token, "application/json", "application/json");
 
 
