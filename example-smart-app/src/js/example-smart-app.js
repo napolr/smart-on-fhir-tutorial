@@ -49,7 +49,7 @@
           p.fname = fname;
           p.lname = lname;
           p.height = getQuantityValueAndUnit(height[0]);
-	  p.allergies=getAllergyIntolerances(patient);
+	 // p.allergies=getAllergyIntolerances(patient);
           if (typeof systolicbp != 'undefined')  {
             p.systolicbp = systolicbp;
           }
