@@ -21,7 +21,12 @@
                       }
                     }
                   });
-
+        var allergyIntolerance = patient.api.fetchAll({
+                    type: 'AllergyIntolerance',
+                    query: {
+                      
+                    }
+                  });
         $.when(pt, obv).fail(onError);
 
         $.when(pt, obv).done(function(patient, obv) {
@@ -117,7 +122,7 @@
   
   function getAllergyIntolerances(patient){
          var allergyIntolerance=null;
-	var obv = patient.api.fetchAll({
+	var allergyIntolerance = patient.api.fetchAll({
                     type: 'AllergyIntolerance',
                     query: {
                       
