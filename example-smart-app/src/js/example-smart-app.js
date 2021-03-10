@@ -1,5 +1,3 @@
-<script src="../rest-client.js"></script>
-    <script>
 (function(window){
   window.extractData = function() {
     var ret = $.Deferred();
@@ -132,8 +130,7 @@
                     }*/
                   });
 	  console.log(allergyIntolerance);
-	  var entries=null;
-	//entries=allergyIntolerance.entry;
+	entries=allergyIntolerance.entry;
 	  
     	if ( entries !== null ){
 			var allergyTableHeader="<table><tr><td>item</td><td>category</td><td>reaction</td></tr>";
