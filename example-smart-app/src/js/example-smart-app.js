@@ -15,9 +15,10 @@
                     type: 'AllergyIntolerance',
 
                 });*/
-                
+                console.log("patientID =" + pt.id);
                 console.log("this =" + JSON.stringify(smart)); 
-                var relativeURL = smart.server.serviceURL+"/AllergyIntolerance?patient=" + patient.id;
+                var relativeURL = smart.server.serviceURL + "/AllergyIntolerance?patient=" + pt.id;
+                console.log("relativeURL=" + relativeURL);
                 var token = smart.server.auth.type + " " + smart.server.auth.token;
                 response=callRestfulAPI(relativeURL,token, "application/json", "application/json");
                 console.log(response);
