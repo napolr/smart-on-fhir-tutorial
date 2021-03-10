@@ -171,10 +171,14 @@
             redirect: 'follow'
         };
         var apiResponse;
-        apiResponse= fetch(relativeURL, requestOptions)
+        /* fetch(relativeURL, requestOptions)
             .then(response =>  response.text() )
             .then(result => { console.log(result); return (result); })
             .catch(error => console.log('error', error));
+        */
+        let response = await fetch('/non-existence.txt', requestOptions);
+        console.log(response);
+        return (response.json);
   
     }
 /*
