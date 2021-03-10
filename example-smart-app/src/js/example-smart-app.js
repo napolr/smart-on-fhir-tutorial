@@ -11,6 +11,7 @@
             if (smart.hasOwnProperty('patient')) {
                 var patient = smart.patient;
                 var pt = patient.read();
+
                /* var allergyIntolerance = smart.patient.api.fetchAll({
                     type: 'AllergyIntolerance',
 
@@ -18,11 +19,19 @@
                 console.log("smart=" + JSON.stringify(smart)); 
                 console.log( pt); 
                 console.log("srverURL =" + smart.server.serviceUrl); 
-                var relativeURL = smart.server.serviceUrl + "/AllergyIntolerance?patient=" + patient.id;
+
                 console.log("relativeURL=" + relativeURL);
                 var token = smart.server.auth.type + " " + smart.server.auth.token;
                 var token = smart.tokenResponse.token_type + " " + smart.tokenResponse.access_token;
                 console.log("token=" + token);
+
+
+                var relativeURL = smart.server.serviceUrl + "/Patient/" + patient.id;
+                var pt = callRestfulAPI(relativeURL, token, "application/json", "application/json");
+                console.log("patient=" + JSON.stringify(pt));
+
+
+                var relativeURL = smart.server.serviceUrl + "/AllergyIntolerance?patient=" + patient.id;
                 var AllergyIntolerance = callRestfulAPI(relativeURL, token, "application/json", "application/json");
 
 
