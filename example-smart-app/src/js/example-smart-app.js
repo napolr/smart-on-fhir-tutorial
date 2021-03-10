@@ -37,7 +37,7 @@
                 Observations = callRestfulAPI(relativeURL, token, "application/json", "application/json");
 
 
-                console.log(response);
+                console.log(Observations);
                 var obv = smart.patient.api.fetchAll({
                     type: 'Observation',
                     query: {
