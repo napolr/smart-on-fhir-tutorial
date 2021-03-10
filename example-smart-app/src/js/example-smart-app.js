@@ -175,8 +175,7 @@
             .then(response =>  response.text() )
             .then(result => { console.log(result); return (result); })
             .catch(error => console.log('error', error));
-        console.log("response=" + apiResponse);
-        return (apiResponse);
+  
     }
 /*
     function getAllergyIntolerances(smart) {
