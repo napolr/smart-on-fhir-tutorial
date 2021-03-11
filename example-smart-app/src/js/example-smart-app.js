@@ -191,13 +191,13 @@
 
 
 
-    async function getResult() {
-        let result = await doAPICall();
+    async function getResult(relativeURL, token, contentType, acceptType) {
+        let result = await doAPICall(relativeURL, token, contentType, acceptType);
         return result
     }
 
-    async function callRestfulAPI() {
-        let data = await getResult();
+    async function callRestfulAPI(relativeURL, token, contentType, acceptType) {
+        let data = await getResult(relativeURL, token, contentType, acceptType);
         console.log(data)
         return data;
     }
