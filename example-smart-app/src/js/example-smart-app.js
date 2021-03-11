@@ -199,6 +199,7 @@
     async function callRestfulAPI() {
         let data = await getResult();
         console.log(data)
+        return data;
     }
     
 /*
