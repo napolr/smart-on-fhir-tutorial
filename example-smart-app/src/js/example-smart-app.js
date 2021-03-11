@@ -189,6 +189,7 @@
 
         fetchFHIRObject().then(fhirObject => {
             fhirObject; // fetched fhirObject
+            console.log("fhirObject=" + fhirObject);
         });
 
         console.log("apiResponse=" + fhirObject);
