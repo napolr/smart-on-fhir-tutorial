@@ -182,8 +182,8 @@
             });
 
      
-        console.log("result="+result);
-        return result;
+        console.log("apiResponse=" + apiResponse);
+        return apiResponse;
     }
 /*
     function getAllergyIntolerances(smart) {
