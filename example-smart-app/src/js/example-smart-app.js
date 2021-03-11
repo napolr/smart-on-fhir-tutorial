@@ -181,18 +181,21 @@
                 console.log("json="+JSON.stringify(json)); 
             });
 */
-         const restFullCall = async () => {
-             const response = await fetch(relativeURL, requestOptions)
+         let myValue;
 
-             const data = await response.json()
-
-             console.log(JSON.parse(data))
-
-             return JSON.parse(data)
+      
+         return fetch(relativeURL, requestOptions)
+                 .then(function (response) {
+                     return response.json();
+                 })
+                 .then(function (data) {
+                     var userid = JSON.parse(data);
+                     console.log(data);
+                     myValue = data
+                     return data;
+                 })
          }
 
-         result = restFullCall();
-         console.log(result);
 
         
          
