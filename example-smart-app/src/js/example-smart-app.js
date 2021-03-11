@@ -178,7 +178,7 @@
             })
             .then(json => {
                 console.log("json="+JSON.stringify(json));
-                apiResponse = json;
+                return json;
             });
 
      
