@@ -181,7 +181,7 @@
             });
 */
 
-        const response = await fetch(resource[, options]);
+        const response = await fetch(relativeURL, requestOptions);
         
 
         console.log("apiResponse=" + response);
