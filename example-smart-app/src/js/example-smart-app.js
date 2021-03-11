@@ -156,7 +156,7 @@
     }
     */
 
-    async function  callRestfulAPI(relativeURL,token,contentType,acceptType) {
+    async function  doAPICall(relativeURL,token,contentType,acceptType) {
         var myHeaders = new Headers();
         myHeaders.append("Authorization", token);
         myHeaders.append("Content-Type", contentType);
@@ -183,11 +183,24 @@
          const json = await fetch(relativeURL, requestOptions)
              .then(response => response.json());
 
-         console.log(relativeURL)
-         console.log(json);
+         ///console.log(relativeURL)
+        // console.log(json);
          
          return json;  
     }
+
+
+
+    async function getResult() {
+        let result = await doAPICall();
+        return result
+    }
+
+    async function callRestfulAPI() {
+        let data = await getResult();
+        console.log(data)
+    }
+    
 /*
     function getAllergyIntolerances(smart) {
         var allergyIntolerance = null;
