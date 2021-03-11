@@ -181,23 +181,16 @@
                 console.log("json="+JSON.stringify(json)); 
             });
 */
-         let myValue;
-
-      
-         return await fetch(relativeURL, requestOptions)
-                 .then(function (response) {
-                     return response.json();
-                 })
-                 .then(function (data) {
-                     var userid = JSON.parse(data);
-                     console.log(data);
-                     myValue = data
-                     return data;
-                 })
+         const requestFHIRObject = async () => {
+             const response = await fetch(relativeURL, requestOptions)
+             const json = await response.json();
+             console.log("async/await based");
+             console.log(json);
+             return json;
          }
 
-
-        
+        data=  requestFHIRObject();
+         console.log("data=" + data);
          
          
     }
