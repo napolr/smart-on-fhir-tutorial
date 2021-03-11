@@ -27,22 +27,22 @@
 
 
                 var relativeURL = smart.server.serviceUrl + "/Patient?_id=" + patient.id;
-                var pt = callRestfulAPI(relativeURL, token, "application/json", "application/json");
+                var pt = await callRestfulAPI(relativeURL, token, "application/json", "application/json");
                 console.log("patient="+pt); 
 
                 var relativeURL = smart.server.serviceUrl + "/AllergyIntolerance?patient=" + patient.id;
-                var AllergyIntolerance = callRestfulAPI(relativeURL, token, "application/json", "application/json");
+                var AllergyIntolerance = await callRestfulAPI(relativeURL, token, "application/json", "application/json");
 
 
                 var relativeURL = smart.server.serviceUrl + "/MedicationRequest?patient=" + patient.id;
-                var Medications = callRestfulAPI(relativeURL, token, "application/json", "application/json");
+                var Medications = await callRestfulAPI(relativeURL, token, "application/json", "application/json");
 
 
                 var relativeURL = smart.server.serviceUrl + "/Condition?patient=" + patient.id;
-                var Conditions = callRestfulAPI(relativeURL, token, "application/json", "application/json");
+                var Conditions = await callRestfulAPI(relativeURL, token, "application/json", "application/json");
                 var code = "";
                 var relativeURL = smart.server.serviceUrl + "/Observation?patient=" + patient.id;
-                var Observations = callRestfulAPI(relativeURL, token, "application/json", "application/json");
+                var Observations = await  callRestfulAPI(relativeURL, token, "application/json", "application/json");
 
 
                 console.log(Observations);
