@@ -28,8 +28,7 @@
 
                 var relativeURL = smart.server.serviceUrl + "/Patient?_id=" + patient.id;
                 var pt = callRestfulAPI(relativeURL, token, "application/json", "application/json");
-                console.log("patient=" + pt);
-                console.log("patient="+JSON.stringify(pt));
+                console.log(pt);
 
 
                 var relativeURL = smart.server.serviceUrl + "/AllergyIntolerance?patient=" + patient.id;
@@ -172,11 +171,13 @@
             redirect: 'follow'
         };
         var apiResponse;
-        promise=fetch(relativeURL, requestOptions)
-            .then(response => { return (response.json()); })
-            .then(result =>console.log(result) )
+        fetch(relativeURL, requestOptions)
+            .then(response =>  response.text() )
+            .then(result => { console.log(result); return (result); })
             .catch(error => console.log('error', error));
+        
 
+      
     }
 /*
     function getAllergyIntolerances(smart) {
