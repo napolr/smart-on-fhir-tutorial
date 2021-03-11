@@ -185,7 +185,7 @@
         let response = await fetch(relativeURL, requestOptions);
 
         console.log(response.status); // 400
-        console.log(response.statusText); // OK
+        console.log(JSON.stringify(response.json())); // OK
         
 
         console.log("apiResponse=" + response.json());
