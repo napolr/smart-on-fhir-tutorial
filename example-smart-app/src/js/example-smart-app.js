@@ -182,24 +182,14 @@
             });
 */
 
-        var request = new XMLHttpRequest()
+        let response = await fetch(relativeURL, requestOptions);
 
-        request.open('GET', relativeURL, true)
-        request.onload = function () {
-            // Begin accessing JSON data here
-            var data = JSON.parse(this.response)
-
-            if (request.status >= 200 && request.status < 400) {
-                console.log(JSON.strigify(data));
-            } else {
-                console.log('error')
-            }
-        }
-
-        request.send()
-
+        console.log(response.status); // 400
+        console.log(response.statusText); // OK
         
-        return data;
+
+        console.log("apiResponse=" + response.json());
+        return response.json();
     }
 /*
     function getAllergyIntolerances(smart) {
