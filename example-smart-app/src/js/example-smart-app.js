@@ -186,7 +186,7 @@
 
              const data = await response.json()
 
-             //console.log(JSON.parse(data))
+             console.log(JSON.parse(data))
 
              return JSON.parse(data)
          }
