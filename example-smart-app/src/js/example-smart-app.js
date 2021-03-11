@@ -182,6 +182,8 @@
 */
          const json = await fetch(relativeURL, requestOptions)
              .then(response => response.json());
+
+         console.log(relativeURL)
          console.log(json);
          
          return json;  
