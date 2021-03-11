@@ -171,7 +171,7 @@
             redirect: 'follow'
         };
        let apiResponse;
-       return result = fetch(relativeURL, requestOptions)
+       result = fetch(relativeURL, requestOptions)
             .then(response => {
                 console.log(response);
                 return response.json();
@@ -182,6 +182,7 @@
             });
 
         console.log("apiResponse=" + apiResponse);
+        return apiResponse;
     }
 /*
     function getAllergyIntolerances(smart) {
