@@ -170,8 +170,9 @@
             //body: raw,
             redirect: 'follow'
         };
-      /* let apiResponse;
-       result = fetch(relativeURL, requestOptions)
+        let apiResponse;
+        /*
+       result = await fetch(relativeURL, requestOptions)
             .then(response => {
                 console.log(response);
                 return response.json();
@@ -181,16 +182,24 @@
             });
 */
 
-        const response = await fetch(relativeURL, requestOptions).then(response => {
-            console.log(response);
-            return response.json();
-        })
-            .then(json => {
-                console.log("json=" + JSON.stringify(json));
-            });
+        let response;
+        async function fetchAsync() {
+            // await response of fetch call
+            let response = await fetch(relativeURL, requestOptions);
+            // only proceed once promise is resolved
+            let data = await response.json();
+            // only proceed once second promise is resolved
+            return data;
+        }
+
+        // trigger async function
+        // log response or catch error of fetch promise
+        fetchAsync()
+            .then(response => { response; })
+            .catch(reason => console.log(reason.message))
         
 
-        console.log("apiResponse=" + response);
+        console.log("apiResponse=" + data);
         return response;
     }
 /*
