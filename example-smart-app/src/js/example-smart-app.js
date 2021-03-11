@@ -181,6 +181,11 @@
                 apiResponse = json;
             });
 
+        const apiResponse = async () => {
+            const a = await result;
+            console.log(a);
+        };
+
         console.log("apiResponse=" + apiResponse);
         return apiResponse;
     }
