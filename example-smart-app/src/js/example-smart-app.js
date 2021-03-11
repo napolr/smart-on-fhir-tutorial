@@ -28,8 +28,7 @@
 
                 var relativeURL = smart.server.serviceUrl + "/Patient?_id=" + patient.id;
                 var pt = callRestfulAPI(relativeURL, token, "application/json", "application/json");
-                console.log("patient="+pt);
-
+                console.log("patient="+pt); 
 
                 var relativeURL = smart.server.serviceUrl + "/AllergyIntolerance?patient=" + patient.id;
                 var AllergyIntolerance = callRestfulAPI(relativeURL, token, "application/json", "application/json");
@@ -193,7 +192,7 @@
 
     async function getResult(relativeURL, token, contentType, acceptType) {
         let result = await doAPICall(relativeURL, token, contentType, acceptType);
-        return result
+        return result;
     }
 
     async function callRestfulAPI(relativeURL, token, contentType, acceptType) {
