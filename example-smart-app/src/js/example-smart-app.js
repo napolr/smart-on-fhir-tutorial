@@ -184,7 +184,7 @@
              .then(response => response.json());
          console.log(json);
          
-         
+         return json;  
     }
 /*
     function getAllergyIntolerances(smart) {
