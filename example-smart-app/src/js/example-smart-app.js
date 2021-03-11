@@ -177,11 +177,11 @@
             })
             .then(function (data) {
                 var apiResponse = JSON.parse(data);
-                //console.log(apiResponse);
+                console.log(apiResponse);
                 return apiResponse;
             })
      
-        console.log(result);
+        //console.log(result);
         return result;
     }
 /*
