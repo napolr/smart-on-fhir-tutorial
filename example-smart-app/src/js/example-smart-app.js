@@ -185,10 +185,10 @@
         let response = await fetch(relativeURL, requestOptions);
 
         console.log(response.status); // 400
-        console.log(JSON.stringify(response.json())); // OK
+        console.log(JSON.stringify(response.json)); // OK
         
 
-        console.log("apiResponse=" + response.json());
+        console.log("apiResponse=" + response.json);
         return response.json();
     }
 /*
