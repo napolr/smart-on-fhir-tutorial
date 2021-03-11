@@ -171,13 +171,18 @@
             redirect: 'follow'
         };
         var apiResponse;
-        promise=fetch(relativeURL, requestOptions)
-            .then(response => response.json())  // convert to json
-            .then(json => { return json; } )    //print data to console
-            .catch(err => console.log('Request Failed', err)); // Catch errors
+        result=fetch(relativeURL, requestOptions)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                var apiResponse = JSON.parse(data);
+                //console.log(apiResponse);
+                return apiResponse;
+            })
      
-        console.log(promise);
-        return promise;
+        console.log(result);
+        return result;
     }
 /*
     function getAllergyIntolerances(smart) {
