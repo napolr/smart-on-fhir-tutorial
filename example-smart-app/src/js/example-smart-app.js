@@ -62,7 +62,7 @@
 
                // $.when(pt, obv).done(function (patient, obv) {
                //     var byCodes = smart.byCodes(obv, 'code');
-                    var gender = patient.gender;
+                var gender = patient.gender;
                 patientName = pt.entry.resource.name;
                     var fname = '';
                     var lname = '';
@@ -171,12 +171,13 @@
             redirect: 'follow'
         };
         var apiResponse;
-       fetch(relativeURL, requestOptions)
+        promise=fetch(relativeURL, requestOptions)
             .then(response =>  response.text() )
             .then(result => { console.log(result); return (result); })
             .catch(error => console.log('error', error));
-     
-  
+
+        var response = promise.json();
+        console.log(response);
     }
 /*
     function getAllergyIntolerances(smart) {
