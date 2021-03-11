@@ -189,12 +189,12 @@
 
         const getData = async () => {
             const a = await data; 
-            console.log("a=" + a);
+            console.log("a=" + JSON.parse(a));
             return a;
         };
 
         results=getData();
-         console.log("data=" + results);
+         console.log("results=" + JSON.parse( results));
         
          
          return results;
