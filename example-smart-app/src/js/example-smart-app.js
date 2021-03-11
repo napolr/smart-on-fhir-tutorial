@@ -182,14 +182,16 @@
             });
 */
 
-        let response = await fetch(relativeURL, requestOptions);
-
-        console.log(response.status); // 400
-        console.log(JSON.stringify(response.json)); // OK
+        const data = await fetch(relativeURL, requestOptions)
+            .then((response) => response.json())
+            .then((data) => {
+                return data;
+            });
+ 
         
 
-        console.log("apiResponse=" + response.json);
-        return response.json();
+        console.log("apiResponse=" +data);
+        return data;
     }
 /*
     function getAllergyIntolerances(smart) {
