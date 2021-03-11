@@ -171,17 +171,18 @@
             redirect: 'follow'
         };
         var apiResponse;
-        result=fetch(relativeURL, requestOptions)
-            .then(function (response) {
-                return response.json();
+        result = fetch(relativeURL, requestOptions)
+            .then(response => {
+                console.log(response);
+                return response.json;
             })
-            .then(function (data) {
-                var apiResponse = JSON.parse(data);
-                console.log(apiResponse);
-                return apiResponse;
-            })
+            .then(json => {
+                console.log(json);
+                apiResponse = json;
+            });
+
      
-        //console.log(result);
+        console.log("result="+result);
         return result;
     }
 /*
