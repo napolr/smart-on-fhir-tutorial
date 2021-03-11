@@ -25,7 +25,15 @@
                 var token = smart.tokenResponse.token_type + " " + smart.tokenResponse.access_token;
                 console.log("token=" + token);
 
+                fhirAPIs = ["Patient","AllergyIntolerance","MedicationRequest","Condition","Observation"];
 
+                fhirResults = [];
+                fhirAPIs.forEach(function (apiCall) {
+                    var relativeURL = smart.server.serviceUrl + "/" + apiCall + "?_id=" + patient.id;
+                    fhirResults[apiCall] = callRestfulAPI(relativeURL, token, "application/json", "application/json");
+                    console.log(apiCall + "apiCall returned - " + fhirResults[apiCall]);
+                });
+                /*
                 var relativeURL = smart.server.serviceUrl + "/Patient?_id=" + patient.id;
                 var pt = callRestfulAPI(relativeURL, token, "application/json", "application/json");
                 console.log("patient="+pt); 
@@ -43,9 +51,11 @@
                 var code = "";
                 var relativeURL = smart.server.serviceUrl + "/Observation?patient=" + patient.id;
                 var Observations = callRestfulAPI(relativeURL, token, "application/json", "application/json");
+                console.log(data);
+
+                console.log(Observations);*/
 
 
-                console.log(Observations);
                 /*var obv = smart.patient.api.fetchAll({
                     type: 'Observation',
                     query: {
@@ -197,7 +207,7 @@
 
     async function callRestfulAPI(relativeURL, token, contentType, acceptType) {
         let data = await getResult(relativeURL, token, contentType, acceptType);
-        console.log(data);
+       
         return data;
     }
     
