@@ -181,7 +181,7 @@
                 console.log("json="+JSON.stringify(json)); 
             });
 */
-         const currentloginid = async () => {
+         const result = async () => {
              const response = await fetch(relativeURL, requestOptions)
 
              const data = await response.json()
@@ -192,7 +192,7 @@
          }
 
         
-
+         console.log(result);
 
         
          
