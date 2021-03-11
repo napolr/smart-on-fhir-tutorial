@@ -177,12 +177,12 @@
                 return response.json();
             })
             .then(json => {
-                console.log("json="+json);
+                console.log("json="+JSON.stringify(json));
                 apiResponse = json;
             });
 
      
-        console.log("apiResponse=" + apiResponse);
+        console.log("apiResponse=" + result.json());
         return apiResponse;
     }
 /*
