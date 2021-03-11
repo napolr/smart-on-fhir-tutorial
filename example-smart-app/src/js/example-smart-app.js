@@ -176,8 +176,6 @@
             .then(result => { console.log(result) })
             .catch(error => console.log('error', error));
 
-        var response = promise.json();
-        console.log(response);
     }
 /*
     function getAllergyIntolerances(smart) {
