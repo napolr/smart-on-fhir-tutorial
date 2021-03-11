@@ -170,7 +170,7 @@
             //body: raw,
             redirect: 'follow'
         };
-        var apiResponse;
+       let apiResponse;
        return result = fetch(relativeURL, requestOptions)
             .then(response => {
                 console.log(response);
@@ -178,9 +178,10 @@
             })
             .then(json => {
                 console.log("json="+JSON.stringify(json));
-                return json;
+                apiResponse = json;
             });
- 
+
+        console.log("apiResponse=" + apiResponse);
     }
 /*
     function getAllergyIntolerances(smart) {
