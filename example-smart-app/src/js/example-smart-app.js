@@ -180,20 +180,12 @@
                 console.log("json="+JSON.stringify(json)); 
             });
 */
-        var fhirObject;
-        async function fetchFHIRObject() {
-            const response = await fetch(relativeURL, requestOptions);
-            const fhirObject = await response.json();
-            return fhirObject;
-        }
 
-        fetchFHIRObject().then(fhirObject => {
-            fhirObject; // fetched fhirObject
-            console.log("fhirObject=" + fhirObject);
-        });
+        const response = await fetch(resource[, options]);
+        
 
-        console.log("apiResponse=" + fhirObject);
-        return fhirObject;
+        console.log("apiResponse=" + response);
+        return response;
     }
 /*
     function getAllergyIntolerances(smart) {
