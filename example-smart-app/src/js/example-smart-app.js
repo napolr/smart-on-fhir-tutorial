@@ -174,7 +174,7 @@
         result = fetch(relativeURL, requestOptions)
             .then(response => {
                 console.log(response);
-                return response.json;
+                return response.json();
             })
             .then(json => {
                 console.log("json="+json);
