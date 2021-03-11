@@ -185,7 +185,7 @@
          console.log(relativeURL)
          console.log(json);
          
-         return json;  
+         return JSON.stringify(json);  
     }
 
 
