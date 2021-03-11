@@ -182,8 +182,8 @@
          const json = await fetch(relativeURL, requestOptions)
              .then(response => response.json());
 
-         console.log(relativeURL)
-         console.log(json);
+        // console.log(relativeURL)
+        // console.log(json);
          
          return JSON.stringify(json);  
     }
@@ -197,7 +197,7 @@
 
     async function callRestfulAPI(relativeURL, token, contentType, acceptType) {
         let data = await getResult(relativeURL, token, contentType, acceptType);
-        console.log(data)
+        console.log(data);
         return data;
     }
     
