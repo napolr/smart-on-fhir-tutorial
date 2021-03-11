@@ -182,25 +182,24 @@
             });
 */
 
-        let response;
-        async function fetchAsync() {
-            // await response of fetch call
-            let response = await fetch(relativeURL, requestOptions);
-            // only proceed once promise is resolved
-            let data = await response.json();
-            // only proceed once second promise is resolved
-            return data;
+        var request = new XMLHttpRequest()
+
+        request.open('GET', relativeURL, true)
+        request.onload = function () {
+            // Begin accessing JSON data here
+            var data = JSON.parse(this.response)
+
+            if (request.status >= 200 && request.status < 400) {
+                console.log(JSON.strigify(data));
+            } else {
+                console.log('error')
+            }
         }
 
-        // trigger async function
-        // log response or catch error of fetch promise
-        fetchAsync()
-            .then(response => { response; })
-            .catch(reason => console.log(reason.message))
-        
+        request.send()
 
-        console.log("apiResponse=" + response);
-        return response;
+        
+        return data;
     }
 /*
     function getAllergyIntolerances(smart) {
