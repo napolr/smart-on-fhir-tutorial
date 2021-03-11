@@ -172,11 +172,11 @@
         };
         var apiResponse;
         promise=fetch(relativeURL, requestOptions)
-            .then(response =>  response.text() )
-            .then(result => {  return (result); })
-            .catch(error => console.log('error', error));
+            .then(response => response.json())  // convert to json
+            .then(json => { return json; } )    //print data to console
+            .catch(err => console.log('Request Failed', err)); // Catch errors
      
-    
+        console.log(promise);
     }
 /*
     function getAllergyIntolerances(smart) {
