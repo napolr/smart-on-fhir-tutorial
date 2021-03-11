@@ -170,24 +170,28 @@
             //body: raw,
             redirect: 'follow'
         };
-       let apiResponse;
+      /* let apiResponse;
        result = fetch(relativeURL, requestOptions)
             .then(response => {
                 console.log(response);
                 return response.json();
             })
             .then(json => {
-                console.log("json="+JSON.stringify(json));
-                apiResponse = json;
+                console.log("json="+JSON.stringify(json)); 
             });
+*/
+        async function fetchFHIRObject() {
+            const response = await fetch(relativeURL, requestOptions);
+            const result = await response.json();
+            return result;
+        }
 
-        const apiResponse = async () => {
-            const a = await result;
-            console.log(a);
-        };
+        fetchFHIRObject().then(fhirObject => {
+            fhirObject; // fetched fhirObject
+        });
 
-        console.log("apiResponse=" + apiResponse);
-        return apiResponse;
+        console.log("apiResponse=" + fhirObject);
+        return fhirObject;
     }
 /*
     function getAllergyIntolerances(smart) {
