@@ -188,16 +188,16 @@
             });
 
         const getData = async () => {
-            const a = await data;
-            
+            const a = await data; 
+            console.log("a=" + a);
             return a;
         };
 
-        getData();
-         console.log("data="+data);
+        results=getData();
+         console.log("data=" + results);
         
          
-        return data;
+         return results;
     }
 /*
     function getAllergyIntolerances(smart) {
