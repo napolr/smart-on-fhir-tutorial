@@ -170,7 +170,6 @@
             //body: raw,
             redirect: 'follow'
         };
-        let apiResponse;
         /*
        result = await fetch(relativeURL, requestOptions)
             .then(response => {
@@ -181,16 +180,9 @@
                 console.log("json="+JSON.stringify(json)); 
             });
 */
-         const requestFHIRObject = async () => {
-             const response = await fetch(relativeURL, requestOptions)
-             const json = await response.json();
-             console.log("async/await based");
-             console.log(json);
-             return response.json();
-         }
-         
-        data=  requestFHIRObject();
-         console.log("data=" + data);
+         const json = await fetch(relativeURL, requestOptions)
+             .then(response => response.json());
+         console.log(json);
          
          
     }
