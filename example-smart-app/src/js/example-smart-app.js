@@ -181,23 +181,22 @@
                 console.log("json="+JSON.stringify(json)); 
             });
 */
-        const data = fetch(relativeURL, requestOptions)
-            .then((response) => response.json())
-            .then((data) => {
-                return data;
-            });
+         const currentloginid = async () => {
+             const response = await fetch(relativeURL, requestOptions)
 
-        const getData = async () => {
-            const a = await data; 
-            console.log("a=" + JSON.parse(a));
-            return a;
-        };
+             const data = await response.json()
 
-        results=getData();
-         console.log("results=" + JSON.parse( results));
+             //console.log(JSON.parse(data))
+
+             return JSON.parse(data)
+         }
+
+        
+
+
         
          
-         return results;
+         
     }
 /*
     function getAllergyIntolerances(smart) {
