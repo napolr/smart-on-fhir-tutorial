@@ -173,7 +173,7 @@
         var apiResponse;
         promise=fetch(relativeURL, requestOptions)
             .then(response =>  response.text() )
-            .then(result => { console.log(result); return (result); })
+            .then(result => {  return (result); })
             .catch(error => console.log('error', error));
      
     
