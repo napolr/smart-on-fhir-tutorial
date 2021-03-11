@@ -181,16 +181,16 @@
                 console.log("json="+JSON.stringify(json)); 
             });
 */
-
-        const data = await fetch(relativeURL, requestOptions)
+        const address = fetch(relativeURL, requestOptions)
             .then((response) => response.json())
-            .then((data) => {
-                return data;
+            .then((user) => {
+                return user;
             });
+
+        console.log(address);
  
         
-
-        console.log("apiResponse=" +data);
+         
         return data;
     }
 /*
