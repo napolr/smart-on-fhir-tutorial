@@ -173,8 +173,8 @@
         var apiResponse;
         fetch(relativeURL, requestOptions)
             .then(response =>  response.text() )
-            .then(function (data) {
-                let apiResponse = data.results;
+            .then(function (results) {
+                let apiResponse = results;
                 return apiResponse;
             }
             .catch(error => console.log('error', error));
