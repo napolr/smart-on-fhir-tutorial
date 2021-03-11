@@ -182,7 +182,7 @@
             });
 
      
-        console.log("apiResponse=" + result.json());
+        console.log("apiResponse=" + result);
         return apiResponse;
     }
 /*
