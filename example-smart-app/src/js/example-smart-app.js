@@ -181,7 +181,7 @@
                 console.log("json="+JSON.stringify(json)); 
             });
 */
-         const result = async () => {
+         const restFullCall = async () => {
              const response = await fetch(relativeURL, requestOptions)
 
              const data = await response.json()
@@ -191,7 +191,7 @@
              return JSON.parse(data)
          }
 
-        
+         result = restFullCall();
          console.log(result);
 
         
