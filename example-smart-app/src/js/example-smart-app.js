@@ -156,7 +156,7 @@
     }
     */
 
-     async function  callRestfulAPI(relativeURL,token,contentType,acceptType) {
+      function  callRestfulAPI(relativeURL,token,contentType,acceptType) {
         var myHeaders = new Headers();
         myHeaders.append("Authorization", token);
         myHeaders.append("Content-Type", contentType);
@@ -181,8 +181,8 @@
             });
 */
          const json = await fetch(relativeURL, requestOptions)
-             .then(response => response.json());
-         console.log(json);
+              .then(response => response.json()); 
+         console.log("json="+json);
          
          return json;  
     }
