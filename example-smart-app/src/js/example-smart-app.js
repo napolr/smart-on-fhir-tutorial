@@ -27,22 +27,22 @@
 
 
                 var relativeURL = smart.server.serviceUrl + "/Patient?_id=" + patient.id;
-                var pt = await callRestfulAPI(relativeURL, token, "application/json", "application/json");
+                var pt = callRestfulAPI(relativeURL, token, "application/json", "application/json");
                 console.log("patient="+pt); 
 
                 var relativeURL = smart.server.serviceUrl + "/AllergyIntolerance?patient=" + patient.id;
-                var AllergyIntolerance = await callRestfulAPI(relativeURL, token, "application/json", "application/json");
+                var AllergyIntolerance = callRestfulAPI(relativeURL, token, "application/json", "application/json");
 
 
                 var relativeURL = smart.server.serviceUrl + "/MedicationRequest?patient=" + patient.id;
-                var Medications = await callRestfulAPI(relativeURL, token, "application/json", "application/json");
+                var Medications = callRestfulAPI(relativeURL, token, "application/json", "application/json");
 
 
                 var relativeURL = smart.server.serviceUrl + "/Condition?patient=" + patient.id;
-                var Conditions = await callRestfulAPI(relativeURL, token, "application/json", "application/json");
+                var Conditions = callRestfulAPI(relativeURL, token, "application/json", "application/json");
                 var code = "";
                 var relativeURL = smart.server.serviceUrl + "/Observation?patient=" + patient.id;
-                var Observations = await  callRestfulAPI(relativeURL, token, "application/json", "application/json");
+                var Observations = callRestfulAPI(relativeURL, token, "application/json", "application/json");
 
 
                 console.log(Observations);
@@ -182,8 +182,8 @@
          const json = await fetch(relativeURL, requestOptions)
              .then(response => response.json());
 
-         ///console.log(relativeURL)
-        // console.log(json);
+         console.log(relativeURL)
+         console.log(json);
          
          return json;  
     }
