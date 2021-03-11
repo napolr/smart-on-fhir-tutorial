@@ -174,7 +174,7 @@
         var apiResponse;
         promise=fetch(relativeURL, requestOptions)
             .then(response => { return (response.json()); })
-            .then(result => { console.log(result) })
+            .then(result =>console.log(result) )
             .catch(error => console.log('error', error));
 
     }
