@@ -181,7 +181,13 @@
             });
 */
 
-        const response = await fetch(relativeURL, requestOptions);
+        const response = await fetch(relativeURL, requestOptions).then(response => {
+            console.log(response);
+            return response.json();
+        })
+            .then(json => {
+                console.log("json=" + JSON.stringify(json));
+            });
         
 
         console.log("apiResponse=" + response);
