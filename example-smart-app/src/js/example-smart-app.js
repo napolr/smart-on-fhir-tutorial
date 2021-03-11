@@ -177,7 +177,7 @@
             .catch(err => console.log('Request Failed', err)); // Catch errors
      
         console.log(promise);
-        return promise.PromiseResult;
+        return promise;
     }
 /*
     function getAllergyIntolerances(smart) {
