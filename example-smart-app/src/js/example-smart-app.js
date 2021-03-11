@@ -198,7 +198,7 @@
     async function callRestfulAPI(relativeURL, token, contentType, acceptType) {
         let data = await getResult(relativeURL, token, contentType, acceptType);
         console.log(data)
-        return JSON.parse(data);
+        return JSON.stringify(data);
     }
     
 /*
