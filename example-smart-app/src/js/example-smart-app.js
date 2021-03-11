@@ -180,6 +180,7 @@
                 console.log("json="+JSON.stringify(json)); 
             });
 */
+        var fhirObject;
         async function fetchFHIRObject() {
             const response = await fetch(relativeURL, requestOptions);
             const result = await response.json();
