@@ -156,7 +156,7 @@
     }
     */
 
-    async function callRestfulAPI(relativeURL,token,contentType,acceptType) {
+     function callRestfulAPI(relativeURL,token,contentType,acceptType) {
         var myHeaders = new Headers();
         myHeaders.append("Authorization", token);
         myHeaders.append("Content-Type", contentType);
@@ -181,14 +181,20 @@
                 console.log("json="+JSON.stringify(json)); 
             });
 */
-        const address = fetch(relativeURL, requestOptions)
+        const data = fetch(relativeURL, requestOptions)
             .then((response) => response.json())
-            .then((user) => {
-                return user;
+            .then((data) => {
+                return data;
             });
 
-        console.log(address);
- 
+        const getData = async () => {
+            const a = await data;
+            
+            return a;
+        };
+
+        getData();
+         console.log("data="+data);
         
          
         return data;
