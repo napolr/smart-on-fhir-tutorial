@@ -186,9 +186,9 @@
              const json = await response.json();
              console.log("async/await based");
              console.log(json);
-             return json;
+             return response.json();
          }
-
+         
         data=  requestFHIRObject();
          console.log("data=" + data);
          
