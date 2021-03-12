@@ -51,10 +51,10 @@
                             console.log(response);
                             return response;
                         })
-                        .then(json => {
+                       /* .then(json => {
                             return json;
                             
-                        });
+                        });*/
 
 
                     console.log("json=" + JSON.stringify(json));
