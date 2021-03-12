@@ -7,7 +7,7 @@
             ret.reject();
         }
 
-         function onReady(smart) {
+        function onReady(smart) {
             if (smart.hasOwnProperty('patient')) {
                 var patient = smart.patient;
                 //var pt = patient.read();
@@ -28,7 +28,8 @@
                     }
                 });
 
-                console.log(JSON.stringify(obv); */
+                console.log("observation=" + obv);
+                */
 
                 console.log("smart=" + JSON.stringify(smart)); 
                 
@@ -44,11 +45,19 @@
                 fhirResults = [];
                 fhirAPIs.forEach(function (apiCall) {
                     var relativeURL = smart.server.serviceUrl + "/" + apiCall + "?_id=" + patient.id;
-                    fhirResults[apiCall] = callRestfulAPI(relativeURL, token, "application/json", "application/json");
-                    console.log("relativeURL - " + relativeURL);
-                    // console.log(data)
-                    //fhirResults[apiCall] = data;
-                    console.log(apiCall + "apiCall returned - " + fhirResults[apiCall]);
+                    
+                    result = doAPICall(relativeURL, token, "application/json", "application/json")                   
+                        .then(response => {
+                            console.log(response);
+                            return response.json();
+                        })
+                        .then(json => {
+                            return json;
+                            
+                        });
+
+                    console.log(result);
+                    console.log("json=" + JSON.stringify(result));
                 });
                 /*
                 var relativeURL = smart.server.serviceUrl + "/Patient?_id=" + patient.id;
@@ -188,6 +197,7 @@
         };
         /*
        result = await fetch(relativeURL, requestOptions)
+       fhirResults[apiCall]
             .then(response => {
                 console.log(response);
                 return response.json();
@@ -212,8 +222,8 @@
         return result;
     }
 
-     function callRestfulAPI(relativeURL, token, contentType, acceptType) {
-        let data =  getResult(relativeURL, token, contentType, acceptType);
+    async function callRestfulAPI(relativeURL, token, contentType, acceptType) {
+        let data = await getResult(relativeURL, token, contentType, acceptType);
        
         return data;
     }
