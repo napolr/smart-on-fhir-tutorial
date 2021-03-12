@@ -16,6 +16,20 @@
                     type: 'AllergyIntolerance',
 
                 });*/
+
+                var obv = smart.patient.api.fetchAll({
+                    type: 'Observation',
+                    query: {
+                        code: {
+                            $or: ['http://loinc.org|8302-2', 'http://loinc.org|8462-4',
+                                'http://loinc.org|8480-6', 'http://loinc.org|2085-9',
+                                'http://loinc.org|2089-1', 'http://loinc.org|55284-4']
+                        }
+                    }
+                });
+
+                console.log("observation=" + obv);
+
                 console.log("smart=" + JSON.stringify(smart)); 
                 
                 console.log("srverURL =" + smart.server.serviceUrl); 
@@ -55,17 +69,7 @@
 
                 console.log(Observations);*/
 
-
-                /*var obv = smart.patient.api.fetchAll({
-                    type: 'Observation',
-                    query: {
-                        code: {
-                            $or: ['http://loinc.org|8302-2', 'http://loinc.org|8462-4',
-                                'http://loinc.org|8480-6', 'http://loinc.org|2085-9',
-                                'http://loinc.org|2089-1', 'http://loinc.org|55284-4']
-                        }
-                    }
-                });*/
+                
 
                 //$.when(pt, obv).fail(onError);
 
@@ -205,7 +209,7 @@
         return result;
     }
 
-     function callRestfulAPI(relativeURL, token, contentType, acceptType) {
+    async function callRestfulAPI(relativeURL, token, contentType, acceptType) {
         let data = await getResult(relativeURL, token, contentType, acceptType);
        
         return data;
