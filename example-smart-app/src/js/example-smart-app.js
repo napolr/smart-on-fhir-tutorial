@@ -47,7 +47,7 @@
                     fhirResults[apiCall] = callRestfulAPI(relativeURL, token, "application/json", "application/json");
                     console.log("relativeURL - " + relativeURL);
                     // console.log(data)
-                    fhirResults[apiCall] = data;
+                    //fhirResults[apiCall] = data;
                     console.log(apiCall + "apiCall returned - " + fhirResults[apiCall]);
                 });
                 /*
