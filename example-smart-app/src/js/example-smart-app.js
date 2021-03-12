@@ -50,8 +50,7 @@
                     callRestfulAPI(relativeURL, token, "application/json", "application/json")
                         .then(response => {
                             console.log(response);
-                            result = response;
-                            return response;
+                            result = response; 
                         });
                        /* .then(json => {
                             return json;
