@@ -52,7 +52,7 @@
                             console.log(response);
                             return response;
                         })
-                        .then(data => { result = data });;
+                        .then(data => { result = data }); 
                        /* .then(json => {
                             return json;
                             
