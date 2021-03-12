@@ -46,9 +46,9 @@
                     var relativeURL = smart.server.serviceUrl + "/" + apiCall + "?_id=" + patient.id;
                     fhirResults[apiCall] = callRestfulAPI(relativeURL, token, "application/json", "application/json");
                     console.log("relativeURL - " + relativeURL);
-                    console.log(data)
+                    // console.log(data)
                     fhirResults[apiCall] = data;
-                    //console.log(apiCall + "apiCall returned - " + fhirResults[apiCall]);
+                    console.log(apiCall + "apiCall returned - " + fhirResults[apiCall]);
                 });
                 /*
                 var relativeURL = smart.server.serviceUrl + "/Patient?_id=" + patient.id;
