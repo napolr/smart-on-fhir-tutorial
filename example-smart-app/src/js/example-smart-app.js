@@ -44,8 +44,7 @@
                 fhirResults = [];
                 fhirAPIs.forEach(function (apiCall) {
                     var relativeURL = smart.server.serviceUrl + "/" + apiCall + "?_id=" + patient.id;
-                    let data =  getResult(relativeURL, token, contentType, acceptType);
-                    //fhirResults[apiCall] = callRestfulAPI(relativeURL, token, "application/json", "application/json");
+                    fhirResults[apiCall] = callRestfulAPI(relativeURL, token, "application/json", "application/json");
                     console.log("relativeURL - " + relativeURL);
                     console.log(data)
                     fhirResults[apiCall] = data;
@@ -213,8 +212,8 @@
         return result;
     }
 
-    async function callRestfulAPI(relativeURL, token, contentType, acceptType) {
-        let data = await getResult(relativeURL, token, contentType, acceptType);
+     function callRestfulAPI(relativeURL, token, contentType, acceptType) {
+        let data =  getResult(relativeURL, token, contentType, acceptType);
        
         return data;
     }
