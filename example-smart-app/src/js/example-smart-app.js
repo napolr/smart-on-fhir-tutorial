@@ -7,7 +7,7 @@
             ret.reject();
         }
 
-        async function onReady(smart) {
+         function onReady(smart) {
             if (smart.hasOwnProperty('patient')) {
                 var patient = smart.patient;
                 //var pt = patient.read();
@@ -44,7 +44,7 @@
                 fhirResults = [];
                 fhirAPIs.forEach(function (apiCall) {
                     var relativeURL = smart.server.serviceUrl + "/" + apiCall + "?_id=" + patient.id;
-                    let data = await getResult(relativeURL, token, contentType, acceptType);
+                    let data =  getResult(relativeURL, token, contentType, acceptType);
                     //fhirResults[apiCall] = callRestfulAPI(relativeURL, token, "application/json", "application/json");
                     console.log("relativeURL - " + relativeURL);
                     console.log(data)
