@@ -57,7 +57,7 @@
                         });*/
 
 
-                    console.log("json=" + JSON.stringify(json));
+                    console.log("json=" + JSON.stringify(result));
                 });
                 /*
                 var relativeURL = smart.server.serviceUrl + "/Patient?_id=" + patient.id;
