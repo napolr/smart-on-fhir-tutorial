@@ -28,7 +28,7 @@
                     }
                 });
 
-                console.log("observation=" + obv);
+                console.log(obv);
 
                 console.log("smart=" + JSON.stringify(smart)); 
                 
