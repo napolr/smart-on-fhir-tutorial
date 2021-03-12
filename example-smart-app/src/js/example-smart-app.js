@@ -51,7 +51,7 @@
                         .then(function (response) {
                             console.log(response);
                             let result = response;
-                            return response;
+                            return result;
                         });
                        /* .then(json => {
                             return json;
