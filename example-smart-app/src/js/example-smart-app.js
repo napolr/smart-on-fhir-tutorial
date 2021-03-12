@@ -43,6 +43,7 @@
                 fhirAPIs = ["Patient","AllergyIntolerance","MedicationRequest","Condition","Observation"];
 
                 fhirResults = [];
+                let result;
                 fhirAPIs.forEach(function (apiCall) {
                     var relativeURL = smart.server.serviceUrl + "/" + apiCall + "?_id=" + patient.id;
                     
