@@ -56,7 +56,7 @@
                             
                         });*/
 
-
+                    console.log(result);
                     console.log("json=" + JSON.stringify(result));
                 });
                 /*
