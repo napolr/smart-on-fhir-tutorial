@@ -16,7 +16,7 @@
                     type: 'AllergyIntolerance',
 
                 });*/
-
+                /*
                 var obv = smart.patient.api.fetchAll({
                     type: 'Observation',
                     query: {
@@ -28,7 +28,7 @@
                     }
                 });
 
-                console.log(JSON.stringify(obv);
+                console.log(JSON.stringify(obv); */
 
                 console.log("smart=" + JSON.stringify(smart)); 
                 
