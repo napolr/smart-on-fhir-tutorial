@@ -31,10 +31,12 @@
 
                 console.log("observation=" + obv);
                 */
+            } else {
+                onError();
             }
         }
 
-        async function getData(smart, patient) { 
+        async  function getData(smart, patient) { 
                 console.log("smart=" + JSON.stringify(smart)); 
                 
                 console.log("srverURL =" + smart.server.serviceUrl); 
@@ -132,9 +134,7 @@
 
                     ret.resolve(p);
                // });
-            } else {
-                onError();
-            }
+           
         }
 
         FHIR.oauth2.ready(onReady, onError);
