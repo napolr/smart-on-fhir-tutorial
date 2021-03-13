@@ -11,7 +11,7 @@
             if (smart.hasOwnProperty('patient')) {
                 var patient = smart.patient;
                 var pt = patient.read();
-                getData(smart, patient );
+               let result=  getData(smart, patient );
                 
 
                 /* var allergyIntolerance = smart.patient.api.fetchAll({
@@ -143,6 +143,8 @@
 
                     ret.resolve(p);
                // });
+
+            return result;
            
         }
 
