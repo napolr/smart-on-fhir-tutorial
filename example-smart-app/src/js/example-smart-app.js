@@ -63,7 +63,7 @@
                             
                         });*/
 
-                    result = doAPICall(relativeURL, token, "application/json", "application/json"); 
+                    result = await  doAPICall(relativeURL, token, "application/json", "application/json"); 
                     fhirResults[apiCall] = result;
                     console.log("json=" + result);
                     
