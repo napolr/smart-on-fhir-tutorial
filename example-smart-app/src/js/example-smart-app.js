@@ -62,7 +62,7 @@
                             
                         });*/
 
-                    result = await getResult(relativeURL, token, "application/json", "application/json"); 
+                    result = await doAPICall(relativeURL, token, "application/json", "application/json"); 
                     console.log("json=" + result);
                     
                 });
