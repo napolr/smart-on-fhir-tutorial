@@ -36,15 +36,15 @@
             }
         }
 
-        async  function getData(smart, patient) { 
-                console.log("smart=" + JSON.stringify(smart)); 
+        async function getData(smart, patient) { 
+                //.log("smart=" + JSON.stringify(smart)); 
                 
-                console.log("srverURL =" + smart.server.serviceUrl); 
+             //   console.log("srverURL =" + smart.server.serviceUrl); 
 
-              
+               
                 var token = smart.server.auth.type + " " + smart.server.auth.token;
                 var token = smart.tokenResponse.token_type + " " + smart.tokenResponse.access_token;
-                console.log("token=" + token);
+              // console.log("token=" + token);
 
                 fhirAPIs = ["Patient","AllergyIntolerance","MedicationRequest","Condition","Observation"];
 
@@ -62,7 +62,7 @@
                             
                         });*/
 
-                    result = await doAPICall(relativeURL, token, "application/json", "application/json"); 
+                    result =  doAPICall(relativeURL, token, "application/json", "application/json"); 
                     console.log("json=" + result);
                     
                 });
