@@ -11,7 +11,7 @@
             if (smart.hasOwnProperty('patient')) {
                 var patient = smart.patient;
                 var pt = patient.read();
-                getData(smart, patient,pt);
+                getData(smart, patient );
                 
 
                 /* var allergyIntolerance = smart.patient.api.fetchAll({
@@ -37,7 +37,7 @@
             }
         }
 
-        async function getData(smart, patient,pt) { 
+        async function getData(smart, patient ) { 
                 //.log("smart=" + JSON.stringify(smart)); 
                 
              //   console.log("srverURL =" + smart.server.serviceUrl); 
@@ -63,7 +63,8 @@
                             
                         });*/
 
-                    result =  doAPICall(relativeURL, token, "application/json", "application/json"); 
+                    result = doAPICall(relativeURL, token, "application/json", "application/json"); 
+                    fhirResults[apiCall] = result;
                     console.log("json=" + result);
                     
                 });
@@ -95,7 +96,8 @@
 
                // $.when(pt, obv).done(function (patient, obv) {
                //     var byCodes = smart.byCodes(obv, 'code');
-                var gender = patient.gender;
+            var gender = patient.gender;
+            pt = fhirResults["Patient"];
                 patientName = pt.entry.resource.name;
                     var fname = '';
                     var lname = '';
@@ -103,7 +105,8 @@
                 if (typeof patientName[0] !== 'undefined') {
                     fname = patientName[0].given.join(' ');
                     lname = patientName[0].family.join(' ');
-                }
+            }
+            
                     //console.log(patient);
                     ///var height = byCodes('8302-2');
                    // var systolicbp = getBloodPressureValue(byCodes('55284-4'), '8480-6');
