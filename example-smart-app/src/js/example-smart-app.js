@@ -43,20 +43,20 @@
                 fhirAPIs = ["Patient","AllergyIntolerance","MedicationRequest","Condition","Observation"];
 
                 fhirResults = [];
-                console.log("got here")
                 fhirAPIs.forEach(function (apiCall) {
-                    var relativeURL = smart.server.serviceUrl + "/" + apiCall + "?_id=" + patient.id; 
-                    let myResult = await callRestfulAPI(relativeURL, token, "application/json", "application/json")
+                    var relativeURL = smart.server.serviceUrl + "/" + apiCall + "?_id=" + patient.id;
+                    let result;
+                    result = await callRestfulAPI(relativeURL, token, "application/json", "application/json");
+                    /*
                         .then(response => {
-                           console.log(response);
+                            console.log(response);
                             return response.json();
                         })
                         .then(json => {
-                            myResult = json;
-                            console.log(myResult);
+                           result=json;
                         });
-                    
-                    console.log("json=",myResult)
+                    */
+                    console.log("json=",result)
                     
                 });
                 /*
@@ -186,7 +186,7 @@
         myHeaders.append("Authorization", token);
         myHeaders.append("Content-Type", contentType);
         myHeaders.append("Accept", acceptType);
-         console.log("got here2")
+     
         var raw = "";
 
         var requestOptions = {
@@ -213,8 +213,7 @@
              })
 
         // console.log(relativeURL)
-         console.log("got here3")
-         console.log(json);
+        // console.log(json);
          
          return JSON.stringify(json);  
     }
