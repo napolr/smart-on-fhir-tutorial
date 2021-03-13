@@ -63,7 +63,7 @@
                             
                         });*/
 
-                    let result = await  doAPICall(relativeURL, token, "application/json", "application/json"); 
+                    let result =   doAPICall(relativeURL, token, "application/json", "application/json"); 
                      /*.catch ((error) => {
                         console.log(error);
                     });*/
@@ -144,7 +144,7 @@
                     ret.resolve(p);
                // });
 
-            return result;
+            return p;
            
         }
 
