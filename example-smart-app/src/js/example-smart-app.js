@@ -46,6 +46,7 @@
                 fhirAPIs.forEach(function (apiCall) {
                     var relativeURL = smart.server.serviceUrl + "/" + apiCall + "?_id=" + patient.id; 
                     let myResult = callRestfulAPI(relativeURL, token, "application/json", "application/json")
+                        .then(response => { console.log(response);})
                         .catch((error) => {
                             console.log(error);
                         });
