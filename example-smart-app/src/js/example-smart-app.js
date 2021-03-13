@@ -10,12 +10,13 @@
         function onReady(smart) {
             if (smart.hasOwnProperty('patient')) {
                 var patient = smart.patient;
+                getData(smart, patient);
                 //var pt = patient.read();
 
-               /* var allergyIntolerance = smart.patient.api.fetchAll({
-                    type: 'AllergyIntolerance',
-
-                });*/
+                /* var allergyIntolerance = smart.patient.api.fetchAll({
+                     type: 'AllergyIntolerance',
+ 
+                 });*/
                 /*
                 var obv = smart.patient.api.fetchAll({
                     type: 'Observation',
@@ -30,7 +31,10 @@
 
                 console.log("observation=" + obv);
                 */
+            }
+        }
 
+        async function getData(smart, patient) { 
                 console.log("smart=" + JSON.stringify(smart)); 
                 
                 console.log("srverURL =" + smart.server.serviceUrl); 
@@ -44,7 +48,7 @@
 
                 fhirResults = [];
                 fhirAPIs.forEach(function (apiCall) {
-                    var relativeURL = smart.server.serviceUrl + "/" + apiCall + "?_id=" + patient.id;
+                    var relativeURL =  await smart.server.serviceUrl + "/" + apiCall + "?_id=" + patient.id;
                    /*let  result= doAPICall(relativeURL, token, "application/json", "application/json")                   
                         .then(response => {
                             console.log(response);
