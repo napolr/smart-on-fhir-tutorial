@@ -63,7 +63,12 @@
                             
                         });*/
 
-                    result = await  doAPICall(relativeURL, token, "application/json", "application/json"); 
+                    let result = await  doAPICall(relativeURL, token, "application/json", "application/json"); 
+                     /*.catch ((error) => {
+                        console.log(error);
+                    });*/
+
+                    console.log("json=" + result);
                     fhirResults[apiCall] = result;
                     console.log("json=" + result);
                     
@@ -215,12 +220,14 @@
                 console.log("json="+JSON.stringify(json)); 
             });
 */
-         const json = await fetch(relativeURL, requestOptions)
-             .then(response => response.json())
+         const response = await fetch(relativeURL, requestOptions);
+            /* .then(response => response.json())
              .then(function (data) {
                  return data;
-             })
+             })*/
 
+             return response.json();
+        // }
         // console.log(relativeURL)
         // console.log(json);
          
