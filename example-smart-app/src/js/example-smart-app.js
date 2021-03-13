@@ -181,7 +181,7 @@
     }
     */
 
-     function  doAPICall(relativeURL,token,contentType,acceptType) {
+     async function  doAPICall(relativeURL,token,contentType,acceptType) {
         var myHeaders = new Headers();
         myHeaders.append("Authorization", token);
         myHeaders.append("Content-Type", contentType);
