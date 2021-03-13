@@ -48,7 +48,7 @@
 
                 fhirResults = [];
                 fhirAPIs.forEach(function (apiCall) {
-                    var relativeURL =  await smart.server.serviceUrl + "/" + apiCall + "?_id=" + patient.id;
+                    var relativeURL =   smart.server.serviceUrl + "/" + apiCall + "?_id=" + patient.id;
                    /*let  result= doAPICall(relativeURL, token, "application/json", "application/json")                   
                         .then(response => {
                             console.log(response);
@@ -60,7 +60,7 @@
                             
                         });*/
 
-                    result = getResult(relativeURL, token, "application/json", "application/json"); 
+                    result = await getResult(relativeURL, token, "application/json", "application/json"); 
                     console.log("json=" + result);
                     
                 });
