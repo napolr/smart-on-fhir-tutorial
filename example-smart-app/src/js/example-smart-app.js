@@ -10,8 +10,9 @@
         function onReady(smart) {
             if (smart.hasOwnProperty('patient')) {
                 var patient = smart.patient;
+                var pt = patient.read();
                 getData(smart, patient,pt);
-                //var pt = patient.read();
+                
 
                 /* var allergyIntolerance = smart.patient.api.fetchAll({
                      type: 'AllergyIntolerance',
