@@ -32,7 +32,7 @@
                 fhirAPIs.forEach(function (apiCall) {
                     var relativeURL =   smart.server.serviceUrl + "/" + apiCall + "?_id=" + patient.id;
 
-                    let result =   doAPICall(relativeURL, token, "application/json", "application/json"); 
+                    let result =   doAPICall(relativeURL, token, "application/json", "application/json",apiCall,getResult); 
                      /*.catch ((error) => {
                         console.log(error);
                     });*/
@@ -112,7 +112,7 @@
 
   
 
-     async function  doAPICall(relativeURL,token,contentType,acceptType,callback) {
+     async function  doAPICall(relativeURL,token,contentType,acceptType,apiCall,callback) {
         var myHeaders = new Headers();
         myHeaders.append("Authorization", token);
         myHeaders.append("Content-Type", contentType);
@@ -129,13 +129,13 @@
 
          response = await fetch(relativeURL, requestOptions) 
              .then(response => response.json())
-             .then (result=> callback(result))
+             .then (result=> callback(apiCall,result))
  
     }
 
 
 
-    async function getResult(data) {
+    async function getResult(apiCall,data) {
       
         console.log("got here");
         console.log(data);
