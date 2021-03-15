@@ -1,8 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\example-smart-app"
+    "\\example-smart-app",
+    "\\example-smart-app\\src",
+    "\\example-smart-app\\src\\js"
   ],
-  "SelectedNode": "\\example-smart-app\\launch-smart-sandbox.html",
+  "SelectedNode": "\\example-smart-app\\src\\js\\example-smart-app.js",
   "PreviewInSolutionExplorer": false
 }
