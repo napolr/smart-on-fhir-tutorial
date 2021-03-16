@@ -21,7 +21,7 @@
                         }
                     }
                 });
-                console.log(obv.toString());
+                console.log(obv.toJson());
                 $.when(pt, obv).fail(onError);
 
                 $.when(pt, obv).done(function (patient, obv) {
