@@ -32,7 +32,7 @@
                         }
                     }
                 });
-                console.log(obv.exports.toJson());
+                console.log(obv.exports.$JsonData);
                 $.when(pt, obv).fail(onError);
 
                 $.when(pt, obv).done(function (patient, obv) {
