@@ -21,8 +21,9 @@
                         }
                     }
                 });
-                $.when(pt, obv).fail(onError);
                 console.log(obv);
+                $.when(pt, obv).fail(onError);
+
                 $.when(pt, obv).done(function (patient, obv) {
                     var byCodes = smart.byCodes(obv, 'code');
                     var gender = patient.gender;
@@ -42,7 +43,6 @@
                     var ldl = byCodes('2089-1');
 
                     var p = defaultPatient();
-                    p.patientId = patient.patientId;
                     p.birthdate = patient.birthDate;
                     p.gender = gender;
                     p.fname = fname;
@@ -65,110 +65,67 @@
             } else {
                 onError();
             }
-
-
-            FHIR.oauth2.ready(onReady, onError);
-            return ret.promise();
-
-        };
-
-        function defaultPatient() {
-            return {
-                patientId: { value: '' },
-                fname: { value: '' },
-                lname: { value: '' },
-                gender: { value: '' },
-                birthdate: { value: '' },
-                height: { value: '' },
-                systolicbp: { value: '' },
-                diastolicbp: { value: '' },
-                ldl: { value: '' },
-                hdl: { value: '' },
-            };
         }
 
-        function getBloodPressureValue(BPObservations, typeOfPressure) {
-            var formattedBPObservations = [];
-            BPObservations.forEach(function (observation) {
-                var BP = observation.component.find(function (component) {
-                    return component.code.coding.find(function (coding) {
-                        return coding.code == typeOfPressure;
-                    });
-                });
-                if (BP) {
-                    observation.valueQuantity = BP.valueQuantity;
-                    formattedBPObservations.push(observation);
-                }
-            });
+        FHIR.oauth2.ready(onReady, onError);
+        return ret.promise();
 
-            return getQuantityValueAndUnit(formattedBPObservations[0]);
-        }
+    };
 
-        function getQuantityValueAndUnit(ob) {
-            if (typeof ob != 'undefined' &&
-                typeof ob.valueQuantity != 'undefined' &&
-                typeof ob.valueQuantity.value != 'undefined' &&
-                typeof ob.valueQuantity.unit != 'undefined') {
-                return ob.valueQuantity.value + ' ' + ob.valueQuantity.unit;
-            } else {
-                return undefined;
-            }
-        }
-
-        function getAllergyIntolerances() {
-
-
-            var allergyIntolerance = smart.patient.api.fetchAll({
-                type: 'AllergyIntolerance',
-            });
-            allergies = null;
-            if (allergyIntolerance !== null) {
-                var allergyTableHeader = "<table><tr><td>item</td><td>category</td><td>reaction</td></tr>";
-                var j = 0;
-                allergyRows = "";
-                var rows = "";
-                allergyIntolerance.forEach(function (allergy) {
-
-
-                    if (allergy.resource.code && allergy.resource.code != "invalid") {
-                        rows += "<tr><td>" + allergy.resource.code.text + "</td><td>" + allergy.resource.category + "</td><td>";
-                    }
-
-                    var i = 0;
-                    if (allergy.resource.reaction) {
-                        allergyReactions = "";
-                        allergy.resource.reaction.forEach(function (reaction) {
-
-                            if (i === 0) {
-                                allergyReactions = reaction.description + "(" + reaction.severity + ")";
-                            } else {
-                                allergyReactions = ", " + reaction.description + "(" + reaction.severity + ")";
-                            }
-                        });
-                        rows += "<td>" + allergyReactions + "</td>";
-                        rows += "</tr>";
-                    }
-
-
-                });
-                allergies = allergyTableHeader + rows + "</table>";
-                return allergies;
-            }
-        }
-
-        window.drawVisualization = function (p) {
-            $('#holder').show();
-            $('#loading').hide();
-            $('#patientId').html(p.patientId);
-            $('#fname').html(p.fname);
-            $('#lname').html(p.lname);
-            $('#gender').html(p.gender);
-            $('#birthdate').html(p.birthdate);
-            $('#height').html(p.height);
-            $('#systolicbp').html(p.systolicbp);
-            $('#diastolicbp').html(p.diastolicbp);
-            $('#ldl').html(p.ldl);
-            $('#hdl').html(p.hdl);
+    function defaultPatient() {
+        return {
+            fname: { value: '' },
+            lname: { value: '' },
+            gender: { value: '' },
+            birthdate: { value: '' },
+            height: { value: '' },
+            systolicbp: { value: '' },
+            diastolicbp: { value: '' },
+            ldl: { value: '' },
+            hdl: { value: '' },
         };
     }
-})(window); 
+
+    function getBloodPressureValue(BPObservations, typeOfPressure) {
+        var formattedBPObservations = [];
+        BPObservations.forEach(function (observation) {
+            var BP = observation.component.find(function (component) {
+                return component.code.coding.find(function (coding) {
+                    return coding.code == typeOfPressure;
+                });
+            });
+            if (BP) {
+                observation.valueQuantity = BP.valueQuantity;
+                formattedBPObservations.push(observation);
+            }
+        });
+
+        return getQuantityValueAndUnit(formattedBPObservations[0]);
+    }
+
+    function getQuantityValueAndUnit(ob) {
+        if (typeof ob != 'undefined' &&
+            typeof ob.valueQuantity != 'undefined' &&
+            typeof ob.valueQuantity.value != 'undefined' &&
+            typeof ob.valueQuantity.unit != 'undefined') {
+            return ob.valueQuantity.value + ' ' + ob.valueQuantity.unit;
+        } else {
+            return undefined;
+        }
+    }
+
+    window.drawVisualization = function (p) {
+        $('#holder').show();
+        $('#loading').hide();
+        $('#fname').html(p.fname);
+        $('#lname').html(p.lname);
+        $('#gender').html(p.gender);
+        $('#birthdate').html(p.birthdate);
+        $('#height').html(p.height);
+        $('#systolicbp').html(p.systolicbp);
+        $('#diastolicbp').html(p.diastolicbp);
+        $('#ldl').html(p.ldl);
+        $('#hdl').html(p.hdl);
+    };
+
+})(window);
