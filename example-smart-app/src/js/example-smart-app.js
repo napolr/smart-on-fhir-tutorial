@@ -181,7 +181,7 @@
             }
             console.log("got here");
             var adapter;
-            var client = FHIR.client(config, adapter);
+            var client = new FHIR.client(config, adapter);
             console.log(client);
             return client;
          
