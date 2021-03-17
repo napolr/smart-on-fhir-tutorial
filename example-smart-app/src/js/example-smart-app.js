@@ -21,7 +21,40 @@
                         }
                     }
                 });
+                //var token = smart.server.auth.type + " " + smart.server.auth.token;
+                var token = smart.tokenResponse.token_type + " " + smart.tokenResponse.access_token;
+                var serverURL = smart.server.serviceUrl;
+  
+                client = getFHIRClient(serverURL, token, "application/json", "application/json");
+                var response = client.request({ url: "Patient", signal });
+                console.log("result=");
+                console.log(result);
+                fhirAPIs = ["Patient", "AllergyIntolerance", "MedicationRequest", "Condition", "Observation"];
 
+
+                fhirAPIs.forEach(function (apiCall) {
+                    var relativeURL = smart.server.serviceUrl + "/" + apiCall + "?_id=" + patient.id;
+                    /*let  result= doAPICall(relativeURL, token, "application/json", "application/json")                   
+                         .then(response => {
+                             console.log(response);
+                             return response;
+                         })
+                     */
+                    /* .then(json => {
+                         return json;
+                         
+                     });*/
+
+                    let result = doAPICall(relativeURL, token, "application/json", "application/json");
+                    /*.catch ((error) => {
+                       console.log(error);
+                   });*/
+
+                    console.log("json=" + result);
+                    //fhirResults[apiCall] = result;
+                    console.log("json=" + this.fhirResults[apiCall]);
+
+                }); 
                 var obvs = smart.patient.api.fetchAllWithReferences({
                     type: 'Observation',
                     query: {
@@ -32,7 +65,6 @@
                         }
                     }
                 });
-                console.log(obv.exports.$JsonData);
                 $.when(pt, obv).fail(onError);
 
                 $.when(pt, obv).done(function (patient, obv) {
@@ -123,6 +155,33 @@
         } else {
             return undefined;
         }
+    }
+    function getFHIRClient(serverURL, token, contentType, acceptType) {
+        var config = {
+            // FHIR server base url
+            baseUrl: serverURL,
+            auth: {
+                bearer: token,
+
+            },
+            // Valid Options are 'same-origin', 'include'
+            credentials: 'same-origin',
+            "headers": {
+                // "Authorization": token,
+                "Content-Type": contentType,
+                "Accept": contentType,
+            }
+        }
+        var adapter;
+        var client = fhir(config, adapter);
+        return client;
+    }
+    async function doAPICall(serverURL, token, contentType, acceptType) {
+        
+        var response = client.request({ url: "Patient", signal });
+        console.log("response=" + response);
+        return response;
+
     }
 
     window.drawVisualization = function (p) {
