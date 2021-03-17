@@ -28,7 +28,7 @@
                 client = getFHIRClient(serverURL, token, "application/json", "application/json");
                 var relativeURL = "Patient/" + patient.id;
                 console.log("relativeURL="+relativeURL)
-                var response = client.request({ url: "Patient", signal });
+                var response = client.request( "/Patient");
                 console.log("result=");
                 console.log(result);
                 fhirAPIs = ["Patient", "AllergyIntolerance", "MedicationRequest", "Condition", "Observation"];
