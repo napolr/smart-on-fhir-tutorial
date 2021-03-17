@@ -166,7 +166,7 @@
 
             },
             // Valid Options are 'same-origin', 'include'
-            credentials: 'same-origin',
+            "credentials": 'same-origin',
             "headers": {
                 // "Authorization": token,
                 "Content-Type": contentType,
