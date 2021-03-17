@@ -173,7 +173,7 @@
             }
         }
         var adapter;
-        var client = fhir(config, adapter);
+        var client = FHIR.client(config, adapter);
         return client;
     }
     async function doAPICall(serverURL, token, contentType, acceptType) {
