@@ -157,6 +157,8 @@
         }
     }
     function getFHIRClient(serverURL, token, contentType, acceptType) {
+
+        console.log("create client - serverURL="+serverURL)
         var config = {
             // FHIR server base url
             baseUrl: serverURL,
