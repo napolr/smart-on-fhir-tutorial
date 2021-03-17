@@ -26,6 +26,7 @@
                 var serverURL = smart.server.serviceUrl;
                 console.log(serverURL);
                 client = getFHIRClient(serverURL, token, "application/json", "application/json");
+                console.log(client);
                 var relativeURL = "Patient/" + patient.id;
                 console.log("relativeURL="+relativeURL)
                 var response = client.request(relativeURL);
@@ -182,7 +183,7 @@
             console.log("got here");
             var adapter;
             var client = new FHIR.client(config, adapter);
-            console.log(client);
+            
             return client;
          
     }
