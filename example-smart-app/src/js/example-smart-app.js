@@ -161,9 +161,8 @@
         console.log("create client - serverURL="+serverURL)
         var config = {
             // FHIR server base url
-            baseUrl: serverURL,
-            auth: {
-                bearer: token,
+            "baseUrl": serverURL,
+            "auth":token,
 
             },
             // Valid Options are 'same-origin', 'include'
