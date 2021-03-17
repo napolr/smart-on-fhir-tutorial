@@ -24,7 +24,7 @@
                 //var token = smart.server.auth.type + " " + smart.server.auth.token;
                 var token = smart.tokenResponse.token_type + " " + smart.tokenResponse.access_token;
                 var serverURL = smart.server.serviceUrl;
-  
+                console.log(serverURL);
                 client = getFHIRClient(serverURL, token, "application/json", "application/json");
                 var response = client.request({ url: "Patient", signal });
                 console.log("result=");
