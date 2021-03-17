@@ -26,6 +26,8 @@
                 var serverURL = smart.server.serviceUrl;
                 console.log(serverURL);
                 client = getFHIRClient(serverURL, token, "application/json", "application/json");
+                var relativeURL = "Patient/" + patient.id;
+                console.log("relativeURL="+relativeURL)
                 var response = client.request({ url: "Patient", signal });
                 console.log("result=");
                 console.log(result);
@@ -157,33 +159,34 @@
         }
     }
     function getFHIRClient(serverURL, token, contentType, acceptType) {
+         
 
-        console.log("create client - serverURL="+serverURL)
-        var config = {
-            // FHIR server base url
-            "baseUrl": serverURL,
-            "auth":token,
+            console.log("serverURL=" + serverURL);
 
-            },
-            // Valid Options are 'same-origin', 'include'
-            "credentials": 'same-origin',
-            "headers": {
-                // "Authorization": token,
-                "Content-Type": contentType,
-                "Accept": contentType,
+            //client.request("Patient/"+patientID);
+            var myHeaders = new Headers();
+            myHeaders.append("Authorization", token);
+            myHeaders.append("Content-Type", contentType);
+            myHeaders.append("Accept", acceptType);
+            //myHeaders.append("Cookie", "EpicPersistenceCookie=!N3soogg51eiSXXaWgeFplRcxbLCTJaAUKNt8Z01blDojf1/2t0gSLW48FYGdEoYq68nJjSTaI/QqJ0c=");
+            //myHeaders.append("Epic-Client-ID", "d30ed752-70d5-4b77-9484-9b67f6396f63");
+            
+
+            var config = {
+                // FHIR server base url
+                "serverUrl": serverURL,
+                // Valid Options are 'same-origin', 'include'
+                "credentials": "same-origin",
+                "headers": myHeaders,
             }
-        }
-        var adapter;
-        var client = FHIR.client(config, adapter);
-        return client;
+            console.log("got here");
+            var adapter;
+            var client = FHIR.client(config, adapter);
+            console.log(client);
+            return client;
+         
     }
-    async function doAPICall(serverURL, token, contentType, acceptType) {
-        
-        var response = client.request({ url: "Patient", signal });
-        console.log("response=" + response);
-        return response;
-
-    }
+    
 
     window.drawVisualization = function (p) {
         $('#holder').show();
