@@ -32,7 +32,10 @@
                 var response;
               
                 //response = client.request(relativeURL);
-                response=client.api.search({ type: "Patient" }).then(res.json).catch(res.json);
+                response = client.api.fetchAll({
+                    type: 'Observation',
+                    query: {}
+                });
                 console.log("result=");
                 console.log(response);
                 fhirAPIs = ["Patient", "AllergyIntolerance", "MedicationRequest", "Condition", "Observation"];
