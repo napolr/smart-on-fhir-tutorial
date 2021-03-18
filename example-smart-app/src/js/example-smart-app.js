@@ -178,60 +178,26 @@
             //body: raw,
             redirect: 'follow'
         };
-        /*
-       result = await fetch(relativeURL, requestOptions)
-       fhirResults[apiCall]
+    
+        result = await fetch(relativeURL, requestOptions)
             .then(response => {
                 console.log(response);
                 return response.json();
-            })
-            .then(json => {
-                console.log("json="+JSON.stringify(json)); 
             });
-*/
-        response = await fetch(relativeURL, requestOptions)
-            .then(response => response.json())
-            .then(result => callback(result))
+           
+
 
         // return response.json();
         // }
         // console.log(relativeURL)
         // console.log(json);
 
-        // return JSON.stringify(json);  
+         return response;  
     }
 
 
 
-    async function getResult(data) {
-
-        console.log("got here");
-        console.log(data);
-        fhirResults[apiCall] = result;
-        //document.getElementById("myDiv").innerHTML = results;
-        this.data = results;
-
-    }
-
-    function callRestfulAPI(relativeURL, token, contentType, acceptType) {
-        var data = "";
-
-        var xhr = new XMLHttpRequest();
-        xhr.withCredentials = true;
-
-        xhr.addEventListener("readystatechange", function () {
-            if (this.readyState === 4) {
-                console.log(this.responseText);
-            }
-        });
-
-        xhr.open("GET", "url");
-        xhr.setRequestHeader("Authorization", token);
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.setRequestHeader("Accept", "application/fhir+json");
-
-        xhr.send(data);
-    }
+   
 
 
     /*
