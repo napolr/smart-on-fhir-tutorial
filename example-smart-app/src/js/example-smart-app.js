@@ -170,6 +170,8 @@
         myHeaders.append("Authorization", token);
         myHeaders.append("Content-Type", contentType);
         myHeaders.append("Accept", acceptType);
+        myHeaders.append("Cookie", "EpicPersistenceCookie=!N3soogg51eiSXXaWgeFplRcxbLCTJaAUKNt8Z01blDojf1/2t0gSLW48FYGdEoYq68nJjSTaI/QqJ0c=");
+        myHeaders.append("Epic-Client-ID", "d30ed752-70d5-4b77-9484-9b67f6396f63");
 
         var raw = "";
 
@@ -179,19 +181,11 @@
             //body: raw,
             redirect: 'follow'
         };
-    
-        result = await fetch(relativeURL, requestOptions)
-            .then(response => {
-                console.log(response);
-                return response.json();
-            });
-           
 
+        response = await fetch(relativeURL, requestOptions)
+            .then(response => response.json())
+            .then(result => { console.log(result); return result; })
 
-        // return response.json();
-        // }
-        // console.log(relativeURL)
-        // console.log(json);
 
          return response;  
     }
