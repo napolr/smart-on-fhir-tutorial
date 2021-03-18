@@ -50,53 +50,19 @@
 
             fhirAPIs = ["Patient", "AllergyIntolerance", "MedicationRequest", "Condition", "Observation"];
 
-
+            
             fhirAPIs.forEach(function (apiCall) {
                 var relativeURL = smart.server.serviceUrl + "/" + apiCall + "?_id=" + patient.id;
-                /*let  result= doAPICall(relativeURL, token, "application/json", "application/json")                   
+                result= doAPICall(relativeURL, token, "application/json", "application/json")                   
                      .then(response => {
                          console.log(response);
                          return response;
                      })
-                 */
-                /* .then(json => {
-                     return json;
-                     
-                 });*/
-
-                let result = doAPICall(relativeURL, token, "application/json", "application/json");
-                /*.catch ((error) => {
-                   console.log(error);
-               });*/
-
-                console.log("json=" + result);
-                //fhirResults[apiCall] = result;
-                console.log("json=" + this.fhirResults[apiCall]);
-
+                
+                                    
             });
-            /*
-            var relativeURL = smart.server.serviceUrl + "/Patient?_id=" + patient.id;
-            var pt = callRestfulAPI(relativeURL, token, "application/json", "application/json");
-            console.log("patient="+pt); 
 
-            var relativeURL = smart.server.serviceUrl + "/AllergyIntolerance?patient=" + patient.id;
-            var AllergyIntolerance = callRestfulAPI(relativeURL, token, "application/json", "application/json");
-
-
-            var relativeURL = smart.server.serviceUrl + "/MedicationRequest?patient=" + patient.id;
-            var Medications = callRestfulAPI(relativeURL, token, "application/json", "application/json");
-
-
-            var relativeURL = smart.server.serviceUrl + "/Condition?patient=" + patient.id;
-            var Conditions = callRestfulAPI(relativeURL, token, "application/json", "application/json");
-            var code = "";
-            var relativeURL = smart.server.serviceUrl + "/Observation?patient=" + patient.id;
-            var Observations = callRestfulAPI(relativeURL, token, "application/json", "application/json");
-            console.log(data);
-
-            console.log(Observations);*/
-
-
+           
 
             //$.when(pt, obv).fail(onError);
 
