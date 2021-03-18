@@ -29,7 +29,10 @@
                 console.log(client);
                 var relativeURL = "Patient/" + patient.id;
                 console.log("relativeURL="+relativeURL)
-                var response = client.request(relativeURL);
+                var response;
+              
+                //response = client.request(relativeURL);
+                response=client.api.search({ type: "Patient" }).then(res.json).catch(res.json);
                 console.log("result=");
                 console.log(response);
                 fhirAPIs = ["Patient", "AllergyIntolerance", "MedicationRequest", "Condition", "Observation"];
@@ -112,7 +115,7 @@
                 onError();
             }
         }
-
+        console.log(ret);
         FHIR.oauth2.ready(onReady, onError);
         return ret.promise();
 
