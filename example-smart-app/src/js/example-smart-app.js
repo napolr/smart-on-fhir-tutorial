@@ -58,8 +58,7 @@
                          
                      });*/
 
-                    console.log(result);
-                    console.log("json=" + JSON.stringify(result));
+                    
                 });
                 /*
                 var relativeURL = smart.server.serviceUrl + "/Patient?_id=" + patient.id;
@@ -90,7 +89,7 @@
                 // $.when(pt, obv).done(function (patient, obv) {
                 //     var byCodes = smart.byCodes(obv, 'code');
                 var gender = patient.gender;
-                patientName = pt.entry.resource.name;
+                patientName = patient.id;
                 var fname = '';
                 var lname = '';
 
