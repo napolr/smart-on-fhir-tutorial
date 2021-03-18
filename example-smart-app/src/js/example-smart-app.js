@@ -1,4 +1,5 @@
 (function (window) {
+    var fhirResults = [];
     window.extractData = function () {
         var ret = $.Deferred();
 
@@ -11,7 +12,15 @@
             if (smart.hasOwnProperty('patient')) {
                 var patient = smart.patient;
                 var pt = patient.read();
-                var obv = smart.patient.api.search({
+                let result = getData(smart, patient);
+
+
+                /* var allergyIntolerance = smart.patient.api.fetchAll({
+                     type: 'AllergyIntolerance',
+ 
+                 });*/
+                /*
+                var obv = smart.patient.api.fetchAll({
                     type: 'Observation',
                     query: {
                         code: {
@@ -21,104 +30,125 @@
                         }
                     }
                 });
-                //var token = smart.server.auth.type + " " + smart.server.auth.token;
-                var token = smart.tokenResponse.token_type + " " + smart.tokenResponse.access_token;
-                var serverURL = smart.server.serviceUrl;
-                console.log(serverURL);
-                client = getFHIRClient(serverURL, token, "application/json", "application/json");
-                console.log(client);
-                var relativeURL = "Patient/" + patient.id;
-                console.log("relativeURL="+relativeURL)
-                var response;
-              
-                //response = client.request(relativeURL);
-                response = client.api.fetchAll({
-                    type: 'Observation',
-                    query: {}
-                });
-                console.log("result=");
-                console.log(response);
-                fhirAPIs = ["Patient", "AllergyIntolerance", "MedicationRequest", "Condition", "Observation"];
 
-
-                fhirAPIs.forEach(function (apiCall) {
-                    var relativeURL = smart.server.serviceUrl + "/" + apiCall + "?_id=" + patient.id;
-                    /*let  result= doAPICall(relativeURL, token, "application/json", "application/json")                   
-                         .then(response => {
-                             console.log(response);
-                             return response;
-                         })
-                     */
-                    /* .then(json => {
-                         return json;
-                         
-                     });*/
-
-                    let result = doAPICall(relativeURL, token, "application/json", "application/json");
-                    /*.catch ((error) => {
-                       console.log(error);
-                   });*/
-
-                    console.log("json=" + result);
-                    //fhirResults[apiCall] = result;
-                    console.log("json=" + this.fhirResults[apiCall]);
-
-                }); 
-                var obvs = smart.patient.api.fetchAllWithReferences({
-                    type: 'Observation',
-                    query: {
-                        code: {
-                            $or: ['http://loinc.org|8302-2', 'http://loinc.org|8462-4',
-                                'http://loinc.org|8480-6', 'http://loinc.org|2085-9',
-                                'http://loinc.org|2089-1', 'http://loinc.org|55284-4']
-                        }
-                    }
-                });
-                $.when(pt, obv).fail(onError);
-
-                $.when(pt, obv).done(function (patient, obv) {
-                    var byCodes = smart.byCodes(obv, 'code');
-                    var gender = patient.gender;
-
-                    var fname = '';
-                    var lname = '';
-
-                    if (typeof patient.name[0] !== 'undefined') {
-                        fname = patient.name[0].given.join(' ');
-                        lname = patient.name[0].family.join(' ');
-                    }
-
-                    var height = byCodes('8302-2');
-                    var systolicbp = getBloodPressureValue(byCodes('55284-4'), '8480-6');
-                    var diastolicbp = getBloodPressureValue(byCodes('55284-4'), '8462-4');
-                    var hdl = byCodes('2085-9');
-                    var ldl = byCodes('2089-1');
-
-                    var p = defaultPatient();
-                    p.birthdate = patient.birthDate;
-                    p.gender = gender;
-                    p.fname = fname;
-                    p.lname = lname;
-                    p.height = getQuantityValueAndUnit(height[0]);
-
-                    if (typeof systolicbp != 'undefined') {
-                        p.systolicbp = systolicbp;
-                    }
-
-                    if (typeof diastolicbp != 'undefined') {
-                        p.diastolicbp = diastolicbp;
-                    }
-
-                    p.hdl = getQuantityValueAndUnit(hdl[0]);
-                    p.ldl = getQuantityValueAndUnit(ldl[0]);
-
-                    ret.resolve(p);
-                });
+                console.log("observation=" + obv);
+                */
             } else {
                 onError();
             }
         }
-        console.log(ret);
+
+        async function getData(smart, patient) {
+            //.log("smart=" + JSON.stringify(smart)); 
+
+            //   console.log("srverURL =" + smart.server.serviceUrl); 
+
+
+            var token = smart.server.auth.type + " " + smart.server.auth.token;
+            var token = smart.tokenResponse.token_type + " " + smart.tokenResponse.access_token;
+            // console.log("token=" + token);
+
+            fhirAPIs = ["Patient", "AllergyIntolerance", "MedicationRequest", "Condition", "Observation"];
+
+
+            fhirAPIs.forEach(function (apiCall) {
+                var relativeURL = smart.server.serviceUrl + "/" + apiCall + "?_id=" + patient.id;
+                /*let  result= doAPICall(relativeURL, token, "application/json", "application/json")                   
+                     .then(response => {
+                         console.log(response);
+                         return response;
+                     })
+                 */
+                /* .then(json => {
+                     return json;
+                     
+                 });*/
+
+                let result = doAPICall(relativeURL, token, "application/json", "application/json");
+                /*.catch ((error) => {
+                   console.log(error);
+               });*/
+
+                console.log("json=" + result);
+                //fhirResults[apiCall] = result;
+                console.log("json=" + this.fhirResults[apiCall]);
+
+            });
+            /*
+            var relativeURL = smart.server.serviceUrl + "/Patient?_id=" + patient.id;
+            var pt = callRestfulAPI(relativeURL, token, "application/json", "application/json");
+            console.log("patient="+pt); 
+
+            var relativeURL = smart.server.serviceUrl + "/AllergyIntolerance?patient=" + patient.id;
+            var AllergyIntolerance = callRestfulAPI(relativeURL, token, "application/json", "application/json");
+
+
+            var relativeURL = smart.server.serviceUrl + "/MedicationRequest?patient=" + patient.id;
+            var Medications = callRestfulAPI(relativeURL, token, "application/json", "application/json");
+
+
+            var relativeURL = smart.server.serviceUrl + "/Condition?patient=" + patient.id;
+            var Conditions = callRestfulAPI(relativeURL, token, "application/json", "application/json");
+            var code = "";
+            var relativeURL = smart.server.serviceUrl + "/Observation?patient=" + patient.id;
+            var Observations = callRestfulAPI(relativeURL, token, "application/json", "application/json");
+            console.log(data);
+
+            console.log(Observations);*/
+
+
+
+            //$.when(pt, obv).fail(onError);
+
+            // $.when(pt, obv).done(function (patient, obv) {
+            //     var byCodes = smart.byCodes(obv, 'code');
+            var gender = patient.gender;
+            pt = fhirResults["Patient"];
+            patientName = pt.entry.resource.name;
+            var fname = '';
+            var lname = '';
+
+            if (typeof patientName[0] !== 'undefined') {
+                fname = patientName[0].given.join(' ');
+                lname = patientName[0].family.join(' ');
+            }
+
+            //console.log(patient);
+            ///var height = byCodes('8302-2');
+            // var systolicbp = getBloodPressureValue(byCodes('55284-4'), '8480-6');
+            // var diastolicbp = getBloodPressureValue(byCodes('55284-4'), '8462-4');
+            // var hdl = byCodes('2085-9');
+            // var ldl = byCodes('2089-1');
+
+
+            var p = defaultPatient();
+            //added patient
+
+            p.id = patient.id;
+            p.birthdate = pt.entry.resource.birthDate;
+            p.gender = pt.entry.resource.gender;
+            p.fname = fname;
+            p.lname = lname;
+
+            // p.allergies = getAllergyIntolerances(smart);
+            //  if (typeof systolicbp != 'undefined') {
+            //     p.systolicbp = systolicbp;
+            //  }
+
+            // if (typeof diastolicbp != 'undefined') {
+            //     p.diastolicbp = diastolicbp;
+            // }
+
+            //  p.hdl = getQuantityValueAndUnit(hdl[0]);
+            //  p.ldl = getQuantityValueAndUnit(ldl[0]);
+
+            ret.resolve(p);
+            // });
+
+            return p;
+
+        }
+
         FHIR.oauth2.ready(onReady, onError);
         return ret.promise();
 
@@ -135,69 +165,167 @@
             diastolicbp: { value: '' },
             ldl: { value: '' },
             hdl: { value: '' },
+            id: { value: '' },
         };
     }
 
-    function getBloodPressureValue(BPObservations, typeOfPressure) {
-        var formattedBPObservations = [];
-        BPObservations.forEach(function (observation) {
-            var BP = observation.component.find(function (component) {
-                return component.code.coding.find(function (coding) {
-                    return coding.code == typeOfPressure;
-                });
+    /* function getBloodPressureValue(BPObservations, typeOfPressure) {
+         var formattedBPObservations = [];
+         BPObservations.forEach(function (observation) {
+             var BP = observation.component.find(function (component) {
+                 return component.code.coding.find(function (coding) {
+                     return coding.code == typeOfPressure;
+                 });
+             });
+             if (BP) {
+                 observation.valueQuantity = BP.valueQuantity;
+                 formattedBPObservations.push(observation);
+             }
+         });
+ 
+         return getQuantityValueAndUnit(formattedBPObservations[0]);
+     }
+ 
+     function getQuantityValueAndUnit(ob) {
+         if (typeof ob != 'undefined' &&
+             typeof ob.valueQuantity != 'undefined' &&
+             typeof ob.valueQuantity.value != 'undefined' &&
+             typeof ob.valueQuantity.unit != 'undefined') {
+             return ob.valueQuantity.value + ' ' + ob.valueQuantity.unit;
+         } else {
+             return undefined;
+         }
+     }
+     */
+
+    async function doAPICall(relativeURL, token, contentType, acceptType, callback) {
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", token);
+        myHeaders.append("Content-Type", contentType);
+        myHeaders.append("Accept", acceptType);
+
+        var raw = "";
+
+        var requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            //body: raw,
+            redirect: 'follow'
+        };
+        /*
+       result = await fetch(relativeURL, requestOptions)
+       fhirResults[apiCall]
+            .then(response => {
+                console.log(response);
+                return response.json();
+            })
+            .then(json => {
+                console.log("json="+JSON.stringify(json)); 
             });
-            if (BP) {
-                observation.valueQuantity = BP.valueQuantity;
-                formattedBPObservations.push(observation);
+*/
+        response = await fetch(relativeURL, requestOptions)
+            .then(response => response.json())
+            .then(result => callback(result))
+
+        // return response.json();
+        // }
+        // console.log(relativeURL)
+        // console.log(json);
+
+        // return JSON.stringify(json);  
+    }
+
+
+
+    async function getResult(data) {
+
+        console.log("got here");
+        console.log(data);
+        fhirResults[apiCall] = result;
+        //document.getElementById("myDiv").innerHTML = results;
+        this.data = results;
+
+    }
+
+    function callRestfulAPI(relativeURL, token, contentType, acceptType) {
+        var data = "";
+
+        var xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+
+        xhr.addEventListener("readystatechange", function () {
+            if (this.readyState === 4) {
+                console.log(this.responseText);
             }
         });
 
-        return getQuantityValueAndUnit(formattedBPObservations[0]);
+        xhr.open("GET", "url");
+        xhr.setRequestHeader("Authorization", token);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.setRequestHeader("Accept", "application/fhir+json");
+
+        xhr.send(data);
     }
 
-    function getQuantityValueAndUnit(ob) {
-        if (typeof ob != 'undefined' &&
-            typeof ob.valueQuantity != 'undefined' &&
-            typeof ob.valueQuantity.value != 'undefined' &&
-            typeof ob.valueQuantity.unit != 'undefined') {
-            return ob.valueQuantity.value + ' ' + ob.valueQuantity.unit;
-        } else {
-            return undefined;
-        }
-    }
-    function getFHIRClient(serverURL, token, contentType, acceptType) {
-         
 
-            console.log("serverURL=" + serverURL);
-
-            //client.request("Patient/"+patientID);
-            var myHeaders = new Headers();
-            myHeaders.append("Authorization", token);
-            myHeaders.append("Content-Type", contentType);
-            myHeaders.append("Accept", acceptType);
-            //myHeaders.append("Cookie", "EpicPersistenceCookie=!N3soogg51eiSXXaWgeFplRcxbLCTJaAUKNt8Z01blDojf1/2t0gSLW48FYGdEoYq68nJjSTaI/QqJ0c=");
-            //myHeaders.append("Epic-Client-ID", "d30ed752-70d5-4b77-9484-9b67f6396f63");
-            
-
-            var config = {
-                // FHIR server base url
-                "serverUrl": serverURL,
-                // Valid Options are 'same-origin', 'include'
-                "credentials": "same-origin",
-                "headers": myHeaders,
-            }
-            console.log("got here");
-            var adapter;
-            var client = new FHIR.client(config, adapter);
-            
-            return client;
-         
-    }
+    /*
+        function getAllergyIntolerances(smart) {
+            var allergyIntolerance = null;
+            var allergyIntolerance = smart.patient.api.fetchAll({
+                type: 'AllergyIntolerance',
+                
+            });
     
+            
+            console.log(allergyIntolerance);
+            entries = null;
+            entries = allergyIntolerance.entries;
+           
+            console.log(allergyIntolerance.allergies);
+            allergyIntolerance.
+            if (entries !== null) {
+                var allergyTableHeader = "<table><tr><td>item</td><td>category</td><td>reaction</td></tr>";
+                var j = 0;
+                allergyRows = "";
+                var rows = "";
+                entries.forEach(function (allergy, j) {
+    
+    
+                    //log.debug(JSON.stringify(allergy));
+                    //log.debug("allergy.resource.code"+JSON.stringify(allergy.resource));
+    
+                    if (allergy.resource.code && allergy.resource.code != "invalid") {
+                        rows += "<tr><td>" + allergy.resource.code.text + "</td><td>" + allergy.resource.category + "</td><td>";
+                    }
+    
+                    var i = 0;
+                    if (allergy.resource.reaction) {
+                        allergyReactions = "";
+                        allergy.resource.reaction.forEach(function (reaction) {
+    
+                            if (i === 0) {
+                                allergyReactions = reaction.description + "(" + reaction.severity + ")";
+                            } else {
+                                allergyReactions = ", " + reaction.description + "(" + reaction.severity + ")";
+                            }
+                        });
+                        rows += "<td>" + allergyReactions + "</td>";
+                        rows += "</tr>";
+                    }
+                    // log.debug("rows="+rows);
+    
+    
+                });
+                //log.debug("allergies="+rows);
+                allergies = allergyTableHeader + rows + "</table>";
+                return (allergies);
+            }
+        }*/
 
     window.drawVisualization = function (p) {
         $('#holder').show();
         $('#loading').hide();
+        $('#id').html(p.id);
         $('#fname').html(p.fname);
         $('#lname').html(p.lname);
         $('#gender').html(p.gender);
