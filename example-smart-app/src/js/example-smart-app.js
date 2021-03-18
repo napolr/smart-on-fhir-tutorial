@@ -55,9 +55,10 @@
                 var relativeURL = smart.server.serviceUrl + "/" + apiCall + "?_id=" + patient.id;
                 result= doAPICall(relativeURL, token, "application/json", "application/json")                   
                      .then(response => {
-                         console.log(response);
+                         console.log(response.json);
                          return response;
                      })
+                    .then(result => { console.log(result);})
                 
                                     
             });
