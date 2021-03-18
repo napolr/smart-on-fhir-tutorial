@@ -1,5 +1,4 @@
 (function (window) {
-    var fhirResults = [];
     window.extractData = function () {
         var ret = $.Deferred();
 
@@ -11,9 +10,7 @@
         function onReady(smart) {
             if (smart.hasOwnProperty('patient')) {
                 var patient = smart.patient;
-                var pt = patient.read();
-                let result = getData(smart, patient);
-
+                //var pt = patient.read();
 
                 /* var allergyIntolerance = smart.patient.api.fetchAll({
                      type: 'AllergyIntolerance',
@@ -33,87 +30,108 @@
 
                 console.log("observation=" + obv);
                 */
+
+                console.log("smart=" + JSON.stringify(smart));
+
+                console.log("srverURL =" + smart.server.serviceUrl);
+
+
+                var token = smart.server.auth.type + " " + smart.server.auth.token;
+                var token = smart.tokenResponse.token_type + " " + smart.tokenResponse.access_token;
+                console.log("token=" + token);
+
+                fhirAPIs = ["Patient", "AllergyIntolerance", "MedicationRequest", "Condition", "Observation"];
+
+                fhirResults = [];
+                let result;
+                fhirAPIs.forEach(function (apiCall) {
+                    var relativeURL = smart.server.serviceUrl + "/" + apiCall + "?_id=" + patient.id;
+
+                    callRestfulAPI(relativeURL, token, "application/json", "application/json")
+                        .then(function (response) {
+                            console.log(response);
+                            let result = response;
+                            return result;
+                        });
+                    /* .then(json => {
+                         return json;
+                         
+                     });*/
+
+                    console.log(result);
+                    console.log("json=" + JSON.stringify(result));
+                });
+                /*
+                var relativeURL = smart.server.serviceUrl + "/Patient?_id=" + patient.id;
+                var pt = callRestfulAPI(relativeURL, token, "application/json", "application/json");
+                console.log("patient="+pt); 
+
+                var relativeURL = smart.server.serviceUrl + "/AllergyIntolerance?patient=" + patient.id;
+                var AllergyIntolerance = callRestfulAPI(relativeURL, token, "application/json", "application/json");
+
+
+                var relativeURL = smart.server.serviceUrl + "/MedicationRequest?patient=" + patient.id;
+                var Medications = callRestfulAPI(relativeURL, token, "application/json", "application/json");
+
+
+                var relativeURL = smart.server.serviceUrl + "/Condition?patient=" + patient.id;
+                var Conditions = callRestfulAPI(relativeURL, token, "application/json", "application/json");
+                var code = "";
+                var relativeURL = smart.server.serviceUrl + "/Observation?patient=" + patient.id;
+                var Observations = callRestfulAPI(relativeURL, token, "application/json", "application/json");
+                console.log(data);
+
+                console.log(Observations);*/
+
+
+
+                //$.when(pt, obv).fail(onError);
+
+                // $.when(pt, obv).done(function (patient, obv) {
+                //     var byCodes = smart.byCodes(obv, 'code');
+                var gender = patient.gender;
+                patientName = pt.entry.resource.name;
+                var fname = '';
+                var lname = '';
+
+                if (typeof patientName[0] !== 'undefined') {
+                    fname = patientName[0].given.join(' ');
+                    lname = patientName[0].family.join(' ');
+                }
+                //console.log(patient);
+                ///var height = byCodes('8302-2');
+                // var systolicbp = getBloodPressureValue(byCodes('55284-4'), '8480-6');
+                // var diastolicbp = getBloodPressureValue(byCodes('55284-4'), '8462-4');
+                // var hdl = byCodes('2085-9');
+                // var ldl = byCodes('2089-1');
+
+
+                var p = defaultPatient();
+                //added patient
+
+                p.id = patient.id;
+                p.birthdate = pt.entry.resource.birthDate;
+                p.gender = pt.entry.resource.gender;
+                p.fname = fname;
+                p.lname = lname;
+
+                // p.allergies = getAllergyIntolerances(smart);
+                //  if (typeof systolicbp != 'undefined') {
+                //     p.systolicbp = systolicbp;
+                //  }
+
+                // if (typeof diastolicbp != 'undefined') {
+                //     p.diastolicbp = diastolicbp;
+                // }
+
+                //  p.hdl = getQuantityValueAndUnit(hdl[0]);
+                //  p.ldl = getQuantityValueAndUnit(ldl[0]);
+
+                ret.resolve(p);
+                // });
             } else {
                 onError();
             }
-        }
-
-        async function getData(smart, patient) {
-            //.log("smart=" + JSON.stringify(smart)); 
-
-            //   console.log("srverURL =" + smart.server.serviceUrl); 
-
-
-            var token = smart.server.auth.type + " " + smart.server.auth.token;
-            var token = smart.tokenResponse.token_type + " " + smart.tokenResponse.access_token;
-            // console.log("token=" + token);
-
-            fhirAPIs = ["Patient", "AllergyIntolerance", "MedicationRequest", "Condition", "Observation"];
-
-            
-            fhirAPIs.forEach(function (apiCall) {
-                var relativeURL = smart.server.serviceUrl + "/" + apiCall + "?_id=" + patient.id;
-                result= doAPICall(relativeURL, token, "application/json", "application/json")                   
-                     .then(response => {
-                         console.log(response.json);
-                         return response;
-                     })
-                    .then(result => { console.log(result);})
-                
-                                    
-            });
-
-           
-
-            //$.when(pt, obv).fail(onError);
-
-            // $.when(pt, obv).done(function (patient, obv) {
-            //     var byCodes = smart.byCodes(obv, 'code');
-            var gender = patient.gender;
-            pt = fhirResults["Patient"];
-            patientName = patient.entry.resource.name;
-            var fname = '';
-            var lname = '';
-
-            if (typeof patientName[0] !== 'undefined') {
-                fname = patientName[0].given.join(' ');
-                lname = patientName[0].family.join(' ');
-            }
-
-            //console.log(patient);
-            ///var height = byCodes('8302-2');
-            // var systolicbp = getBloodPressureValue(byCodes('55284-4'), '8480-6');
-            // var diastolicbp = getBloodPressureValue(byCodes('55284-4'), '8462-4');
-            // var hdl = byCodes('2085-9');
-            // var ldl = byCodes('2089-1');
-
-
-            var p = defaultPatient();
-            //added patient
-
-            p.id = patient.id;
-            p.birthdate = pt.entry.resource.birthDate;
-            p.gender = pt.entry.resource.gender;
-            p.fname = fname;
-            p.lname = lname;
-
-            // p.allergies = getAllergyIntolerances(smart);
-            //  if (typeof systolicbp != 'undefined') {
-            //     p.systolicbp = systolicbp;
-            //  }
-
-            // if (typeof diastolicbp != 'undefined') {
-            //     p.diastolicbp = diastolicbp;
-            // }
-
-            //  p.hdl = getQuantityValueAndUnit(hdl[0]);
-            //  p.ldl = getQuantityValueAndUnit(ldl[0]);
-
-            ret.resolve(p);
-            // });
-
-            return p;
-
         }
 
         FHIR.oauth2.ready(onReady, onError);
@@ -165,13 +183,11 @@
      }
      */
 
-    async function doAPICall(relativeURL, token, contentType, acceptType, callback) {
+    async function doAPICall(relativeURL, token, contentType, acceptType) {
         var myHeaders = new Headers();
         myHeaders.append("Authorization", token);
         myHeaders.append("Content-Type", contentType);
         myHeaders.append("Accept", acceptType);
-        myHeaders.append("Cookie", "EpicPersistenceCookie=!N3soogg51eiSXXaWgeFplRcxbLCTJaAUKNt8Z01blDojf1/2t0gSLW48FYGdEoYq68nJjSTaI/QqJ0c=");
-        myHeaders.append("Epic-Client-ID", "d30ed752-70d5-4b77-9484-9b67f6396f63");
 
         var raw = "";
 
@@ -181,19 +197,38 @@
             //body: raw,
             redirect: 'follow'
         };
+        /*
+       result = await fetch(relativeURL, requestOptions)
+       fhirResults[apiCall]
+            .then(response => {
+                console.log(response);
+                return response.json();
+            })
+            .then(json => {
+                console.log("json="+JSON.stringify(json)); 
+            });
+*/
+        const json = await fetch(relativeURL, requestOptions)
+            .then(response => response.json());
 
-        response = await fetch(relativeURL, requestOptions)
-            .then(response => response.json())
-            .then(result => { console.log(result); return result; })
+        // console.log(relativeURL)
+        // console.log(json);
 
-
-         return response;  
+        return JSON.stringify(json);
     }
 
 
 
-   
+    async function getResult(relativeURL, token, contentType, acceptType) {
+        let result = await doAPICall(relativeURL, token, contentType, acceptType);
+        return result;
+    }
 
+    async function callRestfulAPI(relativeURL, token, contentType, acceptType) {
+        let data = await getResult(relativeURL, token, contentType, acceptType);
+
+        return data;
+    }
 
     /*
         function getAllergyIntolerances(smart) {
