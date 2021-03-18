@@ -71,7 +71,7 @@
             //     var byCodes = smart.byCodes(obv, 'code');
             var gender = patient.gender;
             pt = fhirResults["Patient"];
-            patientName = pt.entry.resource.name;
+            patientName = patient.entry.resource.name;
             var fname = '';
             var lname = '';
 
