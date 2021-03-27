@@ -1,7 +1,7 @@
 (function (window) {
     window.extractData = function () {
         var ret = $.Deferred();
-        var fhirResults = [];
+        var fhirResults = {};
         function onError() {
             console.log('Loading error', arguments);
             ret.reject();
@@ -50,9 +50,7 @@
                     callRestfulAPI(relativeURL, token, "application/json", "application/json")
                         .then(function (response) {
                             console.log(response);
-                            fhirResults.push(apiCall, response);
-                            let result = response;
-                            return result;
+                            fhirResults[apiCall] = response;          
                         });
                     /* .then(json => {
                          return json;
