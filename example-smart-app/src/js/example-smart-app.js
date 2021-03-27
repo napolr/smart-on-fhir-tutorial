@@ -57,7 +57,7 @@
                          
                      });*/
 
-                    console.log(apiCall, this.fhirResults[apiCall]);
+                    console.log(apiCall, fhirResults[apiCall]);
 
                     
                 });
