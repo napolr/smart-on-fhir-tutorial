@@ -1,7 +1,7 @@
 (function (window) {
     window.extractData = function () {
         var ret = $.Deferred();
-
+        var fhirResults = [];
         function onError() {
             console.log('Loading error', arguments);
             ret.reject();
@@ -42,7 +42,7 @@
 
                 fhirAPIs = ["Patient", "AllergyIntolerance", "MedicationRequest", "Condition", "Observation"];
 
-                fhirResults = [];
+                 
                 let result;
                 fhirAPIs.forEach(function (apiCall) {
                     var relativeURL = smart.server.serviceUrl + "/" + apiCall + "?_id=" + patient.id;
@@ -50,6 +50,7 @@
                     callRestfulAPI(relativeURL, token, "application/json", "application/json")
                         .then(function (response) {
                             console.log(response);
+                            this.fhirResults.push(apiCall, response);
                             let result = response;
                             return result;
                         });
@@ -57,6 +58,8 @@
                          return json;
                          
                      });*/
+
+                    console.log(apiCall, this.fhirResults[apiCall]);
 
                     
                 });
