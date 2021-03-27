@@ -50,7 +50,7 @@
                     callRestfulAPI(relativeURL, token, "application/json", "application/json")
                         .then(function (response) {
                             console.log(response);
-                            this.fhirResults.push(apiCall, response);
+                            fhirResults.push(apiCall, response);
                             let result = response;
                             return result;
                         });
