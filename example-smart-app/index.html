@@ -19,7 +19,7 @@
 
         async function loginUserWitOauth() {
             //	let code=this.urlParams.get('code');
-            var redirectURL = "./index2.html";
+            var redirectURI = "https://priceless-mclean-588366.netlify.app/";
             var phrql_login_url = "https://accounts-phrqltest.auth.us-west-2.amazoncognito.com/oauth2/authorize?response_type=code&client_id=118a1qur3i4k7jpf4drf2nd7v7&redirect_uri=" + this.redirectURI;
             //let state = uuidv4();
             //console.log("state=" + state)
@@ -38,6 +38,7 @@
                 }).then(response => { console.log(response.json); })
             } else {
                 console.log("authorization code", code)
+                var redirectURI = "https://priceless-mclean-588366.netlify.app/";
                 var href = "https://accounts-phrqltest.auth.us-west-2.amazoncognito.com/oauth2/authorize?response_type==authorization_code&code=" + code + "&client_id=" + this.appClientId + "&redirect_uri=" + this.redirectURI;
 
                 await fetch(href, {
@@ -66,7 +67,7 @@
         this.region = "us-west-2";
         this.state = "";
         this.appClientId = "118a1qur3i4k7jpf4drf2nd7v7";
-        this.redirectURI = "https://priceless-mclean-588366.netlify.app/"
+        this.redirectURI = "https://priceless-mclean-588366.netlify.app/";
 
 
 
