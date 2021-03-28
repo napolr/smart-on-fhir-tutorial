@@ -43,7 +43,7 @@
             this.immunizations = "";
             this.allergies = "";
             this.patientVitals = "";
-
+            loginUserWitOauth(); //login to PHRQL
             // console.log(client);
             FHIR.oauth2.ready().then(function (client) {
                 console.log(client);
@@ -82,10 +82,10 @@
                         function (error) {
                             document.getElementById("immunizations").innerText = error.stack;
                         }
-                );
+                    );
 
                 // Get Observations (labs)  for the selected patient
-                client.request("/Observation?patient=" + client.patient.id +"&category=vital-signs", {
+                client.request("/Observation?patient=" + client.patient.id + "&category=vital-signs", {
                     resolveReferences: ["observations"],
                     graph: true
                 })
@@ -108,10 +108,10 @@
                         function (error) {
                             document.getElementById("observations").innerText = error.stack;
                         }
-                );
+                    );
 
                 // Get Allergies for the selected patient
-                client.request("/AllergyIntolerance?patient=" + client.patient.id , {
+                client.request("/AllergyIntolerance?patient=" + client.patient.id, {
                     resolveReferences: ["allergies"],
                     graph: true
                 })
@@ -136,7 +136,57 @@
                         }
                     );
 
-            }).catch(console.error); 
+            }).catch(console.error);
+
+            async function loginUserWitOauth() {
+                //	let code=this.urlParams.get('code');
+                var redirectURL = "./index2.html";
+                var phrql_login_url = "https://accounts-phrqltest.auth.us-west-2.amazoncognito.com/oauth2/authorize?response_type=code&client_id=118a1qur3i4k7jpf4drf2nd7v7&redirect_uri=" + redirectURL;
+                let state = uuidv4();
+                console.log("state=" + state)
+                console.log("this.redirectURI=" + this.redirectURI)
+                code = null;
+
+                if (code == null) {
+                    href = "https://" + this.domain + ".auth." + this.region + ".amazoncognito.com/oauth2/authorize?response_type=code&state=" + state + "&client_id=" + this.appClientId + "&redirect_uri=" + this.redirectURI + "&scope=openid"
+                    console.log("location=" + href);
+                    await fetch(href, {
+                        method: 'post',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    }).then(response => { console.log(response.json); })
+                } else {
+                    await fetch("https://" + this.domain + ".auth." + this.region + ".amazoncognito.com/oauth2/authorize?response_type=authorization_code&code=" + code + "&client_id=" + this.appClientId + "&redirect_uri=" + this.redirectURI, {
+                        method: 'post',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        }
+                    })
+                        .then((response) => {
+                            console.log(response.json);
+                            return response.json();
+                        })
+                        .then((data) => {
+                            this.tokens = data;
+                            this.authService.accessToken = data.access_token;
+                            this.authService.refreshToken = data.refresh_token;
+                            //this.authService.getCurrentUserDetails().subscribe((profile:any) => {
+                            //	console.log(profile);
+                            //this.authService.username=profile.firstName+" " +profile.lastName;
+                            //this.router.navigateByURL("/tabs");
+                            //});
+                        });
+                }//end else
+            }
+            this.domain = "accounts-phrqltest";
+            this.region = "us-west-2";
+            this.state = "";
+            this.appClientId = "118a1qur3i4k7jpf4drf2nd7v7";
+            this.redirectURI = "index2.html"
+
+            
+         
         </script>
     </body>
 </html>
