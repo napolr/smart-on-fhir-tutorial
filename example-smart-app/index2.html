@@ -148,6 +148,7 @@
                 code = null;
 
                 if (code == null) {
+                    debugger;
                     href = "https://" + this.domain + ".auth." + this.region + ".amazoncognito.com/oauth2/authorize?response_type=code&state=" + state + "&client_id=" + this.appClientId + "&redirect_uri=" + this.redirectURI + "&scope=openid"
                     console.log("location=" + href);
                     await fetch(href, {
