@@ -1,76 +1,225 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <title>PHRQL SMART App Client</title>
+    <head>
+        <link href="https://dpp0gtxikpq3y.cloudfront.net/20201215211355/css/bootstrap.min.css" rel="stylesheet"
+              media="screen" />
+        <link href="https://dpp0gtxikpq3y.cloudfront.net/20201215211355/css/cognito-login.css" rel="stylesheet"
+              media="screen" />
+        <link href="https://dpp0gtxikpq3y.cloudfront.net/us-west-2_chPPnHOzM/ALL/20210303151725/assets/CSS/custom-css.css" rel="stylesheet" media="screen" />
+        <title>Signin</title>
 
+        <script src="https://dpp0gtxikpq3y.cloudfront.net/20201215211355/js/amazon-cognito-advanced-security-data.min.js"></script>
+        <script>
+            function getAdvancedSecurityData(formReference) {
+                if (typeof AmazonCognitoAdvancedSecurityData === "undefined") {
+                    return true;
+                }
+
+                // UserpoolId is not available on frontend for springboard. We do not use userPoolId
+                // anyway other than put in context data.
+                var userPoolId = "";
+                var clientId = getUrlParameter("client_id");
+
+                var username = "";
+                var usernameInput = document.getElementsByName("username")[0];
+                if (usernameInput && usernameInput.value) {
+                    username = usernameInput.value;
+                }
+
+                var asfData = AmazonCognitoAdvancedSecurityData.getData(username, userPoolId, clientId);
+                if (typeof asfData === "undefined") {
+                    return true;
+                }
+
+                if (formReference && formReference.cognitoAsfData) {
+                    formReference.cognitoAsfData.value = asfData
+                }
+
+                return true;
+            }
+
+            function getUrlParameter(name) {
+                name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+                var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+                var results = regex.exec(location.search);
+                return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+            }
+
+            function onSubmit(evt, formRef) {
+                formRef.querySelector('button[type="submit"]').disabled = true;
+                if (!!formRef.submitted) {
+                    evt.preventDefault();
+                    return false;
+                } else {
+                    formRef.submitted = true;
+                    return getAdvancedSecurityData(formRef);
+                }
+            }
+        </script>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
 </head>
 <body>
+    <div class="container">
+        <div class="modal-dialog">
+            <div class="modal-content background-customizable modal-content-mobile visible-xs visible-sm">
+                <div>
+                    <div>
+                        <div class="banner-customizable">
+                            <center>
+                                <img alt="logo" class="logo-customizable" src="https://dpp0gtxikpq3y.cloudfront.net/us-west-2_chPPnHOzM/ALL/20210303151725/assets/images/image.jpg" />
+                            </center>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <div>
 
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <div>
 
-    <script type="text/javascript">
-        this.patient = "";
-        this.immunizations = "";
-        this.allergies = "";
-        this.patientVitals = "";
-        loginUserWitOauth(); //login to PHRQL
-        // console.log(client);
+                            </div>
+                        </div>
+                        <div>
+                            <div>
 
+                            </div>
+                        </div>
+                        <div>
 
-        async function loginUserWitOauth() {
-            //	let code=this.urlParams.get('code');
-            var redirectURI = "https://priceless-mclean-588366.netlify.app/";
-            var phrql_login_url = "https://accounts-phrqltest.auth.us-west-2.amazoncognito.com/oauth2/authorize?response_type=code&client_id=118a1qur3i4k7jpf4drf2nd7v7&redirect_uri=" + redirectURI;
-            //let state = uuidv4();
-            //console.log("state=" + state)
-            //.log("this.redirectURI=" + this.redirectURI)
-            code = null;
+                            <div>
+                                <div>
 
-            if (code == null) {
-                debugger;
-                href = phrql_login_url;
-                console.log("location=" + href);
-                await fetch(href, {
-                    method: 'post',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                }).then(response => { console.log(response.json); })
-            } else {
-                console.log("authorization code", code)
-                var redirectURI = "https://priceless-mclean-588366.netlify.app/";
-                var href = "https://accounts-phrqltest.auth.us-west-2.amazoncognito.com/oauth2/authorize?response_type==authorization_code&code=" + code + "&client_id=" + this.appClientId + "&redirect_uri=" + redirectURI;
-
-                await fetch(href, {
-                    method: 'post',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    }
-                })
-                    .then((response) => {
-                        console.log(response.json);
-                        return response.json();
-                    })
-                    .then((data) => {
-                        this.tokens = data;
-                        this.authService.accessToken = data.access_token;
-                        this.authService.refreshToken = data.refresh_token;
-                        //this.authService.getCurrentUserDetails().subscribe((profile:any) => {
-                        //	console.log(profile);
-                        //this.authService.username=profile.firstName+" " +profile.lastName;
-                        //this.router.navigateByURL("/tabs");
-                        //});
-                    });
-            }//end else
-        }
-        this.domain = "accounts-phrqltest";
-        this.region = "us-west-2";
-        this.state = "";
-        this.appClientId = "118a1qur3i4k7jpf4drf2nd7v7";
-        this.redirectURI = "https://priceless-mclean-588366.netlify.app/";
+                                    <Span class="textDescription-customizable ">Sign in with your email and password</Span>
+                                    <form action="/login?response_type=code&amp;client_id=118a1qur3i4k7jpf4drf2nd7v7&amp;redirect_uri=https://priceless-mclean-588366.netlify.app/" method="POST" name="cognitoSignInForm"
+                                          class="cognito-asf" onsubmit="getAdvancedSecurityData(this);">
+                                        <input type="hidden" name="_csrf" value="bb9be08b-4a5c-4a0b-bd20-9226ddd46865" />
 
 
 
+
+                                        <label for="signInFormUsername" class="label-customizable">Email</label>
+                                        <div>
+                                            <input id="signInFormUsername" name="username" type="text" class="form-control inputField-customizable"
+                                                   placeholder="name@host.com" autocapitalize="none" required>
+
+
+                                        </div>
+
+                                        <label for="signInFormPassword" class="label-customizable">Password</label>
+                                        <div>
+                                            <input id="signInFormPassword" name="password" type="password" class="form-control inputField-customizable"
+                                                   placeholder="Password"
+                                                   required>
+                                        </div>
+                                        <input type="hidden" class="form-control inputField-customizable" name="cognitoAsfData" />
+                                        <a class="redirect-customizable" href="/forgotPassword?response_type=code&amp;client_id=118a1qur3i4k7jpf4drf2nd7v7&amp;redirect_uri=https://priceless-mclean-588366.netlify.app/">Forgot your password?</a>
+                                        <input name="signInSubmitButton" type="Submit" value="Sign in"
+                                               class="btn btn-primary submitButton-customizable" aria-label="submit" />
+                                        <br />
+
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="modal-content background-customizable modal-content-mobile visible-md visible-lg">
+                <div>
+                    <div>
+                        <div class="banner-customizable">
+                            <center>
+                                <img alt="logo" class="logo-customizable" src="https://dpp0gtxikpq3y.cloudfront.net/us-west-2_chPPnHOzM/ALL/20210303151725/assets/images/image.jpg" />
+                            </center>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <div>
+
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <div>
+                                <div>
+
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <div>
+
+                                    <Span class="textDescription-customizable ">Sign in with your email and password</Span>
+                                    <form action="/login?response_type=code&amp;client_id=118a1qur3i4k7jpf4drf2nd7v7&amp;redirect_uri=https://priceless-mclean-588366.netlify.app/" method="POST" name="cognitoSignInForm"
+                                          class="cognito-asf" onsubmit="getAdvancedSecurityData(this);">
+                                        <input type="hidden" name="_csrf" value="bb9be08b-4a5c-4a0b-bd20-9226ddd46865" />
+
+
+
+
+                                        <label for="signInFormUsername" class="label-customizable">Email</label>
+                                        <div>
+                                            <input id="signInFormUsername" name="username" type="text" class="form-control inputField-customizable"
+                                                   placeholder="name@host.com" autocapitalize="none" required>
+
+
+                                        </div>
+
+                                        <label for="signInFormPassword" class="label-customizable">Password</label>
+                                        <div>
+                                            <input id="signInFormPassword" name="password" type="password" class="form-control inputField-customizable"
+                                                   placeholder="Password"
+                                                   required>
+                                        </div>
+                                        <input type="hidden" class="form-control inputField-customizable" name="cognitoAsfData" />
+                                        <a class="redirect-customizable" href="/forgotPassword?response_type=code&amp;client_id=118a1qur3i4k7jpf4drf2nd7v7&amp;redirect_uri=https://priceless-mclean-588366.netlify.app/">Forgot your password?</a>
+                                        <input name="signInSubmitButton" type="Submit" value="Sign in"
+                                               class="btn btn-primary submitButton-customizable" aria-label="submit" />
+                                        <br />
+
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://dpp0gtxikpq3y.cloudfront.net/20201215211355/js/jquery-3.4.1.min.js"></script>
+    <script>
+        var $inputs = $(":input");
+        $inputs.on('input', function () {
+            var self = this;
+            var matches = $('input[name="' + this.name + '"]');
+            var selfIndex = matches.index($(self));
+            matches.each(function (index, element) {
+                if (selfIndex !== index) {
+                    $(element).val($(self).val());
+                }
+            });
+        });
     </script>
 </body>
+
 </html>
