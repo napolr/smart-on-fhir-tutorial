@@ -69,7 +69,7 @@
                 );
 
                 // Get Observations (labs)  for the selected patient
-                client.request("/Observation?patient=" + client.patient.id, {
+                client.request("/Observation?patient=" + client.patient.id +"&category=vital-signs", {
                     resolveReferences: ["observations"],
                     graph: true
                 })
