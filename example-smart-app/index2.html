@@ -22,6 +22,10 @@
         <h4>Immunizations</h4>
         <div id="immunizations">Loading...</div>
         <script type="text/javascript">
+            this.patient = "";
+            this.immunizations = "";
+            this.allergies = "";
+            
        // console.log(client);
             FHIR.oauth2.ready().then(function(client) {
                 console.log(client);
@@ -29,6 +33,7 @@
                 client.patient.read().then(
                     function(pt) {
                         document.getElementById("patient").innerText = JSON.stringify(pt, null, 4);
+                        this.patient = JSON.stringify(pt, null, 4);
                     },
                     function(error) {
                         document.getElementById("patient").innerText = error.stack;
@@ -54,6 +59,7 @@
                 .then(
                     function (immunizations) {
                         document.getElementById("immunizations").innerText = JSON.stringify(immunizations, null, 4);
+                        this.immunizations = immunizations;
                     },
                     function(error) {
                         document.getElementById("immunizations").innerText = error.stack;
@@ -61,6 +67,7 @@
                 );
 
             }).catch(console.error);
+            console.log("immunizations", immunizations)
         </script>
     </body>
 </html>
