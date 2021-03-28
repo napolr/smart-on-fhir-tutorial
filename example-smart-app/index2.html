@@ -36,15 +36,15 @@
                 );
                 
                 // Get MedicationRequests for the selected patient
-                client.request("/MedicationRequest?patient=" + client.patient.id, {
-                    resolveReferences: [ "medicationReference" ],
+                client.request("/Immunization?patient=" + client.patient.id, {
+                    resolveReferences: [ "immunization" ],
                     graph: true
                 })
                 
                 // Reject if no MedicationRequests are found
                 .then(function(data) {
                     if (!data.entry || !data.entry.length) {
-                        throw new Error("No medications found for the selected patient");
+                        throw new Error("No immunizations found for the selected patient");
                     }
                     return data.entry;
                 })
@@ -53,10 +53,10 @@
                 // Render the current patient's medications (or any error)
                 .then(
                     function(meds) {
-                        document.getElementById("meds").innerText = JSON.stringify(meds, null, 4);
+                        document.getElementById("immunizations").innerText = JSON.stringify(meds, null, 4);
                     },
                     function(error) {
-                        document.getElementById("meds").innerText = error.stack;
+                        document.getElementById("immunizations").innerText = error.stack;
                     }
                 );
 
