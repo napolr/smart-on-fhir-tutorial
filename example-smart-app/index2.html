@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <title>Example SMART App</title>
+        <title>PHRQL SMART App Client</title>
         <script src="https://cdn.jsdelivr.net/npm/fhirclient/build/fhir-client.js"></script>
         <style>
             #patient, #immunizations {
@@ -16,17 +16,33 @@
         </style>
     </head>
     <body>
-        <h4>Current Patient</h4>
-        <div id="patient">Loading...</div>
-        <br />
-        <h4>Immunizations</h4>
-        <div id="immunizations">Loading...</div>
-        <h4>Observations</h4>
-        <div id="observations">Loading...</div>
+        <table>
+            <tr>
+                <td>
+                    <h4>Current Patient</h4>
+                    <div id="patient">Loading...</div></td>
+                <td>
+                    <h4>Immunizations</h4>
+                    <div id="immunizations">Loading...</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h4>Observations</h4>
+                    <div id="observations">Loading...</div>
+                </td>
+                <td>
+                    <h4>Allergy Intolerance</h4>
+                    <div id="allergies">Loading...</div>
+                </td>
+            </tr>
+        </table>
+       
         <script type="text/javascript">
             this.patient = "";
             this.immunizations = "";
             this.allergies = "";
+            this.patientVitals = "";
 
             // console.log(client);
             FHIR.oauth2.ready().then(function (client) {
@@ -83,7 +99,7 @@
                     })
 
 
-                    // Render the current patient's immunizations (or any error)
+                    // Render the current patient's Observations (or any error)
                     .then(
                         function (observations) {
                             document.getElementById("observations").innerText = JSON.stringify(observations, null, 4);
@@ -91,6 +107,32 @@
                         },
                         function (error) {
                             document.getElementById("observations").innerText = error.stack;
+                        }
+                );
+
+                // Get Allergies for the selected patient
+                client.request("/AllergyIntolerance?patient=" + client.patient.id , {
+                    resolveReferences: ["allergies"],
+                    graph: true
+                })
+
+                    // Reject if no allergies are found
+                    .then(function (data) {
+                        if (!data.entry || !data.entry.length) {
+                            throw new Error("No allergies found for the selected patient");
+                        }
+                        return data.entry;
+                    })
+
+
+                    // Render the current patient's allergies (or any error)
+                    .then(
+                        function (allergies) {
+                            document.getElementById("allergies").innerText = JSON.stringify(allergies, null, 4);
+                            this.allergies = allergies;
+                        },
+                        function (error) {
+                            document.getElementById("allergies").innerText = error.stack;
                         }
                     );
 
