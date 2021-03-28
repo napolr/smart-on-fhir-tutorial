@@ -53,7 +53,7 @@
                 // Render the current patient's medications (or any error)
                 .then(
                     function(meds) {
-                        document.getElementById("immunizations").innerText = JSON.stringify(meds, null, 4);
+                        document.getElementById("immunizations").innerText = JSON.stringify(immunizations, null, 4);
                     },
                     function(error) {
                         document.getElementById("immunizations").innerText = error.stack;
