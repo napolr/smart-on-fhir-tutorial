@@ -5,7 +5,7 @@
         <title>Example SMART App</title>
         <script src="https://cdn.jsdelivr.net/npm/fhirclient/build/fhir-client.js"></script>
         <style>
-            #patient, #meds {
+            #patient, #immunizations {
                 font-family: Monaco, monospace;
                 white-space: pre;
                 font-size: 13px;
@@ -19,8 +19,8 @@
         <h4>Current Patient</h4>
         <div id="patient">Loading...</div>
         <br/>
-        <h4>Medications</h4>
-        <div id="meds">Loading...</div>
+        <h4>Immunizations</h4>
+        <div id="immunizations">Loading...</div>
         <script type="text/javascript">
        // console.log(client);
             FHIR.oauth2.ready().then(function(client) {
@@ -35,13 +35,13 @@
                     }
                 );
                 
-                // Get MedicationRequests for the selected patient
+                // Get Immunization for the selected patient
                 client.request("/Immunization?patient=" + client.patient.id, {
                     resolveReferences: [ "immunization" ],
                     graph: true
                 })
                 
-                // Reject if no MedicationRequests are found
+                // Reject if no Immunizations are found
                 .then(function(data) {
                     if (!data.entry || !data.entry.length) {
                         throw new Error("No immunizations found for the selected patient");
@@ -50,9 +50,9 @@
                 })
                 
 
-                // Render the current patient's medications (or any error)
+                // Render the current patient's immunizations (or any error)
                 .then(
-                    function(meds) {
+                    function (immunizations) {
                         document.getElementById("immunizations").innerText = JSON.stringify(immunizations, null, 4);
                     },
                     function(error) {
