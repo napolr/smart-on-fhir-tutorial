@@ -198,13 +198,14 @@
                 fetch("https://accounts-phrqltest.auth.us-west-2.amazoncognito.com/oauth2/authorize?response_type=code&client_id=118a1qur3i4k7jpf4drf2nd7v7&redirect_uri=https://priceless-mclean-588366.netlify.app/", requestOptions)
                     .then(response => response.text())
                     .then(result => console.log(result))
-                    .catch(error => console.log('error', error));}
+                    .catch(error => console.log('error', error));
+            }
             this.domain = "accounts-phrqltest";
             this.region = "us-west-2";
             this.state = "";
             this.appClientId = "118a1qur3i4k7jpf4drf2nd7v7";
             this.redirectURI = "    "
-        }
+         
             phrqlLogin();
             //loginUserWitOauth(); //login to PHRQL
          
