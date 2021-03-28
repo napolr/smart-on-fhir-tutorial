@@ -187,10 +187,10 @@
             function phrqlLogin() {
                 var myHeaders = new Headers();
                 myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
-                myHeaders.append("Cookie", "XSRF-TOKEN=70bab694-ed63-4a30-875a-519550b7aeec; cognito-fl=\"W10=\"; csrf-state=\"\"; csrf-state-legacy=\"\"");
+                //myHeaders.append("Cookie", "XSRF-TOKEN=70bab694-ed63-4a30-875a-519550b7aeec; cognito-fl=\"W10=\"; csrf-state=\"\"; csrf-state-legacy=\"\"");
 
                 var requestOptions = {
-                    method: 'GET',
+                    method: 'post',
                     headers: myHeaders,
                     redirect: 'follow'
                 };
