@@ -20,7 +20,7 @@
         async function loginUserWitOauth() {
             //	let code=this.urlParams.get('code');
             var redirectURI = "smartfhir.phrqltest.com";
-            var phrql_login_url = "https://accounts-phrqltest.auth.us-west-2.amazoncognito.com/oauth2/authorize?response_type=code&client_id=118a1qur3i4k7jpf4drf2nd7v7&redirect_uri=http://" + redirectURI + "&scope=openid";
+            var phrql_login_url = "https://accounts-phrqltest.auth.us-west-2.amazoncognito.com/oauth2/authorize?response_type=code&client_id=118a1qur3i4k7jpf4drf2nd7v7&redirect_uri=https://" + redirectURI + "&scope=openid";
             //let state = uuidv4();
             //console.log("state=" + state)
             //.log("this.redirectURI=" + this.redirectURI)
@@ -39,7 +39,7 @@
             } else {
                 console.log("authorization code", code)
                 var redirectURI = "smartfhir.phrqltest.com";
-                var href = "https://accounts-phrqltest.auth.us-west-2.amazoncognito.com/oauth2/authorize?response_type==authorization_code&code=" + code + "&client_id=" + this.appClientId + "&redirect_uri=http://" + redirectURI + "&scope=openid";
+                var href = "https://accounts-phrqltest.auth.us-west-2.amazoncognito.com/oauth2/authorize?response_type==authorization_code&code=" + code + "&client_id=" + this.appClientId + "&redirect_uri=https://" + redirectURI + "&scope=openid";
 
                 await fetch(href, {
                     method: 'post',
