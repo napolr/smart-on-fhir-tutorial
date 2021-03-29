@@ -26,8 +26,7 @@
             //.log("this.redirectURI=" + this.redirectURI)
             code = null;
 
-            if (code == null) {
-                debugger;
+            if (code == null) { 
                 href = phrql_login_url;
                 console.log("location=" + href);
                 await fetch(href, {
