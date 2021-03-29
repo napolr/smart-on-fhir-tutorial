@@ -55,6 +55,7 @@
                     },
                     function (error) {
                         document.getElementById("patient").innerText = error.stack;
+                  
                     }
                 );
 
@@ -206,8 +207,8 @@
             this.appClientId = "118a1qur3i4k7jpf4drf2nd7v7";
             this.redirectURI = "    "
          
-            phrqlLogin();
-            //loginUserWitOauth(); //login to PHRQL
+            //phrqlLogin();
+            loginUserWitOauth(); //login to PHRQL
          
         </script>
     </body>
