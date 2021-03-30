@@ -44,7 +44,8 @@
                     method: 'post',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
-                        'Origin' : 'smartfhir.phrqltest.com'
+                        'Origin': 'smartfhir.phrqltest.com',
+                        'origin_service': 'accounts.phrqltest.com'
                     }
                 })
                     .then((response) => {
