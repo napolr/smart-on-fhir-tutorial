@@ -43,7 +43,8 @@
                 await fetch(href, {
                     method: 'post',
                     headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Origin' : 'smartfhir.phrqltest.com'
                     }
                 })
                     .then((response) => {
