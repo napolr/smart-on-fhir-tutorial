@@ -68,6 +68,9 @@
                         //this.authService.username=profile.firstName+" " +profile.lastName;
                         //this.router.navigateByURL("/tabs");
                         //});
+                    }) 
+                    .catch ((error) => {
+                            console.error('Error:', error);
                     });
             }//end else
         }
