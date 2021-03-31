@@ -13,12 +13,13 @@
         this.immunizations = "";
         this.allergies = "";
         this.patientVitals = "";
+        sessionid = getCookie("sessionid");
         csrftoken = getCookie("csrftoken");
         console.log("csrftoken", csrftoken);
-        sessionid = getCookie("sessionid");
+       
         console.log("sessionid", sessionid);
      
-        loginUserWitOauth(); //login to PHRQL
+        //loginUserWitOauth(); //login to PHRQL
         // console.log(client);
 
         function getCookie(name) {
