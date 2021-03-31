@@ -17,14 +17,14 @@
         console.log("csrftoken", csrftoken);
         sessionid = getCookie("sessionid");
         console.log("sessionid", sessionid);
-        debugger;
+     
         loginUserWitOauth(); //login to PHRQL
         // console.log(client);
 
         function getCookie(name) {
             // Split cookie string and get all individual name=value pairs in an array
             var cookieArr = document.cookie.split(";");
-            console.log("cookieList", document.cookie);
+            console.log("cookieList=", document.cookie);
             // Loop through the array elements
             for (var i = 0; i < cookieArr.length; i++) {
                 var cookiePair = cookieArr[i].split("=");
