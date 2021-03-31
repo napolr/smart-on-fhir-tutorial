@@ -9,7 +9,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
     <script type="text/javascript">
-
+        import Cookies from 'js-cookie';
         this.patient = "";
         this.immunizations = "";
         this.allergies = "";
@@ -45,7 +45,7 @@
             return null;
         }
         async function doAPICall(relativeURL, token, contentType, acceptType) {
-            import Cookies from 'js-cookie';
+            
 
 
             var raw = "";
