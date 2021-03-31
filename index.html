@@ -14,7 +14,9 @@
         this.allergies = "";
         this.patientVitals = "";
         csrftoken = getCookie("csrftoken");
-        csrftoken = getCookie("sessionid");
+        console.log("csrftoken", csrftoken);
+        sessionid = getCookie("sessionid");
+        console.log("sessionid", sessionid);
         debugger;
         loginUserWitOauth(); //login to PHRQL
         // console.log(client);
