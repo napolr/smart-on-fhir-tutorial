@@ -7,20 +7,20 @@
 </head>
 <body>
 
-
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
     <script type="text/javascript">
-    
+
         this.patient = "";
         this.immunizations = "";
         this.allergies = "";
         this.patientVitals = "";
         sessionid = getCookie("sessionid");
         console.log("sessionid", sessionid);
-        csrftoken = getCookie("csrftoken");
-        console.log("csrftoken", csrftoken);
-       
-        
-     
+        csrfToken = getCookie("csrftoken");
+        console.log("csrftoken", csrfToken);
+        doAPICall('https://fs-api.phrqltest.com/api/patient-info/10?withCredentials=true', csrfToken, 'application/json', 'application/json')
+
+
         //loginUserWitOauth(); //login to PHRQL
         // console.log(client);
 
@@ -44,7 +44,52 @@
             // Return null if not found
             return null;
         }
+        async function doAPICall(relativeURL, token, contentType, acceptType) {
+            import Cookies from 'js-cookie';
 
+
+            var raw = "";
+
+            response = fetch(url, {
+                method: 'get',
+                headers: {
+                    'Content-Type': contentType,
+                    'X-CSRFToken': Cookies.get('csrftoken')
+                }
+            }
+                .then(response => response.json())
+                .then(result => { console.log(result); return result; });
+
+            
+        }
+
+
+        let data = {};
+        const myPromise = new Promise((resolve, reject) => {
+
+            console.log('resolving the promise ...');
+
+            data = doAPICall(relativeURL, token, "application/json", "application/json");
+            resolve(data);
+
+            reject(new Error('In 10% of the cases, It fail Miserably.'));
+        });
+
+
+        console.log(data);
+
+        myPromise.then((resolvedValue) => {
+            /// write your code here
+
+            console.log('Resolved', resolvedValue);
+        }, (error) => {
+            console.log(error);
+        });
+        domain = "accounts-phrqltest";
+        region = "us-west-2";
+        state = "";
+        appClientId = "118a1qur3i4k7jpf4drf2nd7v7";
+                //this.redirectURI = "https://priceless-mclean-588366.netlify.app/";
 
 
 
