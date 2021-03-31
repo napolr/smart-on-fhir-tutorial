@@ -1,4 +1,4 @@
-[[redirec	ts]]
+[[redirects]]
   from = "/*"
   to = ":splat"
   status = 200
