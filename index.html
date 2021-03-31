@@ -20,16 +20,16 @@
         async function loginUserWitOauth() {
             //	let code=this.urlParams.get('code');
             var redirectURI = "https://smartfhir.phrqltest.com";
-            var phrql_login_url = "https://accounts-phrqltest.auth.us-west-2.amazoncognito.com/oauth2/authorize?response_type=code&client_id=118a1qur3i4k7jpf4drf2nd7v7&redirect_uri=" + redirectURI + "&scope=openid";
+            var url = "https://accounts-phrqltest.auth.us-west-2.amazoncognito.com/oauth2/authorize?response_type=code&client_id=118a1qur3i4k7jpf4drf2nd7v7&redirect_uri=" + redirectURI + "&scope=openid";
             //let state = uuidv4();
             //console.log("state=" + state)
             //.log("this.redirectURI=" + this.redirectURI)
             code = null;
 
             if (code == null) { 
-                href = phrql_login_url;
-                console.log("location=" + href);
-                await fetch(href, {
+               // href = phrql_login_url;
+                console.log("location=" + url);
+                await fetch(url, {
                     method: 'post',
                     headers: {
                         'Content-Type': 'application/json'
@@ -38,9 +38,9 @@
             } else {
                 console.log("authorization code", code)
                 var redirectURI = "https://smartfhir.phrqltest.com";
-                var href = "https://accounts-phrqltest.auth.us-west-2.amazoncognito.com/oauth2/authorize?response_type==authorization_code&code=" + code + "&client_id=" + this.appClientId + "&redirect_uri=" + redirectURI + "&scope=openid";
-
-                await fetch(href, {
+                var url = "https://accounts-phrqltest.auth.us-west-2.amazoncognito.com/oauth2/authorize?response_type==authorization_code&code=" + code + "&client_id=" + this.appClientId + "&redirect_uri=" + redirectURI + "&scope=openid";
+                await fetch(`/cors-proxy/${url}`, {
+               // await fetch(href, {
                     method: 'post',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
@@ -68,7 +68,7 @@
         this.region = "us-west-2";
         this.state = "";
         this.appClientId = "118a1qur3i4k7jpf4drf2nd7v7";
-        this.redirectURI = "https://priceless-mclean-588366.netlify.app/";
+        //this.redirectURI = "https://priceless-mclean-588366.netlify.app/";
 
 
 

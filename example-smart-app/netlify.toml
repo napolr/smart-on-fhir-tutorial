@@ -1,9 +1,10 @@
 # The following redirect is intended for use with most SPAs that handle
 # routing internally.
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
+  from = "/cors-proxy/*"
+  to = ":splat"
   status = 200
+  force = true
 
 [[headers]]
   # Define which paths this specific [[headers]] block will cover.
