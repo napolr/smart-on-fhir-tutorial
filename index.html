@@ -46,7 +46,7 @@
                 console.log("authorization code", code)
                 var redirectURI = "https://smartfhir.phrqltest.com";
                 var url = "https://accounts-phrqltest.auth.us-west-2.amazoncognito.com/oauth2/authorize?response_type=authorization_code&code=" + code + "&client_id=" + appClientId + "&redirect_uri=" + redirectURI + "&scope=openid";
-                debugger
+          
                 await fetch(`/cors-proxy/${url}`, {
                     // await fetch(href, {
                     method: 'post',
