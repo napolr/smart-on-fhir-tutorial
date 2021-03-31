@@ -1,7 +1,7 @@
 # The following redirect is intended for use with most SPAs that handle
 # routing internally.
 [[redirects]]
-  from = "/cors-proxy/*"
+  from = "/*"
   to = ":splat"
   status = 200
   force = true
