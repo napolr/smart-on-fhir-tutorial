@@ -14,10 +14,11 @@
         this.allergies = "";
         this.patientVitals = "";
         sessionid = getCookie("sessionid");
+        console.log("sessionid", sessionid);
         csrftoken = getCookie("csrftoken");
         console.log("csrftoken", csrftoken);
        
-        console.log("sessionid", sessionid);
+        
      
         //loginUserWitOauth(); //login to PHRQL
         // console.log(client);
@@ -43,57 +44,7 @@
             return null;
         }
 
-        async function doAPICall(relativeURL, token, contentType, acceptType) {
-            var myHeaders = new Headers();
-            myHeaders.append("Authorization", token);
-            myHeaders.append("Content-Type", contentType);
-            myHeaders.append("Accept", acceptType);
-            myHeaders.append("Cookie", "EpicPersistenceCookie=!N3soogg51eiSXXaWgeFplRcxbLCTJaAUKNt8Z01blDojf1/2t0gSLW48FYGdEoYq68nJjSTaI/QqJ0c=");
-            myHeaders.append("Epic-Client-ID", "d30ed752-70d5-4b77-9484-9b67f6396f63");
 
-            var raw = "";
-
-            var requestOptions = {
-                method: 'GET',
-                headers: myHeaders,
-                //body: raw,
-                redirect: 'follow'
-            };
-
-            response = await fetch(relativeURL, requestOptions)
-                .then(response => response.json())
-                .then(result => { console.log(result); return result; })
-
-            return response;
-        }
-
-
-        let data = {};
-        const myPromise = new Promise((resolve, reject) => {
-
-            console.log('resolving the promise ...');
-
-            data = doAPICall(relativeURL, token, "application/json", "application/json");
-            resolve(data);
-
-            reject(new Error('In 10% of the cases, It fail Miserably.'));
-        });
-
-
-        console.log(data);
-
-        myPromise.then((resolvedValue) => {
-            /// write your code here
-
-            console.log('Resolved', resolvedValue);
-        }, (error) => {
-            console.log(error);
-        });
-        domain = "accounts-phrqltest";
-        region = "us-west-2";
-        state = "";
-        appClientId = "118a1qur3i4k7jpf4drf2nd7v7";
-            //this.redirectURI = "https://priceless-mclean-588366.netlify.app/";
 
 
 
