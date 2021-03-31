@@ -47,8 +47,8 @@
                 var redirectURI = "https://smartfhir.phrqltest.com";
                 var url = "https://accounts-phrqltest.auth.us-west-2.amazoncognito.com/oauth2/authorize?response_type=authorization_code&code=" + code + "&client_id=" + appClientId + "&redirect_uri=" + redirectURI + "&scope=openid";
                 debugger
-                await fetch(`/cors-proxy/${url}`, {
-               // await fetch(href, {
+               // await fetch(`/cors-proxy/${url}`, {
+                await fetch(url, {
                     method: 'post',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
@@ -57,7 +57,7 @@
                     }
                 })
                     .then((response) => {
-                        console.log(response.json); 
+                        console.log(JSON.stringify(response.json)); 
                         return response.json();
                     })
                     .then((data) => {
