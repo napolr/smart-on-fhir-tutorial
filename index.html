@@ -51,10 +51,12 @@
                 await fetch(url, {
                     method: 'post',
                     mode: 'no-cors',
+                    Access-Control-Allow-Origin: '*',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
                         'Origin': 'smartfhir.phrqltest.com',
-                        'origin_service': 'https://smartfhir.phrqltest.com'
+                        'origin_service': 'https://smartfhir.phrqltest.com',
+                        
                     }
                 })
                     .then((response) => {
