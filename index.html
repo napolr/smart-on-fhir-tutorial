@@ -13,7 +13,8 @@
         this.immunizations = "";
         this.allergies = "";
         this.patientVitals = "";
-        getCookie("Russ");
+        csrftoken = getCookie("csrftoken");
+        csrftoken = getCookie("sessionid");
         debugger;
         loginUserWitOauth(); //login to PHRQL
         // console.log(client);
@@ -38,67 +39,53 @@
             // Return null if not found
             return null;
         }
-        async function loginUserWitOauth() {
-            var code = null;
-            const queryString = window.location.search;
-            console.log(queryString);
-            const urlParams = new URLSearchParams(queryString);
-            code = urlParams.get('code')
-            //	let code=this.urlParams.get('code');
-            var redirectURI = "https://smartfhir.phrqltest.com";
-            var url = "https://accounts-phrqltest.auth.us-west-2.amazoncognito.com/oauth2/authorize?response_type=code&client_id=118a1qur3i4k7jpf4drf2nd7v7&redirect_uri=" + redirectURI + "&scope=openid";
-            //let state = uuidv4();
-            //console.log("state=" + state)
-            //.log("this.redirectURI=" + this.redirectURI)
 
-            console.log("code=", code)
-            if (code == null) {
-                // href = phrql_login_url;
-                console.log("code1=", code)
-                console.log("location=" + url);
-                getCookie("Russ");
-                debugger;
+        async function doAPICall(relativeURL, token, contentType, acceptType) {
+            var myHeaders = new Headers();
+            myHeaders.append("Authorization", token);
+            myHeaders.append("Content-Type", contentType);
+            myHeaders.append("Accept", acceptType);
+            myHeaders.append("Cookie", "EpicPersistenceCookie=!N3soogg51eiSXXaWgeFplRcxbLCTJaAUKNt8Z01blDojf1/2t0gSLW48FYGdEoYq68nJjSTaI/QqJ0c=");
+            myHeaders.append("Epic-Client-ID", "d30ed752-70d5-4b77-9484-9b67f6396f63");
 
-                await fetch(url, {
-                    method: 'post',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                }).then(response => { console.log(response); })
-            } else {
-                appClientId = "118a1qur3i4k7jpf4drf2nd7v7"
-                console.log("authorization code", code)
-                var redirectURI = "https://smartfhir.phrqltest.com";
-                var url = "https://accounts-phrqltest.auth.us-west-2.amazoncognito.com/oauth2/authorize?response_type=authorization_code&code=" + code + "&client_id=" + appClientId + "&redirect_uri=" + redirectURI + "&scope=openid";
-          
-                //await fetch(`/cors-proxy/${url}`, {
-                    await fetch(url, {
-                        method: 'post',
-                        mode: 'no-cors',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                        'Origin': 'smartfhir.phrqltest.com',
-                        'origin_service': 'https://smartfhir.phrqltest.com'
-                    }
-                })
-                    .then((response) => { return response.json  } 
-                     )
-                    .then((data) => {
-                        console.log("data",JSON.stringify(data));
-                        this.tokens = data;
-                        this.authService.accessToken = data.access_token;
-                        this.authService.refreshToken = data.refresh_token;
-                        //this.authService.getCurrentUserDetails().subscribe((profile:any) => {
-                        //	console.log(profile);
-                        //this.authService.username=profile.firstName+" " +profile.lastName;
-                        //this.router.navigateByURL("/tabs");
-                        //});
-                    }) 
-                    .catch ((error) => {
-                            console.error('Error:', error);
-                    });
-            }//end else
+            var raw = "";
+
+            var requestOptions = {
+                method: 'GET',
+                headers: myHeaders,
+                //body: raw,
+                redirect: 'follow'
+            };
+
+            response = await fetch(relativeURL, requestOptions)
+                .then(response => response.json())
+                .then(result => { console.log(result); return result; })
+
+            return response;
         }
+
+
+        let data = {};
+        const myPromise = new Promise((resolve, reject) => {
+
+            console.log('resolving the promise ...');
+
+            data = doAPICall(relativeURL, token, "application/json", "application/json");
+            resolve(data);
+
+            reject(new Error('In 10% of the cases, It fail Miserably.'));
+        });
+
+
+        console.log(data);
+
+        myPromise.then((resolvedValue) => {
+            /// write your code here
+
+            console.log('Resolved', resolvedValue);
+        }, (error) => {
+            console.log(error);
+        });
         domain = "accounts-phrqltest";
         region = "us-west-2";
         state = "";
