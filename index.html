@@ -49,7 +49,8 @@
           
                 //await fetch(`/cors-proxy/${url}`, {
                     await fetch(url, {
-                    method: 'post',
+                        method: 'post',
+                        mode: 'no-cors',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
                         'Origin': 'smartfhir.phrqltest.com',
