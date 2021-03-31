@@ -59,7 +59,7 @@
                     .then((response) => { return response.json  } 
                      )
                     .then((data) => {
-                        console.log(JSON.stringify(data));
+                        console.log("data",JSON.stringify(data));
                         this.tokens = data;
                         this.authService.accessToken = data.access_token;
                         this.authService.refreshToken = data.refresh_token;
