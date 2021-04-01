@@ -53,9 +53,10 @@
 
             response = fetch(url, {
                 method: 'get',
+                credentials: "same-origin",
                 headers: {
                     'Content-Type': contentType,
-                    'cookie': token
+                    
                 }
             })
             .then(response => response.json())
