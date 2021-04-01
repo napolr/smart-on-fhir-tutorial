@@ -57,9 +57,9 @@
                     'Content-Type': contentType,
                     'cookie': token
                 }
-            }
-                .then(response => response.json())
-                .then(result => { console.log(result); return result; });
+            })
+            .then(response => response.json())
+            .then(result => { console.log(result); return result; });
 
             
         }
