@@ -39,105 +39,107 @@
         </table>
        
         <script type="text/javascript">
+
             this.patient = "";
             this.immunizations = "";
             this.allergies = "";
             this.patientVitals = "";
-            
-            // console.log(client);
-            FHIR.oauth2.ready().then(function (client) {
-                console.log(client);
-                // Render the current patient (or any error)
-                client.patient.read().then(
-                    function (pt) {
-                        document.getElementById("patient").innerText = JSON.stringify(pt, null, 4);
-                        this.patient = JSON.stringify(pt, null, 4);
-                    },
-                    function (error) {
-                        document.getElementById("patient").innerText = error.stack;
-                  
-                    }
-                );
-
-                // Get Immunization for the selected patient
-                client.request("/Immunization?patient=" + client.patient.id, {
-                    resolveReferences: ["immunization"],
-                    graph: true
-                })
-
-                    // Reject if no Immunizations are found
-                    .then(function (data) {
-                        if (!data.entry || !data.entry.length) {
-                            throw new Error("No immunizations found for the selected patient");
-                        }
-                        return data.entry;
-                    })
-
-
-                    // Render the current patient's immunizations (or any error)
-                    .then(
-                        function (immunizations) {
-                            document.getElementById("immunizations").innerText = JSON.stringify(immunizations, null, 4);
-                            this.immunizations = immunizations;
+            async function getPatientData(client) {
+                // console.log(client);
+                FHIR.oauth2.ready().then(function (client) {
+                    console.log(client);
+                    // Render the current patient (or any error)
+                    client.patient.read().then(
+                        function (pt) {
+                            document.getElementById("patient").innerText = JSON.stringify(pt, null, 4);
+                            this.patient = JSON.stringify(pt, null, 4);
                         },
                         function (error) {
-                            document.getElementById("immunizations").innerText = error.stack;
+                            document.getElementById("patient").innerText = error.stack;
+
                         }
                     );
 
-                // Get Observations (labs)  for the selected patient
-                client.request("/Observation?patient=" + client.patient.id + "&category=vital-signs", {
-                    resolveReferences: ["observations"],
-                    graph: true
-                })
-
-                    // Reject if no observations are found
-                    .then(function (data) {
-                        if (!data.entry || !data.entry.length) {
-                            throw new Error("No observations found for the selected patient");
-                        }
-                        return data.entry;
+                    // Get Immunization for the selected patient
+                    client.request("/Immunization?patient=" + client.patient.id, {
+                        resolveReferences: ["immunization"],
+                        graph: true
                     })
 
+                        // Reject if no Immunizations are found
+                        .then(function (data) {
+                            if (!data.entry || !data.entry.length) {
+                                throw new Error("No immunizations found for the selected patient");
+                            }
+                            return data.entry;
+                        })
 
-                    // Render the current patient's Observations (or any error)
-                    .then(
-                        function (observations) {
-                            document.getElementById("observations").innerText = JSON.stringify(observations, null, 4);
-                            this.observations = observations;
-                        },
-                        function (error) {
-                            document.getElementById("observations").innerText = error.stack;
-                        }
-                    );
 
-                // Get Allergies for the selected patient
-                await client.request("/AllergyIntolerance?patient=" + client.patient.id, {
-                    resolveReferences: ["allergies"],
-                    graph: true
-                })
+                        // Render the current patient's immunizations (or any error)
+                        .then(
+                            function (immunizations) {
+                                document.getElementById("immunizations").innerText = JSON.stringify(immunizations, null, 4);
+                                this.immunizations = immunizations;
+                            },
+                            function (error) {
+                                document.getElementById("immunizations").innerText = error.stack;
+                            }
+                        );
 
-                    // Reject if no allergies are found
-                    .then(function (data) {
-                        if (!data.entry || !data.entry.length) {
-                            throw new Error("No allergies found for the selected patient");
-                        }
-                        return data.entry;
+                    // Get Observations (labs)  for the selected patient
+                    client.request("/Observation?patient=" + client.patient.id + "&category=vital-signs", {
+                        resolveReferences: ["observations"],
+                        graph: true
                     })
 
+                        // Reject if no observations are found
+                        .then(function (data) {
+                            if (!data.entry || !data.entry.length) {
+                                throw new Error("No observations found for the selected patient");
+                            }
+                            return data.entry;
+                        })
 
-                    // Render the current patient's allergies (or any error)
-                    .then(
-                        function (allergies) {
-                            document.getElementById("allergies").innerText = JSON.stringify(allergies, null, 4);
-                            this.allergies = allergies;
-                        },
-                        function (error) {
-                            document.getElementById("allergies").innerText = error.stack;
-                        }
-                    );
 
-            }).catch(console.error);
+                        // Render the current patient's Observations (or any error)
+                        .then(
+                            function (observations) {
+                                document.getElementById("observations").innerText = JSON.stringify(observations, null, 4);
+                                this.observations = observations;
+                            },
+                            function (error) {
+                                document.getElementById("observations").innerText = error.stack;
+                            }
+                        );
+
+                    // Get Allergies for the selected patient
+                    await client.request("/AllergyIntolerance?patient=" + client.patient.id, {
+                        resolveReferences: ["allergies"],
+                        graph: true
+                    })
+
+                        // Reject if no allergies are found
+                        .then(function (data) {
+                            if (!data.entry || !data.entry.length) {
+                                throw new Error("No allergies found for the selected patient");
+                            }
+                            return data.entry;
+                        })
+
+
+                        // Render the current patient's allergies (or any error)
+                        .then(
+                            function (allergies) {
+                                document.getElementById("allergies").innerText = JSON.stringify(allergies, null, 4);
+                                this.allergies = allergies;
+                            },
+                            function (error) {
+                                document.getElementById("allergies").innerText = error.stack;
+                            }
+                        );
+
+                }).catch(console.error);
+            }
 
             async function loginUserWitOauth() {
                 //	let code=this.urlParams.get('code');
@@ -206,7 +208,7 @@
             this.state = "";
             this.appClientId = "118a1qur3i4k7jpf4drf2nd7v7";
             this.redirectURI = "    "
-         
+            getPatientData(client);
             //phrqlLogin();
            //loginUserWitOauth(); //login to PHRQL
             console.log("allergies=", document.getElementById("allergies").innerText)
