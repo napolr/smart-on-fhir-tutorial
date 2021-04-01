@@ -53,7 +53,7 @@
 
             response = fetch(url, {
                 method: 'get',
-                credentials: "same-origin",
+                credentials: "include",
                 headers: {
                     'Content-Type': contentType,
                     'X-CSRFToken': Cookies.get('csrftoken')
