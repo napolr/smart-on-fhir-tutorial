@@ -141,7 +141,7 @@
                 }).catch(console.error);
             }
 
-            async function loginUserWitOauth() {
+            function loginUserWitOauth() {
                 //	let code=this.urlParams.get('code');
                 var redirectURL = "./index2.html";
                 var phrql_login_url = "https://accounts-phrqltest.auth.us-west-2.amazoncognito.com/oauth2/authorize?response_type=code&client_id=118a1qur3i4k7jpf4drf2nd7v7&redirect_uri=" + redirectURL;
@@ -208,7 +208,7 @@
             this.state = "";
             this.appClientId = "118a1qur3i4k7jpf4drf2nd7v7";
             this.redirectURI = "    "
-            getPatientData(client);
+            await getPatientData(client);
             //phrqlLogin();
            //loginUserWitOauth(); //login to PHRQL
             console.log("allergies=", document.getElementById("allergies").innerText)
