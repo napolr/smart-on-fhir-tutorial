@@ -113,7 +113,7 @@
                         );
 
                     // Get Allergies for the selected patient
-                    await client.request("/AllergyIntolerance?patient=" + client.patient.id, {
+                     client.request("/AllergyIntolerance?patient=" + client.patient.id, {
                         resolveReferences: ["allergies"],
                         graph: true
                     })
