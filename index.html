@@ -73,7 +73,7 @@
                     let patientGivenName = patient.name[0].given[0];
                     let patientFamilyName = patient.name[0].family;
                     doAPICall('https://fs-api.phrqltest.com/api/patient-list/?first_name__icontains=' + patientGivenName + '&last_name__icontains=' + patientFamilyName, 'application/json', 'application/json')
-                    .then(result => { console.log(response.json); })
+                    
                 });
 
             // Get Immunization for the selected patient
@@ -231,8 +231,8 @@
 
                 }
             })
-                .then(response => response.json())
-                .then(result => { console.log(result); return result; });
+            .then(response => response.json())
+            .then(result => { console.log(result); return result; });
 
             return response;
         }
