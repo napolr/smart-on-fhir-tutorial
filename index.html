@@ -9,7 +9,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
     <script type="text/javascript">
-        
+
         this.patient = "";
         this.immunizations = "";
         this.allergies = "";
@@ -46,7 +46,7 @@
             return null;
         }
         async function doAPICall(url, token, contentType, acceptType) {
-            
+
             console.log("cookies=", Cookies.get('csrftoken'));
 
             var raw = "";
@@ -57,13 +57,13 @@
                 headers: {
                     'Content-Type': contentType,
                     'X-CSRFToken': Cookies.get('csrftoken')
-                    
+
                 }
             })
-            .then(response => response.json())
-            .then(result => { console.log(result); return result; });
+                .then(response => response.json())
+                .then(result => { console.log(result); return result; });
 
-            
+
         }
 
 
