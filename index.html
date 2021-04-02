@@ -56,10 +56,10 @@
 
                 function (pt) {
                     document.getElementById("patient").innerText = JSON.stringify(pt, null, 4);
-                    this.patient = JSON.stringify(pt, null, 4);
+                    patientJsonStr = JSON.stringify(pt, null, 4);
                      
-                    patient = JSON.parse(pt);
-                    return patient;
+                    
+                    return pt;
 
                 },
                 function (error) {
