@@ -44,7 +44,7 @@
         this.immunizations = "";
         this.allergies = "";
         this.patientVitals = "";
-        phrqlLogin();
+        
         // console.log(client);
         FHIR.oauth2.ready().then(function (client) {
             console.log(client);
@@ -166,12 +166,14 @@
 
            
         //loginUserWitOauth(); //login to PHRQL
-        sessionid = getCookie("sessionid");
+        /*sessionid = getCookie("sessionid");
         console.log("sessionid", sessionid);
         csrfToken = getCookie("csrftoken");
         console.log("csrftoken", csrfToken);
         csrfToken = "csrfToken=" + csrfToken;
-        doAPICall('https://fs-api.phrqltest.com/api/patient-info/10?withCredentials=true', csrfToken, 'application/json', 'application/json')
+        */
+        phrqlLogin();
+        //doAPICall('https://fs-api.phrqltest.com/api/patient-info/10?withCredentials=true', csrfToken, 'application/json', 'application/json')
 
 
         //loginUserWitOauth(); //login to PHRQL
