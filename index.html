@@ -44,7 +44,7 @@
         this.immunizations = "";
         this.allergies = "";
         this.patientVitals = "";
-        phrqlLogin();
+        //phrqlLogin();
         // console.log(client);
         FHIR.oauth2.ready().then(function (client) {
             console.log(client);
@@ -140,52 +140,7 @@
 
         }).catch(console.error);
 
-        async function loginUserWitOauth() {
-            //	let code=this.urlParams.get('code');
-            var redirectURL = "./index2.html";
-            var phrql_login_url = "https://accounts-phrqltest.auth.us-west-2.amazoncognito.com/oauth2/authorize?response_type=code&client_id=118a1qur3i4k7jpf4drf2nd7v7&redirect_uri=" + redirectURL;
-            //let state = uuidv4();
-            //console.log("state=" + state)
-            //.log("this.redirectURI=" + this.redirectURI)
-            code = null;
-
-            if (code == null) {
-                debugger;
-                href = phrql_login_url;
-                console.log("location=" + href);
-                await fetch(href, {
-                    method: 'post',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                }).then(response => { console.log(response.json); })
-            } else {
-                console.log("authorization code", code)
-                var href = "https://accounts-phrqltest.auth.us-west-2.amazoncognito.com/oauth2/authorize?response_type==authorization_code&code=" + code + "&client_id=" + this.appClientId + "&redirect_uri=" + this.redirectURI;
-
-                await fetch(href, {
-                    method: 'post',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    }
-                })
-                    .then((response) => {
-                        console.log(response.json);
-                        return response.json();
-                    })
-                    .then((data) => {
-                        this.tokens = data;
-                        this.authService.accessToken = data.access_token;
-                        this.authService.refreshToken = data.refresh_token;
-                        //this.authService.getCurrentUserDetails().subscribe((profile:any) => {
-                        //	console.log(profile);
-                        //this.authService.username=profile.firstName+" " +profile.lastName;
-                        //this.router.navigateByURL("/tabs");
-                        //});
-                    });
-            }//end else
-        }
-
+ 
         function phrqlLogin() {
             var myHeaders = new Headers();
             myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
