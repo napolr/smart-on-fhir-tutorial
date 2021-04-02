@@ -225,8 +225,10 @@
             // Return null if not found
             return null;
         }
+        
         async function getPatientList(url, contentType, acceptType) {
-            
+             
+            document.getElementById("patient").innerText = JSON.stringify(pt, null, 4);
             //console.log("cookies=", Cookies.get('csrftoken'));
             console.log("relative_url=", url);
             var raw = "";
@@ -240,11 +242,10 @@
 
                 }
             })
-                .then(response => {response.json())
-                .then(result => {
-                    console.log(result); return result;
-                    document.getElementById("patientList").innerText = JSON.stringify(pt, null, 4);
-                });
+                .then(response => response.json())
+                .then(patientList => {
+                    console.log(patientList); 
+                    document.getElementById("patientList").innerText = JSON.stringify(patientList, null, 4);});
 
             return response;
         }
