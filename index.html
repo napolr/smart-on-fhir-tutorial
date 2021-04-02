@@ -15,14 +15,7 @@
             border: 1px solid #CCC;
         }
     </style>
-    <script>FHIR.oauth2.ready().then(function (client) {
-            let phrqlCookie = Cookies.get('csrftoken');
-            console.log("phrqlCookie=", phrqlCookie);
-            if (phrqlCookie == null) {
-                console.log("Open Popup Attempt");
-                let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no, width=600,height=300,left=100,top=100`;
-                window.open("https://accounts.phrqltest.com/userpool/login/?origin=https://smartfhir.phrqltest.com","_self");
-           }</script>
+
 </head>
 <body>
     <table>
