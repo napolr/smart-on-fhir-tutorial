@@ -45,7 +45,8 @@
         this.allergies = "";
         this.patientVitals = "";
         
-        // console.log(client);
+        console.log(client);
+        debugger;
         FHIR.oauth2.ready().then(function (client) {
             console.log(client);
             // Render the current patient (or any error)
