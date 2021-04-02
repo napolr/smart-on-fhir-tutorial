@@ -151,12 +151,13 @@
                 headers: myHeaders,
                 redirect: 'follow'
             };
-
+            debugger;
             fetch("https://accounts.phrqltest.com/userpool/login/?origin=https://smartfhir.phrqltest.com", requestOptions)
                 .then(response => response.text())
                 .then(result => console.log(result))
                 .catch(error => console.log('error', error));
         }
+        debugger;
         this.domain = "accounts-phrqltest";
         this.region = "us-west-2";
         this.state = "";
