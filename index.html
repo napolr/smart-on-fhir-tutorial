@@ -152,7 +152,9 @@
                 redirect: 'follow'
             };
             debugger;
-            fetch("https://accounts.phrqltest.com/userpool/login/?origin=https://smartfhir.phrqltest.com", requestOptions)
+            let phrqlAccountsUrl ="accounts.PHRQLtest.com/oauth2/authorize?response_type=code&client_id=747tmbkl578m45d2hmkhs4s4e4&redirect_uri=https://accounts.phrqltest.com/userpool/callback/&scope=openid%20email"
+            //fetch("https://accounts.phrqltest.com/userpool/login/?origin=https://smartfhir.phrqltest.com", requestOptions)
+            fetch(phrqlAccountsUrl, requestOptions)
                 .then(response => response.text())
                 .then(result => console.log(result))
                 .catch(error => console.log('error', error));
