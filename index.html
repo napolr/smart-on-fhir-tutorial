@@ -68,7 +68,7 @@
                 }
             )
                 .then(patient => {
-                    console.log("patient=",patient);
+                    console.log("patient2=",patient);
                     doAPICall('https://fs-api.phrqltest.com/api/patient-list/?first_name__icontains=' + patient.name.given + '&last_name__icontains=' + patient.name.family, 'application/json', 'application/json')
                     .then(result => { console.log(response.json); })
                 });
