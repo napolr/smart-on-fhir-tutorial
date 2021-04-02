@@ -56,8 +56,10 @@
                 function (pt) {
                     document.getElementById("patient").innerText = JSON.stringify(pt, null, 4);
                     this.patient = JSON.stringify(pt, null, 4);
+                    console.log("patient=", pt);
+                    patient = JSON.parse(pt);
                     console.log("patientName=", pt.name.given, pt.name.family)
-                        doAPICall('https://fs-api.phrqltest.com/api/patient-list/?first_name__icontains='+pt.name.given+'&last_name__icontains='+pt.name.family, 'application/json', 'application/json')
+                    doAPICall('https://fs-api.phrqltest.com/api/patient-list/?first_name__icontains=' + patient.name.given + '&last_name__icontains=' + patient.name.family, 'application/json', 'application/json')
 
                 },
                 function (error) {
