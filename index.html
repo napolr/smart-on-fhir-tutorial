@@ -60,6 +60,7 @@
             let phrqlCookie = Cookies.get('csrftoken');
             console.log("phrqlCookie=",phrqlCookie); 
             if (typeof phrqlCookie !== "undefined") {
+                console.log("Open Popup Attempt"); 
                 let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no, width=600,height=300,left=100,top=100`;
                window.open("https://accounts.phrqltest.com/userpool/login/?origin=https://smartfhir.phrqltest.com");
             }
