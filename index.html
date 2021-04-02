@@ -81,7 +81,7 @@
                     console.log("patient2=", patient);
                     let patientGivenName = patient.name[0].given[0];
                     let patientFamilyName = patient.name[0].family;
-                    getPatientList('https://fs-api.phrqltest.com/api/patient-list/?first_name__icontains=' + patientGivenName + '&last_name__icontains=' + patientFamilyName, 'application/json', 'application/json')
+                    getPatientList('https://accounts.phrqltest.com/api/patient/?first_name__icontains=' + patientGivenName + '&last_name__icontains=' + patientFamilyName, 'application/json', 'application/json')
                     
                 });
 
