@@ -38,6 +38,15 @@
                 <div id="allergies">Loading...</div>
             </td>
         </tr>
+
+    </table>
+    <table>
+        <tr>
+            <td>
+                <h4>PHRQL Patient List</h4>
+                <div id="patientList">Loading...</div>
+            </td>
+        </tr>
     </table>
 
     <script type="text/javascript">
@@ -72,7 +81,7 @@
                     console.log("patient2=", patient);
                     let patientGivenName = patient.name[0].given[0];
                     let patientFamilyName = patient.name[0].family;
-                    doAPICall('https://fs-api.phrqltest.com/api/patient-list/?first_name__icontains=' + patientGivenName + '&last_name__icontains=' + patientFamilyName, 'application/json', 'application/json')
+                    getPatientList('https://fs-api.phrqltest.com/api/patient-list/?first_name__icontains=' + patientGivenName + '&last_name__icontains=' + patientFamilyName, 'application/json', 'application/json')
                     
                 });
 
@@ -216,8 +225,31 @@
             // Return null if not found
             return null;
         }
-        async function doAPICall(url, contentType, acceptType) {
+        async function getPatientList(url, contentType, acceptType) {
+            
+            //console.log("cookies=", Cookies.get('csrftoken'));
+            console.log("relative_url=", url);
+            var raw = "";
 
+            response = fetch(url, {
+                method: 'get',
+                credentials: "include",
+                headers: {
+                    'Content-Type': contentType,
+                    'X-CSRFToken': Cookies.get('csrftoken')
+
+                }
+            })
+                .then(response => {response.json())
+                .then(result => {
+                    console.log(result); return result;
+                    document.getElementById("patientList").innerText = JSON.stringify(pt, null, 4);
+                });
+
+            return response;
+        }
+        async function doAPICall(url, contentType, acceptType) {
+            document.getElementById("patient").innerText = JSON.stringify(pt, null, 4);
             //console.log("cookies=", Cookies.get('csrftoken'));
             console.log("relative_url=", url);
             var raw = "";
