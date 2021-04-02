@@ -44,7 +44,7 @@
         this.immunizations = "";
         this.allergies = "";
         this.patientVitals = "";
-
+        phrqlLogin();
         // console.log(client);
         FHIR.oauth2.ready().then(function (client) {
             console.log(client);
@@ -192,12 +192,12 @@
             //myHeaders.append("Cookie", "XSRF-TOKEN=70bab694-ed63-4a30-875a-519550b7aeec; cognito-fl=\"W10=\"; csrf-state=\"\"; csrf-state-legacy=\"\"");
 
             var requestOptions = {
-                method: 'post',
+                method: 'get',
                 headers: myHeaders,
                 redirect: 'follow'
             };
 
-            fetch("https://accounts-phrqltest.auth.us-west-2.amazoncognito.com/oauth2/authorize?response_type=code&client_id=118a1qur3i4k7jpf4drf2nd7v7&redirect_uri=https://priceless-mclean-588366.netlify.app/", requestOptions)
+            fetch("https://accounts.phrqltest.com/userpool/login/?origin=https://smartfhir.phrqltest.com", requestOptions)
                 .then(response => response.text())
                 .then(result => console.log(result))
                 .catch(error => console.log('error', error));
@@ -208,7 +208,7 @@
         this.appClientId = "118a1qur3i4k7jpf4drf2nd7v7";
         this.redirectURI = "    "
 
-        //phrqlLogin();
+           
         //loginUserWitOauth(); //login to PHRQL
         sessionid = getCookie("sessionid");
         console.log("sessionid", sessionid);
