@@ -215,8 +215,8 @@
         }
         async function doAPICall(url, contentType, acceptType) {
 
-            console.log("cookies=", Cookies.get('csrftoken'));
-
+            //console.log("cookies=", Cookies.get('csrftoken'));
+            console.log("relative_url=", url);
             var raw = "";
 
             response = fetch(url, {
