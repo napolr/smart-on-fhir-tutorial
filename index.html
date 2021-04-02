@@ -45,10 +45,10 @@
         this.allergies = "";
         this.patientVitals = "";
         
-        console.log(client);
-        debugger;
+       
         FHIR.oauth2.ready().then(function (client) {
             console.log(client);
+            phrqlLogin();
             // Render the current patient (or any error)
             client.patient.read().then(
                 function (pt) {
@@ -176,7 +176,7 @@
         console.log("csrftoken", csrfToken);
         csrfToken = "csrfToken=" + csrfToken;
         */
-        phrqlLogin();
+        //phrqlLogin();
         //doAPICall('https://fs-api.phrqltest.com/api/patient-info/10?withCredentials=true', csrfToken, 'application/json', 'application/json')
 
 
