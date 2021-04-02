@@ -3,4 +3,4 @@
   to = ":splat"
   status = 200
   force = true
-  headers = {Access-Control-Allow-Origin = "*",  Header always set X-Frame-Options "SAMEORIGIN"}
+  headers = {Access-Control-Allow-Origin = "*"}

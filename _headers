@@ -1,1 +1,2 @@
-Referrer-Policy: no-referrer	
+Referrer-Policy: no-referrer
+X-Frame-Options: SAMEORIGIN
