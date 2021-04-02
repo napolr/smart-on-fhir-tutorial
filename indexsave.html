@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>PHRQL SMART App Client</title>
+
+</head>
+<body>
+
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+    <script type="text/javascript">
+
+        this.patient = "";
+        this.immunizations = "";
+        this.allergies = "";
+        this.patientVitals = "";
+        sessionid = getCookie("sessionid");
+        console.log("sessionid", sessionid);
+        csrfToken = getCookie("csrftoken");
+        console.log("csrftoken", csrfToken);
+        csrfToken = "csrfToken=" + csrfToken;
+        doAPICall('https://fs-api.phrqltest.com/api/patient-info/10?withCredentials=true', csrfToken, 'application/json', 'application/json')
+
+
+        //loginUserWitOauth(); //login to PHRQL
+        // console.log(client);
+
+        function getCookie(name) {
+            // Split cookie string and get all individual name=value pairs in an array
+            var cookieArr = document.cookie.split(";");
+            console.log("cookieList=", document.cookie);
+            // Loop through the array elements
+            for (var i = 0; i < cookieArr.length; i++) {
+                var cookiePair = cookieArr[i].split("=");
+
+                /* Removing whitespace at the beginning of the cookie name
+                and compare it with the given string */
+                if (name == cookiePair[0].trim()) {
+                    // Decode the cookie value and return
+                    console.log(decodeURIComponent(cookiePair[1]));
+                    return decodeURIComponent(cookiePair[1]);
+                }
+            }
+
+            // Return null if not found
+            return null;
+        }
+        async function doAPICall(url, token, contentType, acceptType) {
+
+            console.log("cookies=", Cookies.get('csrftoken'));
+
+            var raw = "";
+
+            response = fetch(url, {
+                method: 'get',
+                credentials: "include",
+                headers: {
+                    'Content-Type': contentType,
+                    'X-CSRFToken': Cookies.get('csrftoken')
+
+                }
+            })
+                .then(response => response.json())
+                .then(result => { console.log(result); return result; });
+
+
+        }
+
+
+
+    </script>
+</body>
+</html>
