@@ -316,26 +316,46 @@
         }
         function updatePHRQLPatient() {
             console.log("phqrlPatientID=", document.getElementById("phqrlPatientID").innerHTML);
-            patientData = document.getElementById("patientHidden").innerHTML
+            ehrPatientData = JSON.parse(document.getElementById("patientHidden").innerHTML);
             phrqlPatientID = document.getElementById("phqrlPatientID").innerHTML;
-            //document.getElementById("updatePatient").innerHTML = "YOU CLICKED ME!";
-            updatePatientAddress(patientData, phrqlPatientID )
+
+            url = this.apiServer + "/patient/" + phrqlPatientID;
+            response = fetch(url, {
+                method: 'get',
+                //body: apiBody,
+                credentials: "include",
+                headers: {
+                    'Content-Type': contentType,
+                    'X-CSRFToken': Cookies.get('csrftoken')
+
+                }
+            })
+                .then(response => {
+
+                    console.log(response);
+                    updatePatientAddress(response, phrqlPatientID, ehrPatientData)
+                }
+                ) 
+            //Let's get the patient detail info.
+
+            
         }
-        function updatePatientAddress(patient, phrqlPatientID) {
+        function updatePatientAddress(phrqlPatient, phrqlPatientID,ehrPatientData) {
             console.log("UpdatePatientAddress PatientData=", patient);
-            var patObj = JSON.parse(patient);
-            var ehrPatientAddress = patObj.address; 
+         
+            var ehrPatientAddress = ehrPatientData.address; 
             console.log("ehrPatientAddress=", ehrPatientAddress);
             ehrPatientAddress.forEach(function (address) {
                 if (address.use == "home") {
                     var newPatientAddress =
                     {
-                        "address1": address.line[0],
-                        "address2": address.line[1],
-                        "postCode": address.postalCode,
-                        "city":     address.city,
-                        "state":    address.state,
-                        "default": true
+                        "id": phrqlPatient.addresses[0].id;
+                        "address1" : address.line[0],
+                        "address2" : address.line[1],
+                        "postCode" : address.postalCode,
+                        "city"     : address.city,
+                        "state"    : address.state,
+                        "default"  : true
                     };
                     console.log("Changing Patient Address..");
                     console.log(JSON.stringify(newPatientAddress));
