@@ -53,11 +53,7 @@
     <div id="phqrlPatientID" hidden>Loading...</div>
     <div id="ehrPatientData" hidden>Loading...</div>
     <script type="text/javascript">
-        this.patient = "";
-        this.immunizations = "";
-        this.allergies = "";
-        this.patientVitals = "";
-        this.apiServerBaseURL ="https://accounts.phrqltest.com/api"
+        apiServerBaseURL ="https://accounts.phrqltest.com/api"
 
 
 
@@ -322,7 +318,8 @@
             ehrPatientData = JSON.parse(document.getElementById("patientHidden").innerHTML);
             phrqlPatientID = document.getElementById("phqrlPatientID").innerHTML;
 
-            url = this.apiServerBaseURL + "/patient/" + phrqlPatientID;
+            url = window.apiServerBaseURL + "/patient/" + phrqlPatientID;
+            console.log("url=", url);
             response = fetch(url, {
                 method: 'get',
                 //body: apiBody,
