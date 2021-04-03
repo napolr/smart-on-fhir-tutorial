@@ -57,7 +57,7 @@
         this.immunizations = "";
         this.allergies = "";
         this.patientVitals = "";
-        
+        this.apiServerBaseURL ="https://accounts.phrqltest.com/api"
 
 
 
@@ -322,7 +322,7 @@
             ehrPatientData = JSON.parse(document.getElementById("patientHidden").innerHTML);
             phrqlPatientID = document.getElementById("phqrlPatientID").innerHTML;
 
-            url = this.apiServer + "/patient/" + phrqlPatientID;
+            url = this.apiServerBaseURL + "/patient/" + phrqlPatientID;
             response = fetch(url, {
                 method: 'get',
                 //body: apiBody,
