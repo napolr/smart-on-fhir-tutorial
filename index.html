@@ -56,7 +56,10 @@
         this.allergies = "";
         this.patientVitals = "";
         
-       
+        function updatePHRQLPatient() {
+            document.getElementById("updatePatient").innerHTML = "YOU CLICKED ME!";
+        }
+
         FHIR.oauth2.ready().then(function (client) {
             let phrqlCookie = Cookies.get('csrftoken');
             console.log("phrqlCookie=",phrqlCookie); 
@@ -272,9 +275,7 @@
                     pList+="</table>";
                     document.getElementById("patientList").insertAdjacentHTML('beforeend', pList); 
 
-                    function updatePHRQLPatient() {
-                        document.getElementById("updatePatient").innerHTML = "YOU CLICKED ME!";
-                    }
+
                 });
 
 
