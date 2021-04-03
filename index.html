@@ -344,7 +344,7 @@
             );
  
             console.log("Changing Patient Address..", JSON.stringify(patAddress));
-            relativeURL = "https://accounts.phrqltest.com/api/patient/" + phrqlPatientID+"/update-address/1/";
+            relativeURL = "https://accounts.phrqltest.com/api/patient/" + phrqlPatientID+"/update-address/";
             doAPICall(relativeURL, 'application/json', 'application/json', "put", patAddress);
             }
 
