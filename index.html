@@ -366,7 +366,7 @@
                     //doAPICall(relativeURL, 'application/json', 'application/json', "put", newPatientAddress);
                     response = fetch(relativeURL, {
                         method: "PUT",
-                        body: newPhrqlAddress,
+                        body: JSON.stringify(newPhrqlAddress),
                         credentials: "include",
                         headers: {
                             'Content-Type': 'application/json',
