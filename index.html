@@ -82,6 +82,7 @@
 
                 function (pt) {
                     document.getElementById("patient").innerText = JSON.stringify(pt, null, 4);
+                    document.getElementById("patientHidden").innerHTML = JSON.stringify(pt, null, 4);
                     patientJsonStr = JSON.stringify(pt, null, 4);
 
 
