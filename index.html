@@ -330,7 +330,7 @@
 
                 }
             }).then(response => {
-                return console.log(JSON.stringify(response));
+                console.log(JSON.stringify(response));
                 updatePatientAddress(phrqlPatientID, response,  ehrPatientData) })
               
             //Let's get the patient detail info.
