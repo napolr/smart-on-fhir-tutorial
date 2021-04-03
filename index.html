@@ -324,10 +324,11 @@
         function updatePatientAddress(patient, phrqlPatientID) {
             console.log("UpdatePatientAddress PatientData=", patient);
             var ehrPatientAddress = patient.address;
-            ehrPatientAddress.forEach(){
+            ehrPatientAddress.forEach(function (address) {
 
                 console.log("address.use", address.use);
             }
+            );
             /*
             var patAddress =
             {
