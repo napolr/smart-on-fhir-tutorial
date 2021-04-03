@@ -346,25 +346,27 @@
 
             console.log("ehrPatientAddress=", ehrPatientAddress);
             console.log("phrqlPatient=", phrqlPatient);
-            ehrPatientAddress.forEach(function (address) {
+            ehrPatientAddress.forEach(function (ehrAddress) {
+                newPhrqlAddress = {};
                 if (address.use == "home") {
-                    var newPatientAddress =
-                    { 
-                        "address1" : address.line[0],
-                        "address2" : address.line[1],
-                        "postCode" : address.postalCode,
-                        "city"     : address.city,
-                        "state"    : address.state,
-                        "default"  : true
-                    };
+                   
+
+                    newPhrqlAddress.address1 = ehrAddress.line[0];
+                    newPhrqlAddress.address2 = ehrAddress.line[2];
+                    newPhrqlAddress.postCode = ehrAddress.postalCode;
+                    newPhrqlAddress.city = ehrAddress.city;
+                    newPhrqlAddress.state = ehrAddress.state;
+                    newPhrqlAddress.default = true;
+                     
+                    
                     console.log("Changing Patient Address..");
-                    console.log(JSON.stringify(newPatientAddress));
-                    console.log(newPatientAddress);
+                    console.log(JSON.stringify(newPhrqlAddress));
+                    console.log(newPhrqlAddress);
                     relativeURL = "https://accounts.phrqltest.com/api/patient/" + phrqlPatientID + "/update-address/" + phrqlPatient.addresses[0].id+"/";
                     //doAPICall(relativeURL, 'application/json', 'application/json', "put", newPatientAddress);
                     response = fetch(relativeURL, {
                         method: "PUT",
-                        body: newPatientAddress,
+                        body: newPhrqlAddress,
                         credentials: "include",
                         headers: {
                             'Content-Type': 'application/json',
