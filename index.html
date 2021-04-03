@@ -57,6 +57,7 @@
         this.immunizations = "";
         this.allergies = "";
         this.patientVitals = "";
+        
 
         function updatePHRQLPatient() {
             console.log("phqrlPatientID=", document.getElementById("phqrlPatientID").innerHTML);
@@ -297,14 +298,15 @@
 
             return response;
         }
-        async function doAPICall(url, contentType, acceptType) {
+        async function doAPICall(url, contentType, acceptType, httpMethod, apiBody) {
             document.getElementById("patient").innerText = JSON.stringify(pt, null, 4);
             //console.log("cookies=", Cookies.get('csrftoken'));
             console.log("relative_url=", url);
             var raw = "";
 
             response = fetch(url, {
-                method: 'get',
+                method: httpMethod,
+                body: apiBody,
                 credentials: "include",
                 headers: {
                     'Content-Type': contentType,
@@ -315,8 +317,22 @@
                 .then(response => response.json())
                 .then(result => { console.log(result); return result; });
 
-            return response;
+                return response;
         }
+        function updatePatientAddress(patient, phrqlID) {
+
+            var patAddress =
+            {
+                "address1": patient.address[0].line[0],
+                "address2": patient.address[0].line[0],
+                "postCode": patient.address[0].postalCode,
+                "city": patient.address[0].city,
+                "state": patient.address[0].state,
+                "default": true
+            };
+            relativeURL = "https://accounts.phrqltest.com/api/patient/29/update-address/1/";
+            doAPICall(relativeURL, contentType, acceptType, "put", patAddress);
+            }
 
     </script>
 </body>
