@@ -323,7 +323,8 @@
         }
         function updatePatientAddress(patient, phrqlPatientID) {
             console.log("UpdatePatientAddress PatientData=", patient);
-            var ehrPatientAddress = patient.address;
+            var patObj = JSON.parse(patient);
+            var ehrPatientAddress = patObj.address;
             ehrPatientAddress.forEach(function (address) {
 
                 console.log("address.use", address.use);
