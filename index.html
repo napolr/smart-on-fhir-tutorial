@@ -251,7 +251,7 @@
             })
                 .then(response => response.json())
                 .then(patientList => {
-                    console.log(patientList); 
+                    console.log("patientList=",patientList); 
                     //plist=JSON.parse(patientList
                     var pList = "<table><td>Patient Name</td><td>Paient DOB</td>";
                     for (var i = 0; i < patientList.count; i++) {
@@ -260,6 +260,7 @@
                         } else {
                             rowClass = "\"odd\"";
                         } 
+                        console.log("patName=", patientList.results[i].lastName);
                         patientLastName = patientList.results[i].lastName;
                         patientFirstName = patientList.results[i].firstName;
                         patientDOB = patientList.results[i].dob;
