@@ -343,7 +343,7 @@
             }
             );
  
-            console.log("Changing Patient Address..", JSON.parse(patAddress));
+            console.log("Changing Patient Address..", JSON.stringify(patAddress));
             relativeURL = "https://accounts.phrqltest.com/api/patient/29/update-address/1/";
             doAPICall(relativeURL, contentType, acceptType, "put", patAddress);
             }
