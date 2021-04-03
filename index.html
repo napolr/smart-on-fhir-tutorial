@@ -372,8 +372,10 @@
 
                         }
                     })
-                        .then(response => { console.log(response); }
-                        ) 
+                        .then(response => response.json())
+                        .then(result => { 
+                            console.log(JSON.stringify(phrqlPatient)); 
+                        })
                 }
                
             }
