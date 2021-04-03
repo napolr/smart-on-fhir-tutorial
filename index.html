@@ -82,8 +82,8 @@
 
                 function (pt) {
                     document.getElementById("patient").innerText = JSON.stringify(pt, null, 4);
-                    document.getElementById("patientHidden").innerHTML = JSON.stringify(pt, null, 4);
-                    document.getElementById("patient").style.visibility = "hidden";
+                    document.getElementById("patient").hidden = false;
+                    document.getElementById("patientHidden").innerHTML = JSON.stringify(pt, null, 4); 
                     patientJsonStr = JSON.stringify(pt, null, 4);
 
 
@@ -122,7 +122,7 @@
                 .then(
                     function (immunizations) {
                         document.getElementById("immunizations").innerText = JSON.stringify(immunizations, null, 4);
-                        document.getElementById("immunizations").style.visibility = "hidden";
+                        document.getElementById("immunizations").hidden = false;
                         this.immunizations = immunizations;
                     },
                     function (error) {
@@ -149,7 +149,7 @@
                 .then(
                     function (observations) {
                         document.getElementById("observations").innerText = JSON.stringify(observations, null, 4);
-                        document.getElementById("observations").style.visibility = "hidden";
+                        document.getElementById("observations").hidden = false;
                         this.observations = observations;
                     },
                     function (error) {
@@ -176,7 +176,7 @@
                 .then(
                     function (allergies) {
                         document.getElementById("allergies").innerText = JSON.stringify(allergies, null, 4);
-                        document.getElementById("allergies").style.visibility = "hidden";
+                        document.getElementById("allergies").hidden = false;
                         this.allergies = allergies;
                     },
                     function (error) {
