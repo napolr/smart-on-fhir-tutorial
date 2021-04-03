@@ -23,6 +23,7 @@
             <td>
                 <h4>Current Patient</h4>
                 <div id="patient">Loading...</div>
+                <div id="patientHidden" hidden>Loading...</div>
             </td>
             <td>
                 <h4>Immunizations</h4>
@@ -59,7 +60,8 @@
 
         function updatePHRQLPatient() {
             console.log("phqrlPatientID=", document.getElementById("phqrlPatientID").innerHTML);
-            console.log("ehrPatientData=", JSON.parse(document.getElementById("ehrPatientData").innerHTML));
+            patientData = document.getElementById("patientHidden").innerHTML
+            console.log("ehrPatientData=", patientData);
             document.getElementById("updatePatient").innerHTML = "YOU CLICKED ME!";
         }
 
