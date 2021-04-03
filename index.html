@@ -378,6 +378,9 @@
                         .then(result => { 
                             console.log(JSON.stringify(phrqlPatient)); 
                         })
+                        .catch((error) => {
+                            console.error('Error:', error);
+                        });
                 }
                
             }
