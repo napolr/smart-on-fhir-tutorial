@@ -89,7 +89,7 @@
                     console.log("patient2=", patient);
                     let patientGivenName = patient.name[0].given[0];
                     let patientFamilyName = patient.name[0].family;
-                    getPatientList('https://accounts.phrqltest.com/api/patient/?first_name__icontains=' + patientGivenName + '&last_name__icontains=' + patientFamilyName, 'application/json', 'application/json')
+                    getPatientList('https://accounts.phrqltest.com/api/patient/?first_name__icontains=' + patientGivenName + '&last_name__icontains=' + patientFamilyName, patient,  'application/json', 'application/json')
                     
                 });
 
@@ -234,7 +234,7 @@
             return null;
         }
         
-        async function getPatientList(url, contentType, acceptType) {
+        async function getPatientList(url,EHRPatient, contentType, acceptType) {
               
             //console.log("cookies=", Cookies.get('csrftoken'));
             console.log("relative_url=", url);
@@ -267,10 +267,12 @@
                         patientGender = patientList.results[i].birthSex;
                         patientRace = patientList.results[i].race;
                         patienPHRQL_ID = patientList.results[i].id;
-                        pList += "<tr class=" + rowClass + "><td>" + patientFirstName + " " + patientLastName + "</td><td>" + patientDOB + "</td><td>" + patientGender + "</td><td>" + patientDOB +"</td><td><a href='/userpool/patient/view/10/' class='btn btn - secondary'>Select</a></td></tr>";
+                        pList += "<tr class=" + rowClass + "><td>" + patientFirstName + " " + patientLastName + "</td><td>" + patientDOB + "</td><td>" + patientGender + "</td><td>" + patientDOB +"</td><div id=\"updatePatient\"><td><a href='/userpool/patient/view/10/' class='btn btn - secondary'>Select</a></td></div></tr>";
                     }
                     pList+="</table>";
                     document.getElementById("patientList").insertAdjacentHTML('beforeend', pList);});
+
+            
 
             return response;
         }
@@ -293,6 +295,11 @@
             .then(result => { console.log(result); return result; });
              
             return response;
+        }
+        document.getElementById("demo").onclick = function () { myFunction() };
+
+        function myFunction() {
+            document.getElementById("updatePatient").innerHTML = "YOU CLICKED ME!";
         }
     </script>
 </body>
