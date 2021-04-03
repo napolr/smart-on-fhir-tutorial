@@ -49,8 +49,8 @@
             </td>
         </tr>
     </table>
-    <div id="phqrlPatientID" hidden></div>
-    <div id="EHRPatient" hidden></div>
+    <div id="phqrlPatientID" hidden>Loading...</div>
+    <div id="EHRPatient" hidden>Loading...</div>
     <script type="text/javascript">
         this.patient = "";
         this.immunizations = "";
@@ -275,6 +275,7 @@
                         var patientRace = patientList.results[i].race;
                         var phqrlPatientID = patientList.results[i].id;
                         document.getElementById("phqrlPatientID").innerText = phqrlPatientID;
+
                         document.getElementById("ehrPatientData").innerText = EHRPatient;
                         pList += "<tr class=" + rowClass + "><td>" + patientFirstName + " " + patientLastName + "</td><td>" + patientDOB + "</td><td>" + patientGender + "</td><td>" + patientDOB + "</td><td><button id=\"updatePatient\" onclick=\"updatePHRQLPatient()\" type=\"button\">Select</button></td></tr>";
                     }
