@@ -49,28 +49,31 @@
             </td>
         </tr>
     </table>
-
+    <div id="phqrlPatientID" hidden></div>
+    <div id="EHRPatient" hidden></div>
     <script type="text/javascript">
         this.patient = "";
         this.immunizations = "";
         this.allergies = "";
         this.patientVitals = "";
-        
+
         function updatePHRQLPatient() {
+            console.log("phqrlPatientID=", document.getElementById("phqrlPatientID").innerHTML);
+            console.log("ehrPatientData=", document.getElementById("ehrPatientData").innerHTML);
             document.getElementById("updatePatient").innerHTML = "YOU CLICKED ME!";
         }
 
         FHIR.oauth2.ready().then(function (client) {
             let phrqlCookie = Cookies.get('csrftoken');
-            console.log("phrqlCookie=",phrqlCookie); 
-           if (phrqlCookie== null) {
-               console.log("Open Popup Attempt"); 
-              // let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no, width=600,height=300,left=100,top=100`;
-               window.open("https://accounts.phrqltest.com/userpool/login/?origin=https://smartfhir.phrqltest.com","_self");
+            console.log("phrqlCookie=", phrqlCookie);
+            if (phrqlCookie == null) {
+                console.log("Open Popup Attempt");
+                // let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no, width=600,height=300,left=100,top=100`;
+                window.open("https://accounts.phrqltest.com/userpool/login/?origin=https://smartfhir.phrqltest.com", "_self");
                 //window.open("https://accounts.phrqltest.com/userpool/login/?origin=https://smartfhir.phrqltest.com",, params);
 
-           }
-          
+            }
+
 
             // Render the current patient (or any error)
             client.patient.read().then(
@@ -78,8 +81,8 @@
                 function (pt) {
                     document.getElementById("patient").innerText = JSON.stringify(pt, null, 4);
                     patientJsonStr = JSON.stringify(pt, null, 4);
-                     
-                    
+
+
                     return pt;
 
                 },
@@ -92,8 +95,8 @@
                     console.log("patient2=", patient);
                     let patientGivenName = patient.name[0].given[0];
                     let patientFamilyName = patient.name[0].family;
-                    getPatientList('https://accounts.phrqltest.com/api/patient/?first_name__icontains=' + patientGivenName + '&last_name__icontains=' + patientFamilyName, patient,  'application/json', 'application/json')
-                    
+                    getPatientList('https://accounts.phrqltest.com/api/patient/?first_name__icontains=' + patientGivenName + '&last_name__icontains=' + patientFamilyName, patient, 'application/json', 'application/json')
+
                 });
 
             // Get Immunization for the selected patient
@@ -176,7 +179,7 @@
 
         }).catch(console.error);
 
- 
+
         function phrqlLogin() {
             var myHeaders = new Headers();
             myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
@@ -187,21 +190,21 @@
                 crossDomain: true,
                 headers: myHeaders,
                 redirect: 'follow'
-            }; 
-            let phrqlAccountsUrl ="accounts.PHRQLtest.com/oauth2/authorize?response_type=code&client_id=747tmbkl578m45d2hmkhs4s4e4&redirect_uri=https://accounts.phrqltest.com/userpool/callback/&scope=openid%20email"
+            };
+            let phrqlAccountsUrl = "accounts.PHRQLtest.com/oauth2/authorize?response_type=code&client_id=747tmbkl578m45d2hmkhs4s4e4&redirect_uri=https://accounts.phrqltest.com/userpool/callback/&scope=openid%20email"
             fetch("https://accounts.phrqltest.com/userpool/login/?origin=https://smartfhir.phrqltest.com", requestOptions)
-            //fetch(phrqlAccountsUrl, requestOptions)
+                //fetch(phrqlAccountsUrl, requestOptions)
                 .then(response => response.text())
                 .then(result => console.log(result))
                 .catch(error => console.log('error', error));
-        } 
+        }
         this.domain = "accounts-phrqltest";
         this.region = "us-west-2";
         this.state = "";
         this.appClientId = "118a1qur3i4k7jpf4drf2nd7v7";
         this.redirectURI = "    "
 
-           
+
         //loginUserWitOauth(); //login to PHRQL
         /*sessionid = getCookie("sessionid");
         console.log("sessionid", sessionid);
@@ -236,9 +239,9 @@
             // Return null if not found
             return null;
         }
-        
-        async function getPatientList(url,EHRPatient, contentType, acceptType) {
-              
+
+        async function getPatientList(url, EHRPatient, contentType, acceptType) {
+
             //console.log("cookies=", Cookies.get('csrftoken'));
             console.log("relative_url=", url);
             var raw = "";
@@ -254,32 +257,35 @@
             })
                 .then(response => response.json())
                 .then(patientList => {
-                    console.log("patientList=",patientList); 
+                    console.log("patientList=", patientList);
                     //plist=JSON.parse(patientList
                     var pList = "<table><td>Name</td><td>DOB</td><td>Birth Sex</td><td>Race</td>";
+                    var rowClass;
                     for (var i = 0; i < patientList.count; i++) {
                         if ((i % 2) == 0) {
                             rowClass = "\"even\"";
                         } else {
                             rowClass = "\"odd\"";
-                        } 
+                        }
                         console.log("patName=", patientList.results[i].lastName);
-                        patientLastName = patientList.results[i].lastName;
-                        patientFirstName = patientList.results[i].firstName;
-                        patientDOB = patientList.results[i].dob;
-                        patientGender = patientList.results[i].birthSex;
-                        patientRace = patientList.results[i].race;
-                        patienPHRQL_ID = patientList.results[i].id;
+                        var patientLastName = patientList.results[i].lastName;
+                        var patientFirstName = patientList.results[i].firstName;
+                        var patientDOB = patientList.results[i].dob;
+                        var patientGender = patientList.results[i].birthSex;
+                        var patientRace = patientList.results[i].race;
+                        var phqrlPatientID = patientList.results[i].id;
+                        document.getElementById("phqrlPatientID").innerText = phqrlPatientID;
+                        document.getElementById("ehrPatientData").innerText = EHRPatient;
                         pList += "<tr class=" + rowClass + "><td>" + patientFirstName + " " + patientLastName + "</td><td>" + patientDOB + "</td><td>" + patientGender + "</td><td>" + patientDOB + "</td><td><button id=\"updatePatient\" onclick=\"updatePHRQLPatient()\" type=\"button\">Select</button></td></tr>";
                     }
-                    pList+="</table>";
-                    document.getElementById("patientList").insertAdjacentHTML('beforeend', pList); 
+                    pList += "</table>";
+                    document.getElementById("patientList").insertAdjacentHTML('beforeend', pList);
 
 
                 });
 
 
-            
+
 
             return response;
         }
@@ -298,12 +304,12 @@
 
                 }
             })
-            .then(response => response.json())
-            .then(result => { console.log(result); return result; });
-             
+                .then(response => response.json())
+                .then(result => { console.log(result); return result; });
+
             return response;
         }
-        
+
     </script>
 </body>
 </html>
