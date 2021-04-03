@@ -329,16 +329,17 @@
                     'X-CSRFToken': Cookies.get('csrftoken')
 
                 }
-            }).then(response => {
-                console.log(response);
-                console.log(JSON.stringify(response.json));
-                updatePatientAddress(phrqlPatientID, response.json,  ehrPatientData) })
+            })  .then(response => response.json())
+                .then(phrqlPatient => {
+                    console.log(phrqlPatient);
+                    console.log(JSON.stringify(phrqlPatient));
+                    updatePatientAddress(phrqlPatientID, phrqlPatient,  ehrPatientData) })
               
             //Let's get the patient detail info.
 
             
         }
-        function updatePatientAddress(phrqlPatient, phrqlPatientID,ehrPatientData) {
+        function updatePatientAddress(phrqlPatientID,phrqlPatient, ehrPatientData) {
             console.log("UpdatePatientAddress PatientData=", patient);
          
             var ehrPatientAddress = ehrPatientData.address; 
