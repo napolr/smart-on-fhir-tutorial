@@ -63,7 +63,8 @@
             console.log("phqrlPatientID=", document.getElementById("phqrlPatientID").innerHTML);
             patientData = document.getElementById("patientHidden").innerHTML
             console.log("ehrPatientData=", patientData);
-            document.getElementById("updatePatient").innerHTML = "YOU CLICKED ME!";
+            //document.getElementById("updatePatient").innerHTML = "YOU CLICKED ME!";
+            updatePatientAddress(patientData, document.getElementById("phqrlPatientID").innerHTML)
         }
 
         FHIR.oauth2.ready().then(function (client) {
@@ -330,6 +331,7 @@
                 "state": patient.address[0].state,
                 "default": true
             };
+            console.log("Changing Patient Address..", JSON.parse(patAddress));
             relativeURL = "https://accounts.phrqltest.com/api/patient/29/update-address/1/";
             doAPICall(relativeURL, contentType, acceptType, "put", patAddress);
             }
