@@ -343,6 +343,7 @@
             console.log("UpdatePatientAddress PatientData=", patient);
          
             var ehrPatientAddress = ehrPatientData.address; 
+
             console.log("ehrPatientAddress=", ehrPatientAddress);
             console.log("phrqlPatient=", phrqlPatient);
             ehrPatientAddress.forEach(function (address) {
@@ -360,7 +361,7 @@
                     console.log("Changing Patient Address..");
                     console.log(JSON.stringify(newPatientAddress));
                     console.log(newPatientAddress);
-                    relativeURL = "https://accounts.phrqltest.com/api/patient/" + phrqlPatientID + "/update-address/";
+                    relativeURL = "https://accounts.phrqltest.com/api/patient/" + phrqlPatientID + "/update-address/" + phrqlPatient.addresses[0].id;
                     doAPICall(relativeURL, 'application/json', 'application/json', "put", newPatientAddress);
                 }
                
