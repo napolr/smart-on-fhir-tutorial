@@ -331,11 +331,11 @@
                 if (address.use == "home") {
                     var patAddress =
                     {
-                        "address1": patient.addres.line[0],
-                        "address2": patient.address.line[0],
-                        "postCode": patient.address.postalCode,
-                        "city": patient.address.city,
-                        "state": patient.address.state,
+                        "address1": address.line[0],
+                        "address2": address.line[1],
+                        "postCode": address.postalCode,
+                        "city":     address.city,
+                        "state":    address.state,
                         "default": true
                     };
                 }
