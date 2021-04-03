@@ -324,11 +324,11 @@
 
             var patAddress =
             {
-                "address1": patient.address[0].line[0],
-                "address2": patient.address[0].line[0],
-                "postCode": patient.address[0].postalCode,
-                "city": patient.address[0].city,
-                "state": patient.address[0].state,
+                "address1": patient.address["home"].line[0],
+                "address2": patient.address["home"].line[0],
+                "postCode": patient.address["home"].postalCode,
+                "city": patient.address["home"].city,
+                "state": patient.address["home"].state,
                 "default": true
             };
             console.log("Changing Patient Address..", JSON.parse(patAddress));
