@@ -326,6 +326,7 @@
             var patObj = JSON.parse(patient);
             var ehrPatientAddress = patObj.address;
             var patAddress = {};
+            console.log("ehrPatientAddress=", ehrPatientAddress);
             ehrPatientAddress.forEach(function (address) {
                 if (address.use == "home") {
                     var patAddress =
