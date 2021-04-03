@@ -22,22 +22,22 @@
         <tr>
             <td>
                 <h4>Current Patient</h4>
-                <div id="patient">Loading...</div>
+                <div id="patient" hidden>Loading...</div>
                 <div id="patientHidden" hidden>Loading...</div>
             </td>
             <td>
                 <h4>Immunizations</h4>
-                <div id="immunizations">Loading...</div>
+                <div id="immunizations" hidden>Loading...</div>
             </td>
         </tr>
         <tr>
             <td>
-                <h4>Observations</h4>
-                <div id="observations">Loading...</div>
+                <h4>Vitals</h4>
+                <div id="observations" hidden>Loading...</div>
             </td>
             <td>
-                <h4>Allergy Intolerance</h4>
-                <div id="allergies">Loading...</div>
+                <h4>Allergy Intolerance </h4>
+                <div id="allergies" hidden>Loading...</div>
             </td>
         </tr>
 
@@ -83,6 +83,7 @@
                 function (pt) {
                     document.getElementById("patient").innerText = JSON.stringify(pt, null, 4);
                     document.getElementById("patientHidden").innerHTML = JSON.stringify(pt, null, 4);
+                    document.getElementById("patient").style.visibility = "hidden";
                     patientJsonStr = JSON.stringify(pt, null, 4);
 
 
@@ -121,6 +122,7 @@
                 .then(
                     function (immunizations) {
                         document.getElementById("immunizations").innerText = JSON.stringify(immunizations, null, 4);
+                        document.getElementById("immunizations").style.visibility = "hidden";
                         this.immunizations = immunizations;
                     },
                     function (error) {
@@ -147,6 +149,7 @@
                 .then(
                     function (observations) {
                         document.getElementById("observations").innerText = JSON.stringify(observations, null, 4);
+                        document.getElementById("observations").style.visibility = "hidden";
                         this.observations = observations;
                     },
                     function (error) {
@@ -173,6 +176,7 @@
                 .then(
                     function (allergies) {
                         document.getElementById("allergies").innerText = JSON.stringify(allergies, null, 4);
+                        document.getElementById("allergies").style.visibility = "hidden";
                         this.allergies = allergies;
                     },
                     function (error) {
