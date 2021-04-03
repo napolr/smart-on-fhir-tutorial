@@ -271,12 +271,13 @@
                     }
                     pList+="</table>";
                     document.getElementById("patientList").insertAdjacentHTML('beforeend', pList);
-                });
-            document.getElementById("updatePatient").onclick = function () { myFunction() };
+                    document.getElementById("updatePatient").onclick = function () { myFunction() };
 
-            function myFunction() {
-                document.getElementById("updatePatient").innerHTML = "YOU CLICKED ME!";
-            }
+                    function myFunction() {
+                        document.getElementById("updatePatient").innerHTML = "YOU CLICKED ME!";
+                    }
+                });
+
 
             
 
