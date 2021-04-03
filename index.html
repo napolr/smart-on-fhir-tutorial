@@ -348,7 +348,7 @@
             console.log("phrqlPatient=", phrqlPatient);
             ehrPatientAddress.forEach(function (ehrAddress) {
                 newPhrqlAddress = {};
-                if (address.use == "home") {
+                if (ehrAddress.use == "home") {
                    
 
                     newPhrqlAddress.address1 = ehrAddress.line[0];
