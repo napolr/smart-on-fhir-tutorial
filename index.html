@@ -332,8 +332,8 @@
             })
                 .then(response => {
 
-                    console.log(response);
-                    updatePatientAddress(response, phrqlPatientID, ehrPatientData)
+                    console.log(response.json);
+                    updatePatientAddress(response.json, phrqlPatientID, ehrPatientData)
                 }
                 ) 
             //Let's get the patient detail info.
