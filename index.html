@@ -267,13 +267,13 @@
                         patientGender = patientList.results[i].birthSex;
                         patientRace = patientList.results[i].race;
                         patienPHRQL_ID = patientList.results[i].id;
-                        pList += "<tr class=" + rowClass + "><td>" + patientFirstName + " " + patientLastName + "</td><td>" + patientDOB + "</td><td>" + patientGender + "</td><td>" + patientDOB + "</td><td><button id=\"updatePatient\" type=\"button\">Select</button></td></tr>";
+                        pList += "<tr class=" + rowClass + "><td>" + patientFirstName + " " + patientLastName + "</td><td>" + patientDOB + "</td><td>" + patientGender + "</td><td>" + patientDOB + "</td><td><button id=\"updatePatient\" onclick=\"updatePHRQLPatient()\" type=\"button\">Select</button></td></tr>";
                     }
                     pList+="</table>";
                     document.getElementById("patientList").insertAdjacentHTML('beforeend', pList);
                     document.getElementById("updatePatient").onclick = function () { myFunction() };
 
-                    function myFunction() {
+                    function updatePHRQLPatient() {
                         document.getElementById("updatePatient").innerHTML = "YOU CLICKED ME!";
                     }
                 });
