@@ -253,7 +253,7 @@
                 .then(patientList => {
                     console.log("patientList=",patientList); 
                     //plist=JSON.parse(patientList
-                    var pList = "<table><td>Patient Name</td><td>Paient DOB</td>";
+                    var pList = "<table><td>Name</td><td>DOB</td><td>Gender</td><td>Race</td>";
                     for (var i = 0; i < patientList.count; i++) {
                         if ((i % 2) == 0) {
                             rowClass = "\"even\"";
@@ -267,7 +267,7 @@
                         patientGender = patientList.results[i].gender;
                         patientRace = patientList.results[i].race;
                         patienPHRQL_ID = patientList.results[i].id;
-                        pList += "<tr class=" + rowClass + "><td>" + patientFirstName + " " + patientLastName + "</td><td>" + patientDOB+"</td><td><a href='/userpool/patient/view/10/' class='btn btn - secondary'>Select</a></td></tr>";
+                        pList += "<tr class=" + rowClass + "><td>" + patientFirstName + " " + patientLastName + "</td><td>" + patientDOB + "</td><td>" + patientGender + "</td><td>" + patientRace +"</td><td><a href='/userpool/patient/view/10/' class='btn btn - secondary'>Select</a></td></tr>";
                     }
                     pList+="</table>";
                     document.getElementById("patientList").insertAdjacentHTML('beforeend', pList);});
