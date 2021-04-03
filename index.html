@@ -339,7 +339,8 @@
                         "default": true
                     };
                     console.log("Changing Patient Address..");
-                    console.log(JSON.parse(newPatientAddress));
+                    console.log(JSON.stringify(newPatientAddress));
+                    console.log(newPatientAddress);
                     relativeURL = "https://accounts.phrqltest.com/api/patient/" + phrqlPatientID + "/update-address/";
                     doAPICall(relativeURL, 'application/json', 'application/json', "put", newPatientAddress);
                 }
