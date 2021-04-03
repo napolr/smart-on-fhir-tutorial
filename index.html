@@ -45,7 +45,7 @@
         <tr>
             <td>
                 <h4>PHRQL Patient List</h4>
-                <div id="patientList">Loading...</div>
+                <div id="patientList"></div>
             </td>
         </tr>
     </table>
@@ -261,7 +261,7 @@
                             rowClass = "\"odd\"";
                         } 
 
-                        pList += "<tr class="+rowClass+"<td>" + patientList.firstName + " " + patientList.lastName + "</td><td>patientList.dob</td><td><a href='/userpool/patient/view/10/' class='btn btn - secondary'>Select</a></td></tr>";
+                        pList += "<tr class="+rowClass+"><td>" + patientList.firstName + " " + patientList.lastName + "</td><td>patientList.dob</td><td><a href='/userpool/patient/view/10/' class='btn btn - secondary'>Select</a></td></tr>";
                     }
                     pList+="</table>";
                     document.getElementById("patientList").insertAdjacentHTML('beforeend', pList);});
