@@ -330,11 +330,11 @@
                 if (address.use == "home") {
                     var patAddress =
                     {
-                        "address1": patient.address["home"].line[0],
-                        "address2": patient.address["home"].line[0],
-                        "postCode": patient.address["home"].postalCode,
-                        "city": patient.address["home"].city,
-                        "state": patient.address["home"].state,
+                        "address1": patient.addres.line[0],
+                        "address2": patient.address.line[0],
+                        "postCode": patient.address.postalCode,
+                        "city": patient.address.city,
+                        "state": patient.address.state,
                         "default": true
                     };
                 }
