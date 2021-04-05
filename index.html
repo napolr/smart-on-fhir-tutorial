@@ -334,7 +334,8 @@
                     console.log(phrqlPatient);
                     console.log(JSON.stringify(phrqlPatient));
                     updatePatientAddress(phrqlPatientID, phrqlPatient,  ehrPatientData) })
-              
+                    var phrqlURL = "https://accounts.phrqltest.com/userpool/patient/view/" + phrqlPatientID
+                    window.open(phrqlURL, "_self"); 
             //Let's get the patient detail info.
 
             
